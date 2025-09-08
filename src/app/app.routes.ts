@@ -1,3 +1,11 @@
 import { Routes } from '@angular/router';
+import {HomeComponent} from './components/home-component/home-component';
+import {LoginComponent} from './components/testing/login.component/login.component';
+import {AdminComponent} from './components/admin-component/admin-component';
 
-export const routes: Routes = [];
+export const routes: Routes = [
+  {path: '', component: HomeComponent, pathMatch: 'full'},
+  {path: 'Home', component: HomeComponent },
+  {path: 'Logintesting', component: LoginComponent},
+  {path: 'login', component: AdminComponent},
+];
