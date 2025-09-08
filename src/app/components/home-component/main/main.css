@@ -1,0 +1,93 @@
+.main-component {
+  display: flex;
+  flex-direction: row;
+}
+
+.text-div{
+  width: 50vw;
+  height: 88vh;
+  overflow: hidden;
+  align-content: center;
+  justify-content: center;
+}
+.hhh{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 50%;
+}
+
+.title-main{
+  font-family: Heavitas;
+  line-height:0.9;
+  font-size: clamp(5rem, 2.4rem + 13vw, 18rem);
+  font-weight: 400;
+  color: #EBDDC1;
+  text-align: center;
+  font-style: normal;
+  letter-spacing: 0.5625rem;
+}
+.parraf-main{
+  font-family: Adam;
+  width: 50%;
+  font-size: clamp(0.6rem, 0.3rem + 1vw, 1.7rem);
+  color: #FFF;
+  text-align: center;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+}
+
+
+.img-div{
+  display: flex;
+  justify-content: start;
+  align-items: end;
+  max-height: 88vh;
+  width: 50vw;
+  padding-left: 3rem;
+  box-sizing: border-box;
+}
+.img-vaquita{
+  max-height: 90%;
+  max-width: 90%;
+  height: auto;
+  width: auto;
+}
+#samiComp{
+  display: none;
+}
+
+@media only screen and (max-width: 1024px) {
+  .main-component {
+    flex-direction: column;
+
+  }
+  .text-div{
+    width: 100%;
+    height: 35dvh;
+  }
+  .hhh {
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .title-main{
+  }
+  .img-div{
+    display: flex;
+    justify-content: center;
+    height: 49dvh;
+    width: 100%;
+    padding-left: 0;
+    box-sizing: border-box;
+  }
+  .img-vaquita{
+    width: auto;
+    max-height: 90%;
+    max-width: 90%;
+  }
+}

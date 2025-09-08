@@ -1,0 +1,64 @@
+.nav-a{
+  color: #FFF;
+  text-align: center;
+  font-family: Adam;
+  font-size: clamp(0.9rem, 0.7rem + 0.6666666666666667vw, 1.5rem);
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
+  text-decoration: none;
+}
+.nav-item{
+  display: flex;
+  padding: 0.5rem 1rem;
+  justify-content: center;
+  align-items: center;
+}
+.navbar-nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  width: 67.5%;
+}
+
+.nav-cont{
+  height: 100%;
+  width: 50vw;       /* centra el bloque interior */
+  display: flex;
+  justify-content: center;
+}
+.navbar{
+  width: 100vw;              /* siempre el ancho completo */
+  height: 12dvh;
+}
+
+@media only screen and (max-width: 1024px) {
+  .nav-a{
+  }
+  .nav-item{
+    display: flex;
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+  .navbar-nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 85%;
+  }
+  .nav-cont{
+    height: 100%;
+    margin-inline: auto;          /* centra el bloque interior */
+    display: flex;
+    align-items: center;
+    width: 100vw;
+    justify-content: center;
+
+  }
+  .navbar{
+    width: 100vw;              /* siempre el ancho completo */
+    height: 12vh;
+    min-height: 72px;
+  }
+}

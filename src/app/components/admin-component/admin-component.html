@@ -1,0 +1,19 @@
+<div>
+  <h2>Login Admin</h2>
+  <form (ngSubmit)="login()" #loginForm="ngForm">
+    <label>
+      Usuario:
+      <input type="text" name="username" [(ngModel)]="loginData.username" required>
+    </label>
+    <br>
+    <label>
+      Contraseña:
+      <input type="password" name="password" [(ngModel)]="loginData.password" required>
+    </label>
+    <br>
+    <button type="submit">Login</button>
+  </form>
+  <div *ngIf="errorMsg" style="color:red;">
+    {{ errorMsg }}
+  </div>
+</div>

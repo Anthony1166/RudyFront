@@ -1,0 +1,15 @@
+.home-cont{
+  background: linear-gradient(180deg, #000 -9.81%, #B7CF49 100%);
+  min-height: 100dvh;
+  overflow: hidden;
+}
+
+@media only screen and (max-width: 1024px){
+  .home-cont{
+    min-height: 96dvh;
+  }
+}
+.idea2{
+  background: darkslategray;
+  height: 99dvh;
+}
