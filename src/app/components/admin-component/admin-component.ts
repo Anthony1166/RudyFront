@@ -37,7 +37,7 @@ export class AdminComponent {
         // Puedes guardar el usuario si lo deseas:
         // this.authService.saveCurrentUser({username: resp.username, role: resp.role});
         this.errorMsg = '';
-        this.router.navigate(['/Home']);
+        this.router.navigate(['/administracion']);
       },
       error: () => {
         this.errorMsg = 'Usuario o contraseña incorrectos.';
