@@ -1,9 +1,9 @@
-<div>
+<div class="seccionForm">
   <h2>Login Admin</h2>
-  <form (ngSubmit)="login()" #loginForm="ngForm">
+  <form class="form1" (ngSubmit)="login()" #loginForm="ngForm">
     <label>
       Usuario:
-      <input type="text" name="username" [(ngModel)]="loginData.username" required>
+      <input  type="text" name="username" [(ngModel)]="loginData.username" required>
     </label>
     <br>
     <label>
