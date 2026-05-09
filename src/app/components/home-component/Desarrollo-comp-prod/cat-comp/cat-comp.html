@@ -1,0 +1,25 @@
+<main class="main-cat">
+  <app-navbar-prod [soloFlecha]="true"></app-navbar-prod>
+
+  <div *ngIf="cargando" class="loader-container">
+    <div class="spinner-blanco"></div>
+  </div>
+
+  <div class="carousel-master-wrapper" *ngIf="!cargando && categorias.length > 0">
+
+    <div class="cards-container"
+         [class.cards-1]="categorias.length === 1"
+         [class.cards-2]="categorias.length === 2">
+
+      <div class="cat-card" *ngFor="let cat of categorias" [routerLink]="['/categoria', cat.slug]">
+        <h2 class="cat-title">{{ cat.nombre | uppercase }}</h2>
+
+        <div class="cat-img-wrapper">
+          <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre">
+          <div *ngIf="!cat.urlImagen" class="placeholder-img">📦</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+<app-footer-p1></app-footer-p1>

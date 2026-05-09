@@ -1,0 +1,126 @@
+<div class="contenedor-registro">
+
+  <div class="header-acciones">
+    <div>
+      <h2>Editar Producto</h2>
+      <p class="subtitulo-header">Configura los detalles, fotos y procesos de este artículo.</p>
+    </div>
+    <button class="btn-volver" routerLink="/administracion/producto/listar">← Volver al Catálogo</button>
+  </div>
+
+  <div class="tabs-container">
+    <button class="tab-btn" [class.activa]="pestaniaActiva === 'detalles'" (click)="pestaniaActiva = 'detalles'">
+      📝 Detalles Generales
+    </button>
+    <button class="tab-btn" [class.activa]="pestaniaActiva === 'galeria'" (click)="pestaniaActiva = 'galeria'">
+      🖼️ Galería de Fotos
+    </button>
+    <button class="tab-btn" [class.activa]="pestaniaActiva === 'procesos'" (click)="pestaniaActiva = 'procesos'">
+      ⚙️ Proceso Creativo
+    </button>
+  </div>
+
+  <div class="tab-content">
+
+    <div *ngIf="pestaniaActiva === 'detalles'">
+
+      <div *ngIf="cargandoDatos" class="cargando-container">
+        <div class="spinner"></div>
+        <p>Cargando información del producto...</p>
+      </div>
+
+      <div class="formulario-card" *ngIf="!cargandoDatos">
+        <div class="grid-layout-producto">
+
+          <div class="col-principal">
+            <h3 class="seccion-titulo">Información Básica</h3>
+
+            <div class="campo-form">
+              <label>Nombre del producto <span class="req">*</span></label>
+              <input type="text" [(ngModel)]="producto.nombre" placeholder="Ej. Taza Gato Astronauta">
+            </div>
+
+            <div class="campo-form">
+              <label>Subtítulo (Opcional)</label>
+              <input type="text" [(ngModel)]="producto.subTitulo" placeholder="Ej. Colección de Verano">
+            </div>
+
+            <div class="campo-form mt-15">
+              <label>Descripción detallada <span class="req">*</span></label>
+              <textarea [(ngModel)]="producto.descripcion" rows="5" placeholder="Cuenta la historia de este producto..."></textarea>
+            </div>
+
+            <div class="campo-form">
+              <label>Características Técnicas (Opcional)</label>
+              <textarea [(ngModel)]="producto.caracteristicas" rows="3" placeholder="Ej: Material, Peso, Dimensiones..."></textarea>
+            </div>
+          </div>
+
+          <div class="col-lateral">
+            <h3 class="seccion-titulo">Organización y Precio</h3>
+
+            <div class="seccion-lateral-box">
+              <div class="campo-form">
+                <label>Precio de Venta (PEN) <span class="req">*</span></label>
+                <div class="input-precio-container">
+                  <span class="moneda">S/</span>
+                  <input type="number" [(ngModel)]="producto.precio" min="0" step="0.50">
+                </div>
+              </div>
+            </div>
+
+            <div class="seccion-lateral-box">
+              <div class="campo-form">
+                <label>Categorías</label>
+                <p class="nota-campo">Selecciona las etiquetas aplicables</p>
+
+                <div *ngIf="cargandoCategorias" class="txt-cargando">Cargando...</div>
+
+                <div class="contenedor-pills" *ngIf="!cargandoCategorias">
+                  <button
+                    *ngFor="let cat of categoriasDisponibles"
+                    class="pill-categoria"
+                    [class.seleccionada]="categoriasSeleccionadas.has(cat.id!)"
+                    (click)="toggleCategoria(cat.id)">
+                    {{ cat.nombre }}
+                  </button>
+                  <div *ngIf="categoriasDisponibles.length === 0" class="txt-cargando">No hay categorías.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="seccion-switches">
+              <div class="switch-row">
+                <div class="switch-info">
+                  <h4>⭐ Destacar en tienda</h4>
+                  <p>Tendrá prioridad visual.</p>
+                </div>
+                <div class="toggle-container" (click)="producto.destacado = !producto.destacado">
+                  <div class="toggle-switch switch-estrella" [class.encendido]="producto.destacado">
+                    <div class="toggle-circulo"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div> </div> <div class="footer-form">
+        <button
+          class="btn-guardar"
+          (click)="actualizarProducto()"
+          [disabled]="!producto.nombre || !producto.descripcion || producto.precio <= 0 || guardando">
+          {{ guardando ? 'Guardando...' : '💾 Guardar Cambios' }}
+        </button>
+      </div>
+      </div>
+    </div>
+
+    <div *ngIf="pestaniaActiva === 'galeria'" class="card-unificada">
+      <app-listar-imagen-prod></app-listar-imagen-prod>
+    </div>
+
+    <div *ngIf="pestaniaActiva === 'procesos'" class="card-unificada">
+      <app-listar-proceso-prod></app-listar-proceso-prod>
+    </div>
+
+  </div>
+</div>

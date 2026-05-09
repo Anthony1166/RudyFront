@@ -1,0 +1,182 @@
+:host {
+  display: block;
+  padding: 1rem;
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+.contenedor-registro {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- HEADER Y BOTÓN VOLVER --- */
+.header-acciones { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
+.header-acciones h2 { font-family: 'Heavitas', sans-serif; font-size: 2rem; color: #0f172a; margin: 0 0 0.4rem 0; font-weight: normal; letter-spacing: 0.02em; }
+.subtitulo-header { color: #64748b; margin: 0; font-size: 1.05rem; }
+
+.btn-volver {
+  background: white; border: 1px solid #cbd5e1; padding: 0.6rem 1.2rem;
+  border-radius: 10px; color: #475569; font-weight: 600; cursor: pointer;
+  transition: all 0.3s ease; box-shadow: 0 1px 2px rgba(0,0,0,0.05); font-size: 0.95rem;
+}
+.btn-volver:hover { background: #f8fafc; color: #0f172a; transform: translateX(-4px); box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+/* --- PESTAÑAS (TABS) --- */
+.tabs-container {
+  display: flex; gap: 0.5rem; background: #f1f5f9; padding: 0.4rem;
+  border-radius: 12px; margin-bottom: 2rem; width: max-content;
+}
+.tab-btn {
+  padding: 0.75rem 1.5rem; background: transparent; border: none; border-radius: 8px;
+  color: #64748b; font-weight: 600; cursor: pointer; transition: all 0.3s;
+  font-size: 0.95rem; display: flex; align-items: center; gap: 8px;
+}
+.tab-btn:hover { color: #334155; }
+.tab-btn.activa { background: white; color: #2495FF; box-shadow: 0 4px 10px rgba(36,149,255,0.15); }
+
+/* --- CONTENEDOR PRINCIPAL --- */
+.formulario-card, .card-unificada {
+  background: white; padding: 2.5rem; border-radius: 20px;
+  border: 1px solid #e2e8f0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05);
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* --- GRID 65% / 35% --- */
+.grid-layout-producto {
+  display: grid;
+  grid-template-columns: 2fr 1fr; /* Izquierda más ancha que derecha */
+  gap: 3rem;
+}
+
+.seccion-titulo { font-size: 1.1rem; color: #1e293b; border-bottom: 2px solid #f1f5f9; padding-bottom: 10px; margin-bottom: 20px; margin-top: 0; }
+
+.campo-form { margin-bottom: 1.5rem; display: flex; flex-direction: column; }
+.campo-form label { font-size: 0.9rem; font-weight: 700; color: #475569; margin-bottom: 0.5rem; }
+.req { color: #ef4444; }
+.nota-campo { color: #94a3b8; font-size: 0.8rem; margin-top: -5px; margin-bottom: 10px; }
+
+/* --- INPUTS --- */
+input[type="text"], input[type="number"], textarea {
+  width: 100%; padding: 0.85rem 1rem; border: 2px solid #e2e8f0; border-radius: 10px;
+  font-size: 0.95rem; color: #1e293b; background-color: #f8fafc; transition: all 0.3s ease;
+  box-sizing: border-box; font-family: inherit;
+}
+input:focus, textarea:focus { outline: none; border-color: #3b82f6; background-color: white; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+
+/* --- CAMPO PRECIO --- */
+.input-precio-container { display: flex; align-items: center; position: relative; }
+.input-precio-container .moneda { position: absolute; left: 1rem; color: #64748b; font-weight: 800; }
+.input-precio-container input { padding-left: 2.5rem; font-weight: 700; font-size: 1.1rem; color: #0f172a; }
+
+/* --- CAJAS LATERALES (Para agrupar ajustes) --- */
+.seccion-lateral-box {
+  background: #f8fafc; padding: 1.5rem; border-radius: 12px;
+  border: 1px solid #e2e8f0; margin-bottom: 1.5rem;
+}
+
+/* --- CATEGORÍAS PILLS --- */
+.contenedor-pills { display: flex; flex-wrap: wrap; gap: 8px; }
+.pill-categoria {
+  background: white; border: 2px solid #e2e8f0; padding: 0.4rem 0.8rem;
+  border-radius: 20px; font-size: 0.8rem; font-weight: 600; color: #64748b;
+  cursor: pointer; transition: all 0.2s ease;
+}
+.pill-categoria:hover { border-color: #cbd5e1; background: #f1f5f9; }
+.pill-categoria.seleccionada { background: #ebf5ff; border-color: #3b82f6; color: #2563eb; }
+
+/* --- SWITCHES --- */
+.seccion-switches {
+  background: #fffbeb; padding: 1.5rem; border-radius: 12px;
+  border: 1px solid #fde68a; margin-bottom: 1.5rem;
+}
+.switch-row { display: flex; justify-content: space-between; align-items: center; }
+.switch-info h4 { margin: 0 0 0.2rem 0; color: #92400e; font-size: 0.95rem; }
+.switch-info p { margin: 0; font-size: 0.8rem; color: #b45309; }
+
+.toggle-container { cursor: pointer; }
+.toggle-switch { width: 46px; height: 26px; background: #cbd5e1; border-radius: 30px; position: relative; transition: 0.3s; }
+.toggle-switch.switch-estrella.encendido { background: #f59e0b; }
+.toggle-circulo { width: 18px; height: 18px; background: white; border-radius: 50%; position: absolute; top: 4px; left: 4px; transition: 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.toggle-switch.encendido .toggle-circulo { transform: translateX(20px); }
+
+/* --- BOTÓN GUARDAR (ESTE ERA EL QUE TE FALTABA) --- */
+.footer-form {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e2e8f0;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-guardar {
+  background: linear-gradient(135deg, #2495FF 0%, #B7CF49 100%);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  font-family: 'Inter', sans-serif;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 14px rgba(36, 149, 255, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-guardar:hover:not([disabled]) {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 22px rgba(36, 149, 255, 0.45);
+}
+
+.btn-guardar[disabled] {
+  background: #cbd5e1;
+  color: #94a3b8;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+/* --- SPINNER --- */
+.cargando-container { display: flex; flex-direction: column; align-items: center; padding: 4rem; color: #64748b; }
+.spinner { width: 40px; height: 40px; border: 4px solid #e2e8f0; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin-bottom: 1rem; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* ================================================
+   TABLET (< 1024px)
+   ================================================ */
+@media (max-width: 1024px) {
+  .grid-layout-producto {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+/* ================================================
+   MOBILE (< 640px)
+   ================================================ */
+@media (max-width: 640px) {
+  :host { padding: 0.75rem; }
+
+  .header-acciones {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+  }
+
+  .header-acciones h2 { font-size: 1.5rem; }
+
+  .tabs-container {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .tab-btn { padding: 0.6rem 1rem; font-size: 0.85rem; }
+
+  .formulario-card, .card-unificada { padding: 1.25rem; }
+
+  .footer-form { justify-content: stretch; }
+  .btn-guardar { width: 100%; justify-content: center; }
+}

@@ -1,0 +1,126 @@
+<div class="header-principal">
+  <div class="titulo-seccion">
+    <h1>Inventario de Productos</h1>
+    <p>Tienes <strong>{{ productos.length }}</strong> artículos registrados en total.</p>
+  </div>
+
+  <div class="acciones-globales">
+    <button class="btn-config" routerLink="/administracion/categoria-producto/listar">
+      <span class="icon">🏷️</span> Categorías
+    </button>
+    <button class="btn-nuevo" (click)="abrirModal()">
+      <span class="icon">✨</span> Nuevo Producto
+    </button>
+  </div>
+  <div class="modal-backdrop" *ngIf="mostrarModalRegistro">
+    <div class="modal-contenido">
+      <app-registrar-producto (onCerrar)="cerrarModal($event)"></app-registrar-producto>
+    </div>
+  </div>
+
+</div>
+
+<div class="toolbar">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="Buscar por nombre o descripción..." (input)="onSearch($event)">
+  </div>
+
+  <div class="controles-derecha">
+
+    <div class="filtro-categoria custom-dropdown">
+
+      <div class="dropdown-trigger"
+           [class.abierto]="dropdownAbierto"
+           (click)="dropdownAbierto = !dropdownAbierto">
+        <span>📁 {{ nombreCategoriaSeleccionada }}</span>
+        <span class="flecha">▼</span>
+      </div>
+
+      <div class="dropdown-menu" *ngIf="dropdownAbierto">
+        <div class="dropdown-item"
+             [class.activo]="idCategoriaSeleccionada === 'todas'"
+             (click)="seleccionarCategoriaFiltro('todas', $event)">
+          📁 Todas las categorías
+        </div>
+
+        <div class="dropdown-item"
+             *ngFor="let cat of categorias"
+             [class.activo]="idCategoriaSeleccionada === cat.id"
+             (click)="seleccionarCategoriaFiltro(cat.id!, $event)">
+          📁 {{ cat.nombre }}
+        </div>
+      </div>
+
+    </div>
+
+    <div class="filtros-rapidos">
+      <button class="filter-chip" [class.active]="filtroActual === 'todos'" (click)="filtrarProductos('todos')">Todos</button>
+      <button class="filter-chip" [class.active]="filtroActual === 'destacados'" (click)="filtrarProductos('destacados')"><span>⭐</span> Destacados</button>
+      <button class="filter-chip" [class.active]="filtroActual === 'ocultos'" (click)="filtrarProductos('ocultos')"><span>👁️‍🗨️</span> Ocultos</button>
+    </div>
+
+  </div>
+  <div class="dropdown-backdrop" *ngIf="dropdownAbierto" (click)="dropdownAbierto = false"></div>
+</div>
+
+<div *ngIf="cargando" class="loading-overlay">
+  <div class="loader"></div>
+  <p>Sincronizando catálogo...</p>
+</div>
+
+<div class="grid-moderno"
+     cdkDropList
+     cdkDropListOrientation="mixed"
+     (cdkDropListDropped)="onDrop($event)"
+     *ngIf="!cargando && productos.length > 0">
+
+  <div class="tarjeta-pro"
+       *ngFor="let prod of productos; trackBy: trackByFn; let i = index"
+       cdkDrag
+       [class.is-hidden]="!prod.activo">
+
+    <div class="tarjeta-visual">
+      <div class="orden-badge">#{{i + 1}}</div>
+
+      <div class="drag-anchor" cdkDragHandle>⋮⋮</div>
+
+      <div class="img-wrapper">
+        <img *ngIf="obtenerPortada(prod) as url; else noImg" [src]="url" [alt]="prod.nombre">
+        <ng-template #noImg><div class="placeholder-icon">📦</div></ng-template>
+
+        <div class="status-overlay">
+          <span *ngIf="prod.destacado" class="tag-destacado">DESTACADO</span>
+          <span class="tag-visible" [class.oculto]="!prod.activo">
+            {{ prod.activo ? 'VISIBLE' : 'OCULTO' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tarjeta-info">
+      <div class="info-principal">
+        <h3>{{ prod.nombre }}</h3>
+        <p class="sub-txt">{{ prod.subTitulo || 'Sin subtítulo' }}</p>
+      </div>
+      <div class="info-precio">
+        <span class="currency">S/</span>
+        <span class="amount">{{ prod.precio | number:'1.2-2' }}</span>
+      </div>
+    </div>
+
+    <div class="tarjeta-footer">
+      <button class="action-btn edit" [routerLink]="['/administracion/producto/actualizar', prod.id]" title="Editar Datos">
+        ✏️
+      </button>
+      <button class="action-btn toggle" (click)="toggleVisibilidad(prod)" title="Visibilidad">
+        {{ prod.activo ? '👁️' : '👁️‍🗨️' }}
+      </button>
+      <button class="action-btn delete" (click)="eliminarDefinitivo(prod)" title="Eliminar">
+        🗑️
+      </button>
+    </div>
+
+    <div *cdkDragPlaceholder class="drag-placeholder"></div>
+  </div>
+</div>

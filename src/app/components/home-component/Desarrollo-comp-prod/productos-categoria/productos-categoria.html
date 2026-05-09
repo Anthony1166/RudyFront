@@ -1,0 +1,67 @@
+
+<main class="main-productos">
+
+  <app-navbar-prod></app-navbar-prod>
+
+  <div class="header-categoria">
+    <h1 class="cat-title">{{ nombreCategoria }}</h1>
+
+    <div class="filtro-custom">
+      <button class="filtro-btn" (click)="toggleMenuFiltro()">
+        {{ filtroSeleccionado }}
+        <span class="arrow" [class.up]="menuFiltroAbierto">▼</span>
+      </button>
+
+      <ul class="filtro-lista" *ngIf="menuFiltroAbierto">
+        <li (click)="cambiarOrden('relevancia', 'Relevancia')">Relevancia</li>
+        <li (click)="cambiarOrden('recientes', 'Más Recientes')">Más Recientes</li>
+        <li (click)="cambiarOrden('az', 'Alfabéticamente (A-Z)')">Alfabéticamente (A-Z)</li>
+        <li (click)="cambiarOrden('za', 'Alfabéticamente (Z-A)')">Alfabéticamente (Z-A)</li>
+        <li (click)="cambiarOrden('precio-menor', 'Precio: Menor a Mayor')">Precio: Menor a Mayor</li>
+        <li (click)="cambiarOrden('precio-mayor', 'Precio: Mayor a Menor')">Precio: Mayor a Menor</li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="loader-container">
+    <div class="spinner-blanco"></div>
+  </div>
+
+  <div class="grid-productos" *ngIf="!cargando">
+    <div class="prod-card"
+         *ngFor="let prod of productos; let i = index"
+         [routerLink]="['/producto', prod.id]"
+         [style.animation-delay]="(i * 0.08) + 's'">
+      <img *ngIf="obtenerImagenPortada(prod)" [src]="obtenerImagenPortada(prod)" [alt]="prod.nombre" class="prod-img">
+
+      <div *ngIf="!obtenerImagenPortada(prod)" class="prod-img placeholder-img">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <polyline points="21 15 16 10 5 21"/>
+        </svg>
+      </div>
+
+        <div class="info-container">
+          <div class="card-tit-txt">
+            <h3 class="info-title">{{ prod.nombre | uppercase }}</h3>
+            <p class="info-sub">{{ prod.subTitulo }}</p>
+          </div>
+
+          <div class="card-footer">
+            <span class="info-precio">S/ {{ prod.precio | number:'1.2-2' }}</span>
+            <button class="btn-accion" [routerLink]="['/producto', prod.id]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 12h14M12 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+
+      </div>
+  </div>
+
+</main>
+
+<app-footer-p1></app-footer-p1>

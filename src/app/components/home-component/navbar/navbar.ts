@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
-import {RouterLink, RouterLinkActive} from '@angular/router';
-import {NgForOf} from '@angular/common';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-navbar',
-  imports: [
-    RouterLink
-  ],
+  imports: [],
   templateUrl: './navbar.html',
   styleUrl: './navbar.css'
 })

@@ -1,0 +1,34 @@
+<div class="registrar-container">
+  <div class="form-card">
+    <h2>Nueva Categoría</h2>
+    <p class="subtitle">Ingresa los datos para crear una nueva categoría.</p>
+
+    <form (ngSubmit)="guardar()">
+      <div class="form-group">
+        <label for="nombre">Nombre de la Categoría</label>
+        <input
+          type="text"
+          id="nombre"
+          name="nombre"
+          [(ngModel)]="categoria.nombre"
+          placeholder="Ej: Desarrollo Web"
+          required
+          [disabled]="isLoading"
+        />
+      </div>
+
+      <div *ngIf="errorMsg" class="error-alert">
+        {{ errorMsg }}
+      </div>
+
+      <div class="form-actions">
+        <button type="button" routerLink="/administracion/categoria/listar" class="btn-cancel" [disabled]="isLoading">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="isLoading">
+          {{ isLoading ? 'Guardando...' : 'Guardar Categoría' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

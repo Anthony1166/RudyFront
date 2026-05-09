@@ -1,0 +1,48 @@
+<div class="listar-container">
+  <div class="header-actions">
+    <h2>Lista de Categorías</h2>
+    <a routerLink="/administracion/categoria/registrar" class="btn-add">
+      ➕ Nueva Categoría
+    </a>
+  </div>
+
+  <div *ngIf="isLoading" class="loading">
+    Cargando categorías...
+  </div>
+
+  <div *ngIf="errorMsg" class="error">
+    {{ errorMsg }}
+  </div>
+
+  <div class="table-responsive" *ngIf="!isLoading && !errorMsg">
+    <table class="custom-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Nombre</th>
+          <th class="text-center">Acciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let cat of categorias">
+          <td>{{ cat.idCategoria }}</td>
+          <td>{{ cat.nombre }}</td>
+          <td class="actions-cell">
+            <!-- Botón Actualizar -->
+            <a [routerLink]="['/administracion/categoria/actualizar', cat.idCategoria]" class="btn-action btn-edit" title="Actualizar">
+              🔄
+            </a>
+
+            <!-- Botón Eliminar -->
+            <button (click)="eliminar(cat.idCategoria)" class="btn-action btn-delete" title="Eliminar">
+              🗑️
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="categorias.length === 0">
+          <td colspan="3" class="text-center">No hay categorías registradas.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,78 @@
+<div class="procesos-section">
+  <h2 class="titulo-seccion">¿CÓMO LO HAREMOS?</h2>
+
+  <div class="carousel-container">
+
+    <!-- Flecha Izquierda -->
+    <button class="nav-btn prev-btn"
+            *ngIf="showArrows && canScrollLeft"
+            (click)="scrollIzq()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15 18L9 12L15 6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <!-- El wrapper ahora es el contenedor scrollable (flex) -->
+    <div class="carousel-track-wrapper"
+         #carousel
+         (scroll)="checkScroll()"
+         [class.centered]="!showArrows">
+
+      <!-- Estado de Carga (Skeletons) -->
+      <ng-container *ngIf="cargando">
+        <div class="proceso-card skeleton-card" *ngFor="let i of [1,2,3]">
+          <div class="card-img-container skeleton-img"></div>
+          <div class="card-content">
+            <div class="skeleton-title"></div>
+            <ul class="card-desc-list">
+              <li class="skeleton-text"></li>
+              <li class="skeleton-text"></li>
+              <li class="skeleton-text short"></li>
+            </ul>
+          </div>
+        </div>
+      </ng-container>
+
+      <!-- Estado Vacío (Sin procesos) -->
+      <div class="empty-state" *ngIf="!cargando && (!procesos || procesos.length === 0)">
+        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"></circle>
+          <line x1="12" y1="8" x2="12" y2="12"></line>
+          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        </svg>
+        <p>Aún no se han definido procesos para este producto.</p>
+      </div>
+
+      <!-- Estado con Datos -->
+      <ng-container *ngIf="!cargando && procesos && procesos.length > 0">
+        <div class="proceso-card" *ngFor="let p of procesos">
+
+          <div class="card-img-container">
+            <img [src]="p.urlImagen || 'assets/logo/logo.png'" alt="Imagen del proceso {{p.titulo}}" class="card-img" />
+          </div>
+
+          <div class="card-content">
+            <h3 class="card-title">{{ p.titulo | uppercase }}</h3>
+            <ul class="card-desc-list">
+              <li *ngFor="let punto of obtenerPuntos(p.descripcion)" class="card-desc-item">
+                {{ punto }}
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </ng-container>
+
+    </div>
+
+    <!-- Flecha Derecha -->
+    <button class="nav-btn next-btn"
+            *ngIf="showArrows && canScrollRight"
+            (click)="scrollDer()">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 18L15 12L9 6" stroke="#333" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+  </div>
+</div>

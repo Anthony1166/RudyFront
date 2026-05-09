@@ -1,0 +1,103 @@
+*{
+  padding: 0;
+  margin: 0;
+}
+.site-footer {
+  height: auto;          /* Se adapta al contenido */
+  min-height: 7.5rem;    /* Mínimo visual en desktop */
+  background: #B7CF49;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-sizing: border-box;
+  padding: 1.5rem 7.75rem;
+  box-shadow: 0 -2.375rem 6.25rem 0.625rem rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  position: relative;
+}
+
+.footer-left {
+  display: flex;
+  gap: 3.75rem;
+
+}
+
+.footer-link, .footer-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: #000000;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.5rem;
+  text-decoration: none;
+
+}
+
+.footer-icon {
+  width: 2.5rem;
+  height: 2.5rem;
+}
+
+.footer-link:hover {
+  opacity: 0.7;
+  transition: opacity 0.2s ease-in-out;
+}
+
+
+/* =========================================
+   RESPONSIVE — TABLET (≤1024px)
+   ========================================= */
+@media only screen and (max-width: 1024px) {
+  .site-footer {
+    padding: 1.5rem 3rem;   /* Menos padding lateral que en desktop */
+    height: auto;
+  }
+
+  .footer-left {
+    gap: 2rem;              /* Reduce el gap entre WhatsApp e Instagram */
+  }
+
+  .footer-link,
+  .footer-info {
+    font-size: 1.25rem;     /* Texto un poco más pequeño */
+    gap: 0.75rem;
+  }
+
+  .footer-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE — MÓVIL (≤768px)
+   Todo en una sola fila centrada
+   ========================================= */
+@media only screen and (max-width: 768px) {
+  .site-footer {
+    flex-direction: row;         /* Una sola fila */
+    justify-content: center;     /* Centrado horizontal */
+    align-items: center;
+    gap: 1rem;                 /* Mockup: gap entre grupos */
+    padding: 1.5rem 1rem;        /* Mockup: padding top/bottom 1.5rem */
+    height: auto;
+  }
+
+  .footer-left {
+    gap: 1rem;                 /* Mockup: gap entre WhatsApp e Instagram */
+  }
+
+  .footer-link,
+  .footer-info {
+    font-size: 0.875rem;
+    gap: 0.5rem;
+    white-space: nowrap;  /* Evita que el texto se corte en varias líneas */
+  }
+
+  .footer-icon {
+    width: 1.25rem;              /* Mockup: tamaño del icono */
+    height: 1.25rem;
+  }
+}

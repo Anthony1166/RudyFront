@@ -1,0 +1,103 @@
+:host {
+  display: block;
+}
+
+/* --- HEADER DISCRETO --- */
+.seccion-header-tabs { margin-bottom: 1.5rem; }
+.titulo-discreto { font-size: 1.1rem; color: #1e293b; margin: 0 0 5px 0; }
+.subtitulo-discreto { color: #64748b; font-size: 0.9rem; margin: 0; }
+
+.grid-galeria, .drop-zone-galeria { display: flex; flex-wrap: wrap; gap: 20px; }
+
+/* CAJA DE SUBIDA REDISEÑADA */
+.caja-subida { width: 180px; height: 180px; border: 2px dashed #cbd5e1; border-radius: 16px; background-color: #f8fafc; display: flex; flex-direction: column; justify-content: center; align-items: center; cursor: pointer; transition: all 0.3s; }
+.caja-subida:hover { border-color: #3b82f6; background-color: #ebf5ff; }
+.caja-subida.subiendo { border-color: #3b82f6; opacity: 0.8; cursor: wait; }
+.caja-subida p { color: #64748b; font-weight: 600; margin-top: 10px; font-size: 0.9rem; }
+.icono-nube { font-size: 2.5rem; color: #94a3b8; transition: 0.3s; }
+.caja-subida:hover .icono-nube { color: #3b82f6; }
+
+/* TARJETAS DE FOTOS */
+.tarjeta-foto { width: 180px; height: 180px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); background: white; transition: all 0.2s; cursor: pointer; border: 2px solid transparent; }
+.tarjeta-foto:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+.img-preview { width: 100%; height: 100%; object-fit: cover; }
+
+.badge-portada { position: absolute; top: 8px; left: 8px; background: #f59e0b; color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; z-index: 5; }
+.badge-orden { position: absolute; bottom: 8px; left: 8px; background: rgba(15,23,42,0.7); backdrop-filter: blur(4px); color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; z-index: 5; }
+.drag-handle { position: absolute; top: 8px; right: 8px; background: white; color: #475569; padding: 4px 6px; border-radius: 6px; font-size: 1rem; cursor: grab; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.drag-handle:active { cursor: grabbing; background: #f1f5f9; }
+
+/* Capa hover mucho más sutil */
+.capa-opciones { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.3); display: flex; justify-content: center; align-items: center; opacity: 0; transition: opacity 0.2s; z-index: 4; }
+.tarjeta-foto:hover .capa-opciones { opacity: 1; }
+.icono-ampliar { background: white; color: #0f172a; font-weight: 700; padding: 6px 12px; border-radius: 20px; font-size: 0.8rem; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+.cdk-drag-preview { box-shadow: 0 20px 25px -5px rgba(0,0,0,0.2) !important; border-radius: 16px; opacity: 0.9; }
+.cdk-drag-animating { transition: transform 250ms cubic-bezier(0, 0, 0.2, 1); }
+.drag-placeholder-foto { background: #f8fafc; border: 2px dashed #cbd5e1; border-radius: 16px; width: 180px; height: 180px; }
+.spinner { width: 30px; height: 30px; border: 3px solid #e2e8f0; border-top-color: #3b82f6; border-radius: 50%; animation: spin 1s linear infinite; margin: 0 auto 10px; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.loading-state { text-align: center; padding: 3rem; color: #718096; }
+.saving-toast { position: fixed; bottom: 20px; right: 20px; background: #0f172a; color: white; padding: 10px 20px; border-radius: 8px; z-index: 1000; box-shadow: 0 4px 6px rgba(0,0,0,0.1); font-weight: 600; font-size: 0.9rem;}
+
+/* =========================================
+   ESTILOS DEL MODAL EMERGENTE
+   ========================================= */
+.modal-backdrop { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); z-index: 9999; display: flex; justify-content: center; align-items: center; animation: fadeIn 0.2s ease-out; }
+.modal-card { background: white; width: 850px; max-width: 95vw; border-radius: 24px; padding: 2rem; position: relative; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+.btn-cerrar-modal { position: absolute; top: 20px; right: 20px; background: #f1f5f9; border: none; width: 36px; height: 36px; border-radius: 50%; font-size: 1.2rem; color: #64748b; cursor: pointer; transition: 0.2s; display: flex; justify-content: center; align-items: center; }
+.btn-cerrar-modal:hover { background: #e2e8f0; color: #0f172a; transform: scale(1.05); }
+
+.modal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.modal-foto-container { position: relative; border-radius: 16px; overflow: hidden; background: #f8fafc; display: flex; justify-content: center; align-items: center; aspect-ratio: 1; border: 1px solid #e2e8f0;}
+.modal-foto-grande { width: 100%; height: 100%; object-fit: contain; }
+.badge-portada-modal { position: absolute; top: 15px; left: 15px; background: #f59e0b; color: white; padding: 6px 12px; border-radius: 8px; font-size: 0.8rem; font-weight: 800; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+
+.modal-controles h3 { margin: 0 0 1.5rem 0; color: #0f172a; font-size: 1.5rem; }
+.campo-form-modal { margin-bottom: 1.5rem; }
+.campo-form-modal label { display: block; font-weight: 700; color: #475569; margin-bottom: 0.5rem; font-size: 0.9rem; }
+.campo-form-modal input { width: 100%; padding: 0.8rem; border: 2px solid #e2e8f0; border-radius: 10px; font-family: inherit; font-size: 0.95rem; box-sizing: border-box; transition: 0.3s; }
+.campo-form-modal input:focus { outline: none; border-color: #3b82f6; background: white; box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15); }
+.nota-seo { font-size: 0.8rem; color: #94a3b8; margin: 5px 0 0 0; }
+
+.modal-acciones-principales { display: flex; flex-direction: column; gap: 10px; margin-bottom: 1.5rem; }
+.btn-guardar-modal { background: linear-gradient(135deg, #2495FF 0%, #B7CF49 100%); color: white; border: none; padding: 12px; border-radius: 2rem; font-family: 'Inter', sans-serif; font-weight: bold; font-size: 1rem; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 4px 12px rgba(36, 149, 255, 0.3); }
+.btn-guardar-modal:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(36, 149, 255, 0.4); }
+.btn-guardar-modal[disabled] { background: #cbd5e1; cursor: not-allowed; transform: none; box-shadow: none; }
+
+.btn-portada-modal { background: white; color: #b45309; border: 2px solid #fde68a; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-portada-modal:hover { background: #fffbeb; border-color: #f59e0b; }
+
+.divisor { height: 1px; background: #e2e8f0; margin: 1.5rem 0; }
+.btn-eliminar-modal { width: 100%; background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-eliminar-modal:hover { background: #fee2e2; border-color: #ef4444; }
+
+@keyframes slideUp { from { opacity: 0; transform: translateY(30px) scale(0.95); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+/* ================================================
+   MOBILE (< 640px)
+   ================================================ */
+@media (max-width: 640px) {
+  .caja-subida,
+  .tarjeta-foto,
+  .drag-placeholder-foto { width: 140px; height: 140px; }
+
+  .modal-card {
+    width: 100vw;
+    max-width: 100vw;
+    border-radius: 20px 20px 0 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    padding: 1.5rem;
+  }
+
+  .modal-grid { grid-template-columns: 1fr; }
+  .modal-foto-container { max-height: 220px; }
+}
+
+@media (max-width: 400px) {
+  .caja-subida,
+  .tarjeta-foto,
+  .drag-placeholder-foto { width: 110px; height: 110px; }
+}

@@ -1,0 +1,29 @@
+<section class="main-project-section">
+
+  <ng-container *ngIf="isLoading">
+    <div class="txt-main skeleton-txt-main">
+      <div class="skeleton-title"></div>
+      <div class="skeleton-desc"></div>
+      <div class="skeleton-desc medium"></div>
+    </div>
+
+    <div class="images-container">
+      <div class="skeleton-img-wrapper" *ngFor="let i of [1,2,3]">
+        <div class="skeleton-img"></div>
+      </div>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="!isLoading && proyectoRecibido">
+    <div class="txt-main">
+      <h1 class="main-title">{{ proyectoRecibido.titulo | uppercase }}</h1>
+      <p class="main-desc">{{ proyectoRecibido.descripcion }}</p>
+    </div>
+
+    <div class="images-container">
+      <div class="img-wrapper" *ngFor="let imgObj of proyectoRecibido.imagenes | slice:0:3">
+        <img [src]="imgObj.imagen" [alt]="imgObj.descripcion || proyectoRecibido.titulo" class="project-img">
+      </div>
+    </div>
+  </ng-container>
+</section>

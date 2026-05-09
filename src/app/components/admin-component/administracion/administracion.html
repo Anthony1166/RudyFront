@@ -1,1 +1,28 @@
-<p>administracion works!</p>
+<div class="admin-layout">
+
+  <header class="admin-header">
+    <div class="header-left">
+      <button class="hamburger-btn" (click)="toggleSidebar()" [class.activo]="sidebarAbierto" aria-label="Menú">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <h1 class="admin-logo">Admin Panel</h1>
+    </div>
+    <button class="logout-btn" (click)="logout()">Cerrar Sesión</button>
+  </header>
+
+  <div class="admin-body">
+
+    <div class="sidebar-overlay" [class.visible]="sidebarAbierto" (click)="cerrarSidebar()"></div>
+
+    <aside class="admin-sidebar" [class.abierto]="sidebarAbierto">
+      <app-panel (navegar)="cerrarSidebar()"></app-panel>
+    </aside>
+
+    <main class="admin-content">
+      <router-outlet></router-outlet>
+    </main>
+
+  </div>
+</div>

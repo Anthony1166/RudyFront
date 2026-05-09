@@ -1,0 +1,43 @@
+<section class="projects-section">
+  <div class="projects-header">
+    <h1 class="section-title">MIS PROYECTOS</h1>
+    <h2 class="section-subtitle">PROYECTOS DE DISEÑO, PROTOTIPADO Y FABRICACIÓN.</h2>
+  </div>
+
+  <div class="carousel-container"
+       #carousel
+       (mousedown)="onMouseDown($event)"
+       (mouseleave)="onMouseLeave()"
+       (mouseup)="onMouseUp()"
+       (mousemove)="onMouseMove($event)">
+
+    <ng-container *ngIf="isLoading">
+      <div *ngFor="let i of [1,2,3,4]" class="card skeleton-card">
+        <div class="skeleton-img"></div>
+        <div class="card-info">
+          <div class="card-tit-txt">
+            <div class="skeleton-title"></div>
+            <div class="skeleton-text"></div>
+            <div class="skeleton-text short"></div>
+          </div>
+          <div class="skeleton-btn"></div>
+        </div>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="!isLoading">
+      <div *ngFor="let proyecto of proyectos" class="card">
+        <img [src]="getCurrentImage(proyecto)" [alt]="proyecto.titulo" class="card-img">
+
+        <div class="card-info">
+          <div class="card-tit-txt">
+            <h2 class="card-title">{{ proyecto.titulo }}</h2>
+            <p class="card-text">{{ proyecto.descripcion }}</p>
+          </div>
+          <a [routerLink]="['/proyecto/detalle', proyecto.idProyecto]" class="card-btn">Ver más</a>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+
+</section>

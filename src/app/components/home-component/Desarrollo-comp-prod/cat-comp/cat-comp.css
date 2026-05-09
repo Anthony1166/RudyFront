@@ -1,0 +1,253 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Patrón sticky footer: el host ocupa toda la pantalla como columna */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main-cat {
+  font-family: 'Montserrat', 'Poppins', sans-serif;
+  background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+  flex: 1;           /* Crece para llenar el espacio entre navbar y footer */
+  min-height: 0;     /* Permite que shrink si el contenido es corto */
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+.top-bar {
+  padding: 3rem 4rem 1rem 4rem;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.btn-back {
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.btn-back:hover {
+  transform: translateX(-5px);
+}
+
+.carousel-master-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+  flex: 1;
+}
+
+.cards-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* Fluido: se adapta al viewport */
+  justify-content: center;
+  gap: 2.75rem;
+  padding: 2rem 4rem;                     /* Más padding lateral en desktop */
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+}
+
+/* Centrado de 1 o 2 cards — solo en desktop (>1366px) */
+@media only screen and (min-width: 1367px) {
+  .cards-container.cards-1 {
+    grid-template-columns: minmax(0, 27.125rem);
+    max-width: calc(27.125rem + 8rem);  /* card + padding lateral */
+  }
+
+  .cards-container.cards-2 {
+    grid-template-columns: repeat(2, minmax(0, 27.125rem));
+    max-width: calc(27.125rem * 2 + 2.75rem + 8rem);  /* 2 cards + gap + padding */
+  }
+}
+
+.cat-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 27.125rem;
+  margin: 0 auto;
+  height: 25.625rem;
+  padding: 1.5rem 1rem 1rem 1rem;
+  border-radius: 1.5rem;
+  background: #FFF;
+  box-shadow: 15px 15px 20px 0 rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  cursor: pointer;
+}
+
+.cat-card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.cat-title {
+  color: #000;
+  text-align: center;
+  font-family: 'Heavitas', sans-serif;
+  font-size: 2rem;
+  font-weight: 400;
+  margin: 0;
+}
+
+.cat-img-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  background: #f8fafc;
+  overflow: hidden;
+}
+
+.cat-img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.cat-card:hover .cat-img-wrapper img {
+  transform: scale(1.05);
+}
+
+.placeholder-img {
+  font-size: 4rem;
+  opacity: 0.2;
+}
+
+.loader-container {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner-blanco {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+@media only screen and (max-width: 1024px) {
+  .top-bar {
+    padding: 2rem 2rem 0.5rem 2rem;
+  }
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1.5rem;
+    max-width: 900px;
+  }
+  .cat-card {
+    max-width: 100%;
+    height: auto;
+    min-height: 22rem;
+  }
+  .cat-title {
+    font-size: 1.75rem;
+  }
+}
+
+/* =========================================
+   TABLET HORIZONTAL (landscape) — 1025px a 1366px
+   iPad Air: 1180px | iPad Pro: 1366px
+   2 columnas para evitar que las cards se corten
+   ========================================= */
+@media only screen and (min-width: 1025px) and (max-width: 1366px) {
+  .cards-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 1.5rem;
+    max-width: 1100px;
+  }
+  .cat-card {
+    max-width: 100%;
+    height: auto;
+    min-height: 22rem;
+  }
+  .cat-title {
+    font-size: 1.75rem;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .main-cat {
+    min-height: 100dvh;
+    width: 100%;          /* 100% en vez de 100vw para evitar overflow del scrollbar */
+    overflow-x: hidden;
+  }
+  .top-bar {
+    padding: 1.5rem 1rem 0.5rem 1rem;
+  }
+  .carousel-master-wrapper {
+    padding-top: 0rem;
+    padding-bottom: 0rem;
+    align-items: flex-start;
+  }
+  .cards-container {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;         /* Mockup: gap entre cards */
+    padding: 1rem;       /* Mockup: padding lateral del contenedor */
+    max-width: 100%;
+  }
+  .cat-card {
+    width: 100%;          /* Fluido: se adapta al contenedor */
+    max-width: 20.62rem;  /* Nunca supera el ancho del mockup */
+    height: 15rem;
+    min-height: unset;
+    padding: 1rem;
+    gap: 0;              /* El título controla su propio espaciado internamente */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    overflow: hidden;        /* Previene cualquier desbordamiento */
+    box-shadow: 8px 8px 14px 0 rgba(0, 0, 0, 0.12);
+  }
+  .cat-card:hover {
+    transform: none;
+  }
+  .cat-title {
+    flex: 0 0 3rem;          /* Área fija: 13rem inner − 10rem imagen = 3rem */
+    width: 100%;
+    display: flex;
+    align-items: center;     /* Centra el texto verticalmente dentro del área */
+    justify-content: center; /* Centra horizontalmente */
+    font-size: 1.25rem;
+    line-height: 1.2;
+    text-align: center;
+  }
+  .cat-img-wrapper {
+    width: 100%;
+    height: 10rem;
+    min-height: 10rem;
+    max-height: 10rem;
+    aspect-ratio: auto;      /* Cancela el 4/3 del estilo base */
+    flex-shrink: 0;
+  }
+  .placeholder-img {
+    font-size: 3rem;
+  }
+}

@@ -1,0 +1,107 @@
+<div class="contenedor-registro">
+
+  <div class="header-acciones">
+    <div>
+      <h2>Nuevo Producto</h2>
+      <p class="subtitulo-header">Añade un nuevo artículo a tu tienda. Podrás subir sus fotos en el siguiente paso.</p>
+    </div>
+    <button class="btn-volver" (click)="cancelar()">
+      ✖ Cerrar
+    </button>
+  </div>
+
+  <div class="formulario-card">
+    <div class="grid-layout-producto">
+
+      <div class="col-datos">
+
+        <div class="campo-form">
+          <label>Nombre del producto <span class="req">*</span></label>
+          <input type="text" [(ngModel)]="producto.nombre" placeholder="Ej. Taza Gato Astronauta">
+        </div>
+
+        <div class="campo-form">
+          <label>Subtítulo (Opcional)</label>
+          <input type="text" [(ngModel)]="producto.subTitulo" placeholder="Ej. Edición Limitada en Cerámica">
+        </div>
+
+        <div class="campo-form">
+          <label>Precio (PEN) <span class="req">*</span></label>
+          <div class="input-precio-container">
+            <span class="moneda">S/</span>
+            <input type="number" [(ngModel)]="producto.precio" min="0" step="0.50" placeholder="0.00">
+          </div>
+        </div>
+
+        <div class="campo-form mt-15">
+          <label>Categorías</label>
+          <p class="nota-campo">¿A dónde pertenece este producto?</p>
+
+          <div *ngIf="cargandoCategorias" class="txt-cargando">Cargando categorías...</div>
+
+          <div class="contenedor-pills" *ngIf="!cargandoCategorias">
+            <button
+              *ngFor="let cat of categoriasDisponibles"
+              class="pill-categoria"
+              [class.seleccionada]="categoriasSeleccionadas.has(cat.id!)"
+              (click)="toggleCategoria(cat.id)">
+              {{ cat.nombre }}
+            </button>
+            <div *ngIf="categoriasDisponibles.length === 0" class="txt-cargando">No hay categorías creadas.</div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="col-textos">
+
+        <div class="campo-form">
+          <label>Descripción detallada <span class="req">*</span></label>
+          <textarea [(ngModel)]="producto.descripcion" rows="4" placeholder="Cuenta la historia y detalles de este producto..."></textarea>
+        </div>
+
+        <div class="campo-form">
+          <label>Características (Opcional)</label>
+          <textarea [(ngModel)]="producto.caracteristicas" rows="3" placeholder="Ej. - Alto: 15cm&#10;- Peso: 200g&#10;- Material: Resina"></textarea>
+        </div>
+
+        <div class="seccion-switches">
+          <div class="switch-row">
+            <div class="switch-info">
+              <h4>Visibilidad inicial</h4>
+              <p>¿Mostrar en la tienda al guardarlo?</p>
+            </div>
+            <div class="toggle-container" (click)="producto.activo = !producto.activo">
+              <div class="toggle-switch" [class.encendido]="producto.activo">
+                <div class="toggle-circulo"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="switch-row">
+            <div class="switch-info">
+              <h4>⭐ Producto Destacado</h4>
+              <p>Mostrará una etiqueta especial y prioridad.</p>
+            </div>
+            <div class="toggle-container" (click)="producto.destacado = !producto.destacado">
+              <div class="toggle-switch switch-estrella" [class.encendido]="producto.destacado">
+                <div class="toggle-circulo"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="footer-form">
+      <button
+        class="btn-guardar"
+        (click)="guardarProducto()"
+        [disabled]="!producto.nombre || !producto.descripcion || producto.precio <= 0 || guardando">
+        {{ guardando ? 'Guardando y preparando galería...' : 'Guardar y Continuar' }}
+      </button>
+    </div>
+  </div>
+</div>

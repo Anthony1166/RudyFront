@@ -1,0 +1,40 @@
+<section class="cabecera-container" *ngIf="producto">
+
+  <div class="info-col">
+    <h1 class="prod-titulo">{{ producto.nombre | uppercase }}</h1>
+
+    <h2 class="prod-precio">S/. {{ producto.precio | number:'1.2-2' }}</h2>
+
+    <p class="prod-desc">
+      {{ producto.descripcion }}
+    </p>
+
+    <ul class="prod-lista" *ngIf="listaCaracteristicas.length > 0">
+      <li *ngFor="let item of listaCaracteristicas">{{ item }}</li>
+    </ul>
+
+    <button class="btn-pedido" (click)="abrirWhatsApp()">Empezar mi pedido</button>
+  </div>
+
+  <div class="galeria-col">
+
+    <div class="img-principal-wrapper" *ngIf="imagenActual">
+
+      <img *ngFor="let img of [imagenActual]; trackBy: trackById"
+           [src]="img.urlImagen"
+           [alt]="img.textoAlternativo || producto.nombre"
+           class="img-principal animar-traslacion">
+
+    </div>
+
+    <div class="miniaturas-fila" *ngIf="miniaturas.length > 0">
+      <img *ngFor="let mini of miniaturas"
+           [src]="mini.urlImagen"
+           [alt]="mini.textoAlternativo || producto.nombre"
+           class="img-mini"
+           (click)="cambiarImagen(mini)">
+    </div>
+
+  </div>
+
+</section>

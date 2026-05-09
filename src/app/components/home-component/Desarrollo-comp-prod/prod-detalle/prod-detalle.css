@@ -1,0 +1,35 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+/*
+  Alinea "MINI WAU" con "AVACAS" en el navbar.
+  Posición de AVACAS = nav-padding(4rem) + arrow(2rem) + gap(3rem) = 9rem
+*/
+app-producto-cabecera {
+  --info-col-padding: 9rem;
+}
+
+/* Patrón sticky footer */
+:host {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main-detalle-producto {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+}
+
+.hero-section {
+  min-height: 100dvh;
+  padding-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+}

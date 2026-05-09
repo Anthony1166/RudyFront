@@ -1,0 +1,233 @@
+.projects-section {
+  height: 110vh; /* Ocupa el 100% de la altura de la pantalla */
+  width: 100%;
+  background-color: #B7CF49; /* Cambia este HEX por el verde exacto de tu Figma */
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Evita que toda la página haga scroll hacia abajo */
+  padding: 0;
+  box-sizing: border-box;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 -2.375rem 6.25rem 1.875rem rgba(0, 0, 0, 0.25);
+}
+
+.projects-header {
+  padding-left: 7.6875rem; /* 123px */
+  margin-bottom: 2.5rem;   /* 40px */
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.section-title {
+  color: #FFFFFF;
+  font-family: 'Heavitas',sans-serif;
+  font-size: 3.75rem;
+  margin: 0;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.section-subtitle {
+  color: #FFFFFF;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: 1.5rem;
+  font-style: normal;
+  line-height: normal;
+}
+
+/* CARRUSEL HORIZONTAL */
+.carousel-container {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 3.0625rem; /* 49px */
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-left: 7.6875rem;  /* 123px */
+  padding-right: 7.6875rem; /* 123px */
+  padding-bottom: 2rem;     /* 32px */
+  width: 100%;
+  cursor: grab;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  box-sizing: border-box;
+  scroll-snap-type: x mandatory;
+}
+.carousel-container:active {
+  cursor: grabbing;
+}
+.carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+
+
+
+
+
+
+.card {
+  background: #043237;
+  border-radius: 1.5rem;
+  box-shadow: 0.375rem 0.5rem 0.625rem 0 rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  flex: 0 0 calc((100% - 6.125rem) / 3);
+  height: auto;
+  box-sizing: border-box;
+  user-select: none;
+  padding: 1.5rem;
+  align-items: flex-start;
+  gap: 1.5rem;
+  scroll-snap-align: start;
+  container-type: inline-size;
+}
+
+.card-img {
+  width: 100%;
+  border-radius: 1.25rem; /* 20px */
+  aspect-ratio: 328 / 264;
+  object-fit: cover;
+  -webkit-user-drag: none;
+}
+
+.card-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  gap: max(1.5rem, 5cqi);
+  box-sizing: border-box;
+  padding: 0.5rem 0 0 0;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-grow: 1;
+}
+
+.card-tit-txt{
+  width: 100%;
+  gap: max(1rem, 3cqi);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.card-title {
+  color: #FFFFFF;
+  font-family: 'Heavitas', sans-serif;
+  font-weight: 400;
+  font-size: max(1.5rem, 6cqi);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.card-text {
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  text-align: justify;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: clip;
+  font-style: normal;
+  line-height: 1.4;
+  font-size: max(1rem, 3.5cqi);
+}
+
+.card-btn {
+  color: #FFFFFF;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 1;
+  border: none;
+  border-radius: 0.5rem; /* 8px */
+  cursor: pointer;
+  align-self: flex-end;
+  width: fit-content;
+  transition: background-color 0.3s;
+  display: flex;
+  padding: max(0.625rem, 2cqi) max(1.25rem, 4cqi);
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  background: #2495FF;
+  font-size: max(0.875rem, 3cqi);
+  font-style: normal;
+  margin-top: auto;
+}
+
+.card-btn:hover {
+  background-color: #1a6bcf;
+}
+
+
+
+
+/* =========================================
+   EFECTO SKELETON (Fantasmas)
+   ========================================= */
+
+/* Animación del brillo */
+@keyframes shimmer {
+  0% {
+    background-position: -400px 0;
+  }
+  100% {
+    background-position: 400px 0;
+  }
+}
+
+/* El fondo base de los elementos fantasma */
+.skeleton-img,
+.skeleton-title,
+.skeleton-text,
+.skeleton-btn {
+  /* Color base ligeramente más claro que el fondo de la tarjeta */
+  background: #06454d;
+  /* El gradiente que se moverá (el brillo) */
+  background-image: linear-gradient(
+    to right,
+    #06454d 0%,
+    #095963 20%,
+    #06454d 40%,
+    #06454d 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 800px 100%;
+  animation: shimmer 1.5s infinite linear forwards;
+}
+
+/* --- Formas específicas de los elementos --- */
+
+.skeleton-img {
+  width: 100%;
+  border-radius: 1.25rem;
+  aspect-ratio: 477 / 336;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 2.25rem; /* Alto de tu H2 */
+  border-radius: 0.5rem;
+}
+
+.skeleton-text {
+  width: 100%;
+  height: 1rem; /* Alto de una línea de texto */
+  border-radius: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.skeleton-text.short {
+  width: 60%; /* La segunda línea es más corta */
+}
+
+.skeleton-btn {
+  width: 120px;
+  height: 3rem;
+  border-radius: 0.5rem;
+  align-self: flex-start;
+}

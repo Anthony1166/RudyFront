@@ -1,0 +1,24 @@
+<main class="main-detalle-producto">
+
+  <div class="hero-section">
+    <app-navbar-prod></app-navbar-prod>
+
+    <div *ngIf="cargando" class="loader-container">
+      <div class="spinner-blanco"></div>
+    </div>
+
+    <ng-container *ngIf="!cargando && producto">
+      <app-producto-cabecera
+        [producto]="producto"
+        [imagenes]="imagenes">
+      </app-producto-cabecera>
+    </ng-container>
+  </div>
+
+  <ng-container *ngIf="producto">
+    <app-procesos-lista [procesos]="procesos" [cargando]="cargandoProcesos"></app-procesos-lista>
+  </ng-container>
+
+
+  <app-footer-p1></app-footer-p1>
+</main>

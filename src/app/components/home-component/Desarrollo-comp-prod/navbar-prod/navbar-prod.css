@@ -1,0 +1,171 @@
+*{ margin: 0; padding: 0;}
+
+.navbar-pro {
+  width: 100%;
+  height: 8rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* =========================================
+   MODO SOLO-FLECHA (cat-comp en desktop)
+   Oculta AVACAS, WA e IG — solo muestra ←
+   ========================================= */
+:host(.solo-flecha) .nav-item:not(:first-child) {
+  display: none;   /* Desktop: solo la flecha visible */
+}
+
+/* En tablet y móvil se restauran todos los ítems */
+@media only screen and (max-width: 1366px) {
+  :host(.solo-flecha) .nav-item:not(:first-child) {
+    display: flex;  /* Vuelven AVACAS, WA e IG */
+  }
+}
+
+.nav-cont-pro {
+  width: 100%;
+  max-width: var(--nav-max-width, 103.5rem);
+  margin: 0 auto;
+  padding: var(--nav-padding, 0 4rem);
+}
+
+.navbar-nav-pro {
+  display: flex;
+  gap: 3rem;         /* Reducido desde 4.75rem para mejor adaptación al achicar ventana */
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.brand-title {
+  font-family: 'Heavitas', sans-serif;
+  font-size: 1.5rem;
+  color: white;
+  margin: 0;
+  letter-spacing: 1px;
+}
+
+.nav-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-decoration: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.nav-btn:hover {
+  opacity: 0.8;
+  transform: translateY(-2px); /* Pequeño salto al pasar el mouse */
+}
+
+.nav-icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+
+/* =========================================
+   RESPONSIVE — TABLET (≤1024px)
+   ========================================= */
+@media only screen and (max-width: 1024px) {
+  .navbar-pro {
+    height: 6rem;
+  }
+
+  .nav-cont-pro {
+    padding: 0 2rem;
+  }
+
+  .navbar-nav-pro {
+    gap: 2.5rem;
+    justify-content: flex-start;
+  }
+
+  .brand-title {
+    font-size: 1.25rem;
+  }
+
+  .nav-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+/* =========================================
+   TABLET HORIZONTAL (landscape) — 1025px a 1366px
+   Mismo estilo compacto que tablet portrait
+   ========================================= */
+@media only screen and (min-width: 1025px) and (max-width: 1366px) {
+  .navbar-pro {
+    height: 6rem;
+  }
+
+  .nav-cont-pro {
+    padding: 0 2rem;    /* Mismo padding lateral que tablet portrait */
+  }
+
+  .navbar-nav-pro {
+    gap: 2.5rem;        /* Gap reducido vs desktop (4.75rem) */
+    justify-content: flex-start;
+  }
+
+  .brand-title {
+    font-size: 1.25rem;
+  }
+
+  .nav-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+
+/* =========================================
+   RESPONSIVE — MÓVIL (≤768px)
+   ========================================= */
+@media only screen and (max-width: 768px) {
+  .navbar-pro {
+    height: auto;
+    align-items: center;
+    padding-top: 1.5rem;     /* Baja los ítems desde el borde superior */
+  }
+
+  .nav-cont-pro {
+    padding: 0 2rem;
+  }
+
+  .navbar-nav-pro {
+    gap: 2.5rem;
+    justify-content: flex-start;
+    padding: 0.75rem 0;      /* Padding inferior del nav */
+  }
+
+  /* Oculta la flecha ← en móvil para todos los navbar-prod */
+  .nav-item:first-child {
+    display: none;
+  }
+
+  .brand-title {
+    font-size: 1rem;
+  }
+
+  .nav-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .nav-btn:hover {
+    transform: none;
+  }
+}

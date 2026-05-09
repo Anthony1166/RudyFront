@@ -1,0 +1,155 @@
+.admin-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  font-family: 'Inter', 'Segoe UI', sans-serif;
+}
+
+/* ---- HEADER ---- */
+.admin-header {
+  background: linear-gradient(135deg, #2495FF 0%, #B7CF49 100%);
+  color: white;
+  padding: 0 1.5rem;
+  height: 64px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  box-shadow: 0 4px 20px rgba(36, 149, 255, 0.35);
+  z-index: 200;
+  flex-shrink: 0;
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.admin-logo {
+  font-family: 'Heavitas', sans-serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+  margin: 0;
+  letter-spacing: 0.05em;
+  color: white;
+}
+
+.logout-btn {
+  background: rgba(255, 255, 255, 0.15);
+  color: white;
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  padding: 0.5rem 1.25rem;
+  border-radius: 2rem;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  white-space: nowrap;
+  backdrop-filter: blur(8px);
+}
+
+.logout-btn:hover {
+  background: rgba(255, 255, 255, 0.28);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- HAMBURGER ---- */
+.hamburger-btn {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 0.75rem;
+  transition: background 0.2s;
+}
+
+.hamburger-btn:hover { background: rgba(255, 255, 255, 0.25); }
+
+.hamburger-btn span {
+  display: block;
+  width: 20px;
+  height: 2px;
+  background: white;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburger-btn.activo span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger-btn.activo span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.hamburger-btn.activo span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---- BODY ---- */
+.admin-body {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+}
+
+/* ---- OVERLAY ---- */
+.sidebar-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  top: 64px;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 150;
+  backdrop-filter: blur(3px);
+}
+
+/* ---- SIDEBAR ---- */
+.admin-sidebar {
+  width: 260px;
+  background: #0f172a;
+  color: white;
+  overflow-y: auto;
+  flex-shrink: 0;
+  z-index: 160;
+  transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.15);
+}
+
+/* ---- CONTENT ---- */
+.admin-content {
+  flex: 1;
+  background-color: #f1f5f9;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+/* ================================================
+   TABLET Y MOBILE (< 1024px)
+   ================================================ */
+@media (max-width: 1024px) {
+  .hamburger-btn { display: flex; }
+
+  .admin-sidebar {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    height: calc(100vh - 64px);
+    transform: translateX(-100%);
+    box-shadow: 6px 0 30px rgba(0, 0, 0, 0.3);
+  }
+
+  .admin-sidebar.abierto { transform: translateX(0); }
+  .sidebar-overlay.visible { display: block; }
+  .admin-content { padding: 1.5rem; }
+}
+
+@media (max-width: 640px) {
+  .admin-header { padding: 0 1rem; height: 56px; }
+  .admin-logo { font-size: 1rem; }
+  .logout-btn { padding: 0.4rem 0.9rem; font-size: 0.8rem; }
+  .admin-content { padding: 1rem; }
+
+  .sidebar-overlay { top: 56px; }
+  .admin-sidebar { top: 56px; height: calc(100vh - 56px); }
+}

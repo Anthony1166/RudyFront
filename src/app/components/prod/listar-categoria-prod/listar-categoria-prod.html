@@ -1,0 +1,128 @@
+<div class="contenedor-principal">
+
+  <div class="header-principal">
+    <div class="titulo-seccion">
+      <h1>Categorías de la Tienda</h1>
+      <p>Organiza cómo se agrupan tus productos en la vitrina pública.</p>
+    </div>
+    <div class="acciones-globales">
+      <button class="btn-volver-atras" routerLink="/administracion/producto/listar">← Volver a Productos</button>
+      <button class="btn-nuevo" (click)="abrirModalNueva()">
+        <span class="icon">✨</span> Nueva Categoría
+      </button>
+    </div>
+  </div>
+
+  <div class="toolbar-categorias">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Buscar categoría..." (input)="onSearch($event)">
+    </div>
+    <div class="info-resumen">
+      Total: <strong>{{ categorias.length }}</strong> etiquetas
+    </div>
+  </div>
+
+  <div *ngIf="cargando" class="loading-overlay">
+    <div class="loader-pro"></div>
+    <p>Sincronizando categorías...</p>
+  </div>
+
+  <div *ngIf="guardandoOrden" class="saving-toast">Guardando nuevo orden...</div>
+
+  <div class="grid-moderno"
+       cdkDropList
+       cdkDropListOrientation="mixed"
+       (cdkDropListDropped)="onDrop($event)"
+       *ngIf="!cargando && categorias.length > 0">
+
+    <div class="tarjeta-categoria-pro"
+         *ngFor="let cat of categorias; let i = index"
+         cdkDrag
+         [class.is-hidden]="!cat.activo">
+
+      <div class="visual-wrapper">
+        <div class="orden-badge">#{{i + 1}}</div>
+        <div class="drag-handle" cdkDragHandle>⋮⋮</div>
+
+        <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre" class="img-cat">
+        <div *ngIf="!cat.urlImagen" class="placeholder-cat">{{ cat.nombre.charAt(0).toUpperCase() }}</div>
+
+        <div class="status-pill" [class.oculto]="!cat.activo">
+          {{ cat.activo ? 'VISIBLE' : 'OCULTA' }}
+        </div>
+      </div>
+
+      <div class="info-cat">
+        <h3 [title]="cat.nombre">{{ cat.nombre }}</h3>
+        <div class="btn-group-card">
+          <button class="btn-mini edit" (click)="abrirModalEditar(cat)" title="Editar">✏️</button>
+          <button class="btn-mini toggle" (click)="toggleVisibilidad(cat)" title="Visibilidad">{{ cat.activo ? '👁️' : '👁️‍🗨️' }}</button>
+          <button class="btn-mini delete" (click)="eliminarDefinitivo(cat)" title="Borrar">🗑️</button>
+        </div>
+      </div>
+
+      <div *cdkDragPlaceholder class="drag-placeholder"></div>
+    </div>
+  </div>
+
+  <div *ngIf="!cargando && categorias.length === 0" class="empty-state">
+    Aún no tienes categorías. ¡Crea la primera para organizar tu tienda!
+  </div>
+
+  <div class="modal-backdrop" *ngIf="mostrarModal">
+    <div class="modal-premium">
+      <div class="modal-header-pro">
+        <h3>{{ modoModal === 'crear' ? 'Nueva Categoría' : 'Editar Categoría' }}</h3>
+        <button class="close-x" (click)="cerrarModal()">✕</button>
+      </div>
+
+      <div class="modal-body-pro">
+        <div class="upload-section">
+          <label>Imagen Representativa</label>
+          <div class="dropzone-cat" (click)="fileInput.click()" [class.busy]="subiendoImagen">
+            <input type="file" #fileInput style="display: none" accept="image/*" (change)="alSeleccionarArchivo($event)">
+
+            <div *ngIf="!categoriaForm.urlImagen && !subiendoImagen" class="empty-preview">
+              <span class="big-icon">📸</span>
+              <p>Clic para subir</p>
+            </div>
+
+            <img *ngIf="categoriaForm.urlImagen && !subiendoImagen" [src]="categoriaForm.urlImagen" class="full-preview">
+            <div class="overlay-change" *ngIf="categoriaForm.urlImagen">Cambiar Imagen</div>
+
+            <div *ngIf="subiendoImagen" class="loader-container">
+              <div class="spinner"></div><p>Subiendo...</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-section">
+          <div class="input-group">
+            <label>Nombre de la Categoría <span class="req">*</span></label>
+            <input type="text" [(ngModel)]="categoriaForm.nombre" placeholder="Ej. Tazas de Cerámica">
+          </div>
+
+          <div class="switch-premium" (click)="categoriaForm.activo = !categoriaForm.activo">
+            <div class="switch-label">
+              <strong>Visibilidad Pública</strong>
+              <p>Permitir que los clientes vean esta categoría.</p>
+            </div>
+            <div class="ios-switch" [class.on]="categoriaForm.activo">
+              <div class="ios-handle"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="mensaje-alerta" *ngIf="mensajeError">
+        <span class="icono-alerta">⚠️</span> {{ mensajeError }}
+      </div>
+      <div class="modal-footer-pro">
+        <button class="btn-save-pro" (click)="guardarCategoriaModal()" [disabled]="!categoriaForm.nombre || subiendoImagen || guardandoCategoria">
+          {{ guardandoCategoria ? 'Guardando...' : '💾 Guardar Cambios' }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div>

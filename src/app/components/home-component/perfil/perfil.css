@@ -1,0 +1,212 @@
+.about-section {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  min-height: 1100px;
+  box-sizing: border-box;
+  background: linear-gradient(180deg, #B7CF49 0%, #2495FF 100%);
+}
+
+/* ---- Imagen con clip-path estrella ---- */
+.star-profile-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  flex: 1;
+  max-width: 40rem;
+  height: 100%;
+  padding-right: 4rem;
+}
+
+.star-svg {
+  width: 100%;
+  max-width: 34.625rem;
+  aspect-ratio: 1 / 1;
+}
+
+/* ---- Contenedor de texto ---- */
+.about-text-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  flex: 1.5;
+  max-width: 60rem;
+  height: 100%;
+  color: #FFFFFF;
+}
+
+.text-container {
+  width: 100%;
+}
+
+/* ---- Bloques de contenido (base + variantes) ---- */
+.about-block {
+  display: flex;
+  flex-direction: column;
+}
+
+.about-block--intro {
+  gap: 2.12rem;
+  margin-bottom: 5rem;
+}
+
+.about-block--areas {
+  gap: 0.25rem;
+  margin-bottom: 3rem;
+}
+
+.about-block--idiomas {
+  gap: 1rem;
+}
+
+/* ---- Tipografía ---- */
+.about-title {
+  font-family: 'Heavitas', sans-serif;
+  font-size: 3.75rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-subtitle {
+  font-family: 'Heavitas', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about-desc {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  line-height: normal;
+  text-align: justify;
+}
+
+.about-body {
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  line-height: normal;
+}
+
+.about-lang-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+  font-size: 1.25rem;
+  line-height: 2;
+}
+
+/* ============ TABLET (≤1024px) ============ */
+@media only screen and (max-width: 1024px) {
+  .about-section {
+    flex-direction: column;
+    align-items: center;
+    min-height: auto;
+    padding: 4rem 2rem;
+    gap: 3rem;
+  }
+
+  .star-profile-container {
+    max-width: none;
+    width: 100%;
+    justify-content: center;
+    padding-right: 0;
+    height: auto;
+  }
+
+  .star-svg {
+    max-width: 20rem;
+  }
+
+  .about-text-container {
+    max-width: 32rem;
+    width: 100%;
+    height: auto;
+  }
+
+  .about-title {
+    font-size: 2.75rem;
+  }
+
+  .about-desc {
+    font-size: 1.1rem;
+  }
+
+  .about-block--intro {
+    gap: 1.5rem;
+    margin-bottom: 3.5rem;
+  }
+
+  .about-block--areas {
+    margin-bottom: 2rem;
+  }
+}
+
+/* ============ MOBILE (≤768px) ============ */
+@media only screen and (max-width: 768px) {
+  .about-section {
+    flex-direction: column;
+    min-height: auto;
+    padding: 3rem 1.5rem 0;
+    gap: 0;
+    overflow: hidden;
+  }
+
+  .star-profile-container {
+    order: 2;
+    align-self: flex-end;
+    width: 75%;
+    max-width: none;
+    justify-content: flex-end;
+    padding: 0;
+    height: auto;
+    margin-top: -2rem;
+    margin-right: -3rem;
+  }
+
+  .star-svg {
+    max-width: none;
+    width: 100%;
+  }
+
+  .about-text-container {
+    order: 1;
+    width: 100%;
+    height: auto;
+    max-width: none;
+    position: relative;
+    z-index: 1;
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-desc {
+    font-size: 0.95rem;
+  }
+
+  .about-subtitle {
+    font-size: 1.15rem;
+  }
+
+  .about-body,
+  .about-lang-list {
+    font-size: 0.95rem;
+  }
+
+  .about-block--intro {
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+  }
+
+  .about-block--areas {
+    margin-bottom: 2rem;
+  }
+
+  .about-block--idiomas {
+    gap: 0.75rem;
+  }
+}

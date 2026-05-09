@@ -1,0 +1,61 @@
+<div class="registrar-container">
+  <div class="form-card">
+    <h2>Nuevo Proyecto</h2>
+    <p class="subtitle">Ingresa los datos para crear un nuevo proyecto.</p>
+
+    <form (ngSubmit)="guardar()">
+      <!-- Título -->
+      <div class="form-group">
+        <label for="titulo">Título del Proyecto</label>
+        <input type="text" id="titulo" name="titulo" [(ngModel)]="proyecto.titulo" required [disabled]="isLoading" />
+      </div>
+
+      <!-- Subtítulo -->
+      <div class="form-group">
+        <label for="subtitulo">Subtítulo</label>
+        <input type="text" id="subtitulo" name="subtitulo" [(ngModel)]="proyecto.subtitulo" [disabled]="isLoading" />
+      </div>
+
+      <!-- Descripción -->
+      <div class="form-group">
+        <label for="descripcion">Descripción</label>
+        <textarea id="descripcion" name="descripcion" [(ngModel)]="proyecto.descripcion" rows="4" required [disabled]="isLoading"></textarea>
+      </div>
+
+      <!-- Año -->
+      <div class="form-group">
+        <label for="anio">Año</label>
+        <input type="number" id="anio" name="anio" [(ngModel)]="proyecto.anio" required [disabled]="isLoading" />
+      </div>
+
+      <!-- Selección de Categorías -->
+      <div class="form-group">
+        <label>Categorías</label>
+        <div class="category-checkbox-group">
+          <div *ngFor="let cat of todasLasCategorias" class="checkbox-item">
+            <input type="checkbox" [id]="'cat-' + cat.idCategoria" [name]="'cat-' + cat.idCategoria" [(ngModel)]="categoriasSeleccionadas[cat.idCategoria]" [disabled]="isLoading" />
+            <label [for]="'cat-' + cat.idCategoria">{{ cat.nombre }}</label>
+          </div>
+          <div *ngIf="todasLasCategorias.length === 0 && !errorMsg" class="loading-text">
+            Cargando categorías...
+          </div>
+        </div>
+      </div>
+
+      <!-- Mensaje de Error -->
+      <div *ngIf="errorMsg" class="error-alert">
+        {{ errorMsg }}
+      </div>
+
+      <!-- Botones de Acción -->
+      <div class="form-actions">
+        <button type="button" routerLink="/administracion/proyecto/listar" class="btn-cancel" [disabled]="isLoading">
+          Cancelar
+        </button>
+        <button type="submit" class="btn-save" [disabled]="isLoading">
+          {{ isLoading ? 'Guardando...' : 'Guardar Proyecto' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

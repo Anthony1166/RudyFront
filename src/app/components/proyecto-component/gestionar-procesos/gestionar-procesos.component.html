@@ -1,0 +1,69 @@
+<div class="modal-backdrop" (click)="cerrarModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+
+    <!-- Encabezado del Modal -->
+    <div class="modal-header">
+      <h3>Gestionar Procesos de Diseño para: <strong>{{ proyecto?.titulo }}</strong></h3>
+      <button class="close-btn" (click)="cerrarModal()">×</button>
+    </div>
+
+    <!-- Cuerpo del Modal -->
+    <div class="modal-body">
+
+      <!-- Columna Izquierda: Lista de Procesos -->
+      <div class="process-list-container">
+        <h4>Fases del Proceso</h4>
+        <div *ngIf="isLoading" class="loading-spinner">Cargando...</div>
+        <div *ngIf="!isLoading && procesos.length === 0" class="empty-state">No hay fases de diseño para este proyecto.</div>
+
+        <ul class="process-list">
+          <li *ngFor="let proceso of procesos" [class.editing]="proceso.id === procesoActual.id">
+            <div class="proceso-info">
+              <span class="orden">{{ proceso.orden }}.</span>
+              <span class="titulo">{{ proceso.titulo_fase }}</span>
+            </div>
+            <div class="proceso-actions">
+              <button (click)="editarProceso(proceso)">✏️</button>
+              <button (click)="eliminarProceso(proceso.id)">🗑️</button>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Columna Derecha: Formulario de Creación/Edición -->
+      <div class="form-container">
+        <h4>{{ editMode ? 'Editar Fase' : 'Añadir Nueva Fase' }}</h4>
+
+        <form #procesoForm="ngForm" (ngSubmit)="guardarProceso(procesoForm)">
+          <div class="form-group">
+            <label for="orden">Orden</label>
+            <input type="number" id="orden" name="orden" [(ngModel)]="procesoActual.orden" required>
+          </div>
+
+          <div class="form-group">
+            <label for="titulo_fase">Título de la Fase</label>
+            <input type="text" id="titulo_fase" name="titulo_fase" [(ngModel)]="procesoActual.titulo_fase" required>
+          </div>
+
+          <div class="form-group">
+            <label for="descripcion">Descripción</label>
+            <textarea id="descripcion" name="descripcion" [(ngModel)]="procesoActual.descripcion" rows="5" required></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="imagen">Imagen (Opcional)</label>
+            <input type="file" id="imagen" (change)="onFileSelected($event)">
+            <small *ngIf="editMode && procesoActual.imagen_proceso">Dejar en blanco para conservar la imagen actual.</small>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-secondary" (click)="resetForm(procesoForm)">{{ editMode ? 'Cancelar Edición' : 'Limpiar' }}</button>
+            <button type="submit" class="btn-primary" [disabled]="procesoForm.invalid">
+              {{ editMode ? 'Actualizar Fase' : 'Guardar Fase' }}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

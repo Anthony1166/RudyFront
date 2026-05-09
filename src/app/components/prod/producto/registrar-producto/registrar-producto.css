@@ -1,0 +1,126 @@
+:host {
+  --color-primario: #3498db;
+  --color-texto: #2c3e50;
+  --color-borde: #e2e8f0;
+  display: block;
+  padding: 20px;
+}
+
+.contenedor-registro { max-width: 900px; margin: 0 auto; }
+
+.header-acciones { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 2rem; }
+.header-acciones h2 { margin: 0; color: white; font-size: 1.8rem; }
+.subtitulo-header { color: #718096; margin: 5px 0 0 0; font-size: 0.95rem; }
+.btn-volver { background: none; border: none; color: #7f8c8d; cursor: pointer; font-weight: bold; font-size: 1rem; }
+
+.formulario-card {
+  background: white;
+  padding: 35px;
+  border-radius: 16px;
+  border: 1px solid var(--color-borde);
+  box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+}
+
+.grid-layout-producto {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* Dos columnas iguales */
+  gap: 40px;
+}
+
+/* Formularios Básicos */
+.campo-form { display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px; }
+.campo-form label { font-weight: 700; color: var(--color-texto); font-size: 0.95rem; }
+.req { color: #e74c3c; }
+.nota-campo { margin: 0; font-size: 0.8rem; color: #a0aec0; margin-top: -5px; }
+
+input[type="text"], input[type="number"], textarea {
+  padding: 12px 15px;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+  font-family: inherit;
+}
+input:focus, textarea:focus { border-color: var(--color-primario); box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); }
+textarea { resize: vertical; min-height: 100px; }
+
+/* Input con Moneda S/ */
+.input-precio-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #cbd5e0;
+  border-radius: 8px;
+  overflow: hidden;
+}
+.input-precio-container:focus-within { border-color: var(--color-primario); box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1); }
+.moneda { background: #f8fafc; padding: 12px 15px; color: #4a5568; font-weight: bold; border-right: 1px solid #cbd5e0; }
+.input-precio-container input { border: none; flex: 1; border-radius: 0; box-shadow: none; }
+.input-precio-container input:focus { box-shadow: none; }
+
+/* Categorías (Pills) */
+.mt-15 { margin-top: 15px; }
+.contenedor-pills { display: flex; flex-wrap: wrap; gap: 10px; }
+.pill-categoria {
+  background: white;
+  border: 1px solid #cbd5e0;
+  color: #4a5568;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.pill-categoria:hover { background: #f8fafc; border-color: #a0aec0; }
+.pill-categoria.seleccionada {
+  background: #ebf8ff;
+  border-color: var(--color-primario);
+  color: var(--color-primario);
+}
+.txt-cargando { font-size: 0.9rem; color: #a0aec0; font-style: italic; }
+
+/* Switches de Configuración */
+.seccion-switches {
+  background: #f8fafc;
+  border: 1px solid var(--color-borde);
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.switch-row { display: flex; justify-content: space-between; align-items: center; }
+.switch-info h4 { margin: 0 0 4px 0; color: var(--color-texto); font-size: 0.95rem; }
+.switch-info p { margin: 0; font-size: 0.8rem; color: #718096; }
+
+/* Toggle Core */
+.toggle-container { cursor: pointer; }
+.toggle-switch { width: 48px; height: 26px; background-color: #cbd5e0; border-radius: 13px; position: relative; transition: 0.3s; }
+.toggle-switch.encendido { background-color: var(--color-primario); }
+.toggle-switch.switch-estrella.encendido { background-color: #f59e0b; } /* Color amarillo para destacado */
+.toggle-circulo { width: 20px; height: 20px; background-color: white; border-radius: 50%; position: absolute; top: 3px; left: 3px; transition: 0.3s; box-shadow: 0 2px 4px rgba(0,0,0,0.2); }
+.toggle-switch.encendido .toggle-circulo { transform: translateX(22px); }
+
+/* Footer */
+.footer-form {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-borde);
+  display: flex;
+  justify-content: flex-end;
+}
+.btn-guardar {
+  background-color: var(--color-primario);
+  color: white;
+  border: none;
+  padding: 14px 28px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 0 4px 6px rgba(52, 152, 219, 0.2);
+}
+.btn-guardar:hover:not(:disabled) { background-color: #2980b9; transform: translateY(-2px); box-shadow: 0 6px 8px rgba(52, 152, 219, 0.3); }
+.btn-guardar:disabled { background-color: #a0aec0; cursor: not-allowed; box-shadow: none; transform: none; }

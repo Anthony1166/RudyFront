@@ -1,7 +1,0 @@
-<h2>Login</h2>
-<form (ngSubmit)="onLogin()">
-  <input type="text" [(ngModel)]="loginData.username" name="username" placeholder="Username" required />
-  <input type="password" [(ngModel)]="loginData.password" name="password" placeholder="Password" required />
-  <button type="submit">Login</button>
-</form>
-<div *ngIf="error" style="color:red">{{error}}</div>

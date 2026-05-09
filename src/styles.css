@@ -15,3 +15,14 @@
   font-weight: normal;
   font-style: normal;
 }
+@font-face {
+  font-family: 'Inter';
+  src: url('/src/fonts/Inter.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*
+ @media (max-height: 980px) {
+  html {
+    font-size: 14px; /* Todo lo que esté en 'rem' se encogerá automáticamente un 12.5% */
