@@ -1,0 +1,11 @@
+<div>
+  <div class="div1">
+    <app-navbar></app-navbar>
+    <app-proyecto-publ-main [proyectoRecibido]="proyecto"></app-proyecto-publ-main>
+  </div>
+  <app-proyecto-publ-procesos
+    *ngIf="proyecto?.idProyecto"
+    [idRecibido]="proyecto!.idProyecto!">
+  </app-proyecto-publ-procesos>
+  <app-footer-p1></app-footer-p1>
+</div>

@@ -57,16 +57,7 @@ export class ProductoCabecera {
 
   abrirWhatsApp(): void {
     const nombre = this.producto.nombre;
-    const precio = this.producto.precio?.toFixed(2);
-    const urlProducto = window.location.href;
-
-    const mensaje =
-      `¡Hola! 👋 Vi su página y me enamoré de este producto 😍🐾\n\n` +
-      `🛍️ *${nombre}*\n` +
-      `💰 S/. ${precio}\n\n` +
-      `🔗 ${urlProducto}\n\n` +
-      `¿Me podrían dar más información? ✨`;
-
+    const mensaje = `Hola! Estoy interesado/a en su producto *${nombre}* ✨ ¿Me podrían brindar más información? 🙌`;
     window.open(`https://wa.me/51962284346?text=${encodeURIComponent(mensaje)}`, '_blank');
   }
 }

@@ -1,0 +1,69 @@
+<div class="seccion-header-tabs">
+  <h3 class="titulo-discreto">Galería del Proyecto</h3>
+  <p class="subtitulo-discreto">La primera foto marcada como portada aparecerá en la vista previa. Haz clic en una imagen para más opciones.</p>
+</div>
+
+<div *ngIf="cargando" class="loading-state">
+  <div class="spinner"></div><p>Cargando fotos...</p>
+</div>
+
+<div *ngIf="guardandoOrden" class="saving-toast">Guardando orden...</div>
+
+<div class="grid-galeria" *ngIf="!cargando">
+
+  <div class="caja-subida" (click)="fileInput.click()" [class.subiendo]="subiendo">
+    <input type="file" #fileInput style="display: none" accept="image/*" (change)="alSeleccionarArchivo($event)">
+    <ng-container *ngIf="!subiendo">
+      <span class="icono-nube">＋</span>
+      <p>Añadir foto</p>
+    </ng-container>
+    <ng-container *ngIf="subiendo">
+      <div class="spinner"></div>
+      <p>Subiendo...</p>
+    </ng-container>
+  </div>
+
+  <div cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="onDrop($event)" class="drop-zone-galeria">
+    <div class="tarjeta-foto" *ngFor="let img of imagenes; let i = index" cdkDrag (click)="abrirModal(img)">
+      <img [src]="img.urlImagen" alt="Foto proyecto" class="img-preview">
+      <div *ngIf="img.esPortada" class="badge-portada">⭐ PORTADA</div>
+      <div class="badge-orden">#{{ i + 1 }}</div>
+      <div class="drag-handle" cdkDragHandle (click)="$event.stopPropagation()" title="Arrastrar">⋮⋮</div>
+      <div class="capa-opciones"><span class="icono-ampliar">⚙️ Opciones</span></div>
+      <div *cdkDragPlaceholder class="drag-placeholder-foto"></div>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal-backdrop" *ngIf="imagenSeleccionada">
+  <div class="modal-card">
+    <button class="btn-cerrar-modal" (click)="cerrarModal()">✕</button>
+    <div class="modal-grid">
+      <div class="modal-foto-container">
+        <img [src]="imagenSeleccionada.urlImagen" class="modal-foto-grande">
+        <div *ngIf="imagenSeleccionada.esPortada" class="badge-portada-modal">⭐ PORTADA ACTUAL</div>
+      </div>
+      <div class="modal-controles">
+        <h3>Detalles de la Imagen</h3>
+        <div class="campo-form-modal">
+          <label>Texto Alternativo (SEO)</label>
+          <input type="text" [(ngModel)]="imagenSeleccionada.textoAlternativo" placeholder="Describe qué hay en la foto...">
+          <p class="nota-seo">Ayuda a posicionar en Google y mejora la accesibilidad.</p>
+        </div>
+        <div class="modal-acciones-principales">
+          <button class="btn-guardar-modal" (click)="guardarDetallesImagen()" [disabled]="guardandoCambiosModal">
+            {{ guardandoCambiosModal ? 'Guardando...' : '💾 Guardar Cambios' }}
+          </button>
+          <button *ngIf="!imagenSeleccionada.esPortada" class="btn-portada-modal" (click)="marcarComoPortadaDesdeModal()">
+            ⭐ Hacer Portada
+          </button>
+        </div>
+        <div class="divisor"></div>
+        <button class="btn-eliminar-modal" (click)="eliminarImagenDesdeModal()">
+          🗑️ Eliminar esta fotografía
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

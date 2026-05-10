@@ -1,0 +1,81 @@
+<div class="contenedor-actualizar" *ngIf="!cargandoDatos && !cargandoCategorias; else cargandoTpl">
+
+  <div class="header-actualizar">
+    <div>
+      <h1>{{ proyecto.titulo }}</h1>
+      <p class="sub-header">Editando proyecto · {{ proyecto.anio }}</p>
+    </div>
+    <button class="btn-volver" routerLink="/administracion/proyecto-portafolio/listar">← Volver</button>
+  </div>
+
+  <div class="tabs-nav">
+    <button class="tab-btn" [class.active]="pestaniaActiva === 'detalles'" (click)="pestaniaActiva = 'detalles'">
+      📝 Detalles
+    </button>
+    <button class="tab-btn" [class.active]="pestaniaActiva === 'galeria'" (click)="pestaniaActiva = 'galeria'">
+      🖼️ Galería
+    </button>
+    <button class="tab-btn" [class.active]="pestaniaActiva === 'procesos'" (click)="pestaniaActiva = 'procesos'">
+      🔧 Proceso de Diseño
+    </button>
+  </div>
+
+  <div class="tab-content" *ngIf="pestaniaActiva === 'detalles'">
+    <div class="form-grid">
+      <div class="campo-form">
+        <label>Título <span class="req">*</span></label>
+        <input type="text" [(ngModel)]="proyecto.titulo">
+      </div>
+
+      <div class="campo-form">
+        <label>Subtítulo</label>
+        <input type="text" [(ngModel)]="proyecto.subtitulo" placeholder="Frase corta descriptiva">
+      </div>
+
+      <div class="campo-form">
+        <label>Año <span class="req">*</span></label>
+        <input type="number" [(ngModel)]="proyecto.anio" min="1900" max="2099">
+      </div>
+
+      <div class="campo-form full-width">
+        <label>Descripción</label>
+        <textarea [(ngModel)]="proyecto.descripcion" rows="5" placeholder="Describe el proyecto en detalle..."></textarea>
+      </div>
+
+      <div class="campo-form full-width">
+        <label>Categorías</label>
+        <div class="pills-selector">
+          <button type="button"
+                  *ngFor="let cat of categoriasDisponibles"
+                  class="pill-toggle"
+                  [class.selected]="categoriasSeleccionadas.has(cat.idCategoria!)"
+                  (click)="toggleCategoria(cat.idCategoria)">
+            {{ cat.nombre }}
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="form-acciones">
+      <button class="btn-guardar" (click)="actualizarProyecto()" [disabled]="guardando">
+        {{ guardando ? 'Guardando...' : '💾 Guardar Cambios' }}
+      </button>
+    </div>
+  </div>
+
+  <div class="tab-content" *ngIf="pestaniaActiva === 'galeria'">
+    <app-listar-imagen-proy></app-listar-imagen-proy>
+  </div>
+
+  <div class="tab-content" *ngIf="pestaniaActiva === 'procesos'">
+    <app-listar-proceso-proy></app-listar-proceso-proy>
+  </div>
+
+</div>
+
+<ng-template #cargandoTpl>
+  <div class="loading-overlay">
+    <div class="loader"></div>
+    <p>Cargando proyecto...</p>
+  </div>
+</ng-template>

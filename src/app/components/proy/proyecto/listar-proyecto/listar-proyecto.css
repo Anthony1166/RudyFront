@@ -1,0 +1,30 @@
+@import url('../../../prod/producto/listar-producto/listar-producto.css');
+
+.filtro-anio { margin-left: 8px; }
+
+.info-anio { margin-top: 6px; }
+
+.anio-badge {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #555;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 20px;
+}
+
+.categorias-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 6px;
+}
+
+.pill-cat {
+  background: #e8f0fe;
+  color: #3b5bdb;
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+}

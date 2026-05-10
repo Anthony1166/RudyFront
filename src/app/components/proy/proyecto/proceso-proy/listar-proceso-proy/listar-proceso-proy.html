@@ -1,0 +1,86 @@
+<div class="header-acciones">
+  <div>
+    <h2>Proceso de Diseño</h2>
+    <p class="subtitulo-header">Documenta el paso a paso de cómo se desarrolló este proyecto.</p>
+  </div>
+  <button class="btn-volver" routerLink="/administracion/proyecto-portafolio/listar">
+    ← Volver al Portafolio
+  </button>
+</div>
+
+<div class="grid-procesos">
+
+  <div class="col-formulario">
+    <div class="card-form">
+      <h3>{{ modoEdicion ? '✏️ Editar Paso' : '✨ Nuevo Paso' }}</h3>
+
+      <div class="campo-form">
+        <label>Título de la Fase (Opcional)</label>
+        <input type="text" [(ngModel)]="procesoForm.titulo" placeholder="Ej. Investigación inicial">
+      </div>
+
+      <div class="campo-form">
+        <label>Descripción <span class="req">*</span></label>
+        <textarea [(ngModel)]="procesoForm.descripcion" rows="4" placeholder="Describe lo que sucede en este paso..."></textarea>
+      </div>
+
+      <div class="campo-form">
+        <label>Imagen del Paso (Opcional)</label>
+        <input type="file" #fileInput style="display: none" accept="image/*" (change)="alSeleccionarArchivo($event)">
+        <div class="upload-zona-mini" (click)="!procesoForm.urlImagen ? fileInput.click() : null" [class.subiendo]="subiendoImagen">
+          <div *ngIf="!procesoForm.urlImagen && !subiendoImagen" class="vacio-mini">
+            <span>📷 Subir foto del proceso</span>
+          </div>
+          <div *ngIf="subiendoImagen" class="cargando-mini">
+            <div class="spinner-small"></div> Subiendo...
+          </div>
+          <div *ngIf="procesoForm.urlImagen && !subiendoImagen" class="lleno-mini">
+            <img [src]="procesoForm.urlImagen" alt="Preview">
+            <button class="btn-quitar-foto" (click)="quitarImagenForm()">✖</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="botones-form">
+        <button *ngIf="modoEdicion" class="btn-secundario" (click)="cancelarEdicion()">Cancelar</button>
+        <button class="btn-primario" (click)="guardarProceso()"
+                [disabled]="!procesoForm.descripcion || guardando || subiendoImagen">
+          {{ guardando ? 'Guardando...' : (modoEdicion ? 'Actualizar Paso' : 'Agregar Paso') }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-timeline">
+    <div *ngIf="cargando" class="loading-state">
+      <div class="spinner"></div> Cargando pasos...
+    </div>
+
+    <div *ngIf="guardandoOrden" class="saving-toast">Guardando orden...</div>
+
+    <div *ngIf="!cargando && procesos.length === 0" class="empty-state">
+      Aún no has documentado el proceso de diseño. ¡Agrega el primer paso a la izquierda!
+    </div>
+
+    <div cdkDropList (cdkDropListDropped)="onDrop($event)" class="lista-timeline" *ngIf="!cargando && procesos.length > 0">
+      <div class="tarjeta-proceso" *ngFor="let p of procesos; let i = index" cdkDrag>
+        <div class="drag-handle-vertical" cdkDragHandle title="Arrastrar">⋮</div>
+        <div class="numero-paso">{{ i + 1 }}</div>
+        <div class="proceso-contenido">
+          <div class="proceso-textos">
+            <h4 *ngIf="p.titulo">{{ p.titulo }}</h4>
+            <h4 *ngIf="!p.titulo" class="sin-titulo">Paso {{ i + 1 }}</h4>
+            <p>{{ p.descripcion }}</p>
+          </div>
+          <img *ngIf="p.urlImagen" [src]="p.urlImagen" class="proceso-thumb">
+        </div>
+        <div class="proceso-acciones">
+          <button class="btn-icon" (click)="editarProceso(p)" title="Editar">✏️</button>
+          <button class="btn-icon danger" (click)="eliminarProceso(p)" title="Eliminar">🗑️</button>
+        </div>
+        <div *cdkDragPlaceholder class="drag-placeholder-horizontal"></div>
+      </div>
+    </div>
+  </div>
+
+</div>

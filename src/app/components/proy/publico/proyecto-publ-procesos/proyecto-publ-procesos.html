@@ -1,0 +1,35 @@
+<section class="procesos-section">
+  <div class="procesos-header">
+    <h2 class="section-title">PROCESO DE DISEÑO</h2>
+  </div>
+
+  <div class="procesos-carousel"
+       #carousel
+       (mousedown)="onMouseDown($event)"
+       (mouseleave)="onMouseLeave()"
+       (mouseup)="onMouseUp()"
+       (mousemove)="onMouseMove($event)">
+
+    <ng-container *ngIf="isLoading">
+      <div *ngFor="let i of [1,2,3]" class="proceso-card">
+        <div class="skeleton-img"></div>
+        <div class="proceso-info">
+          <div class="skeleton-title"></div>
+          <div class="skeleton-text"></div>
+          <div class="skeleton-text medium"></div>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="!isLoading">
+      <div *ngFor="let proceso of procesos" class="proceso-card">
+        <img [src]="getImagen(proceso)" [alt]="proceso.titulo" class="proceso-img">
+        <div class="proceso-info">
+          <h3 class="proceso-title">{{ proceso.titulo }}</h3>
+          <p class="proceso-desc">{{ proceso.descripcion }}</p>
+        </div>
+      </div>
+    </ng-container>
+
+  </div>
+</section>

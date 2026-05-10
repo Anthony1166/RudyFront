@@ -1,0 +1,50 @@
+<div class="form-contenedor">
+  <div class="form-header">
+    <h2>Nuevo Proyecto</h2>
+    <button class="btn-cerrar" (click)="cancelar()">✕</button>
+  </div>
+
+  <div class="form-body">
+    <div class="campo-form">
+      <label>Título <span class="req">*</span></label>
+      <input type="text" [(ngModel)]="proyecto.titulo" placeholder="Ej. Branding Marca X">
+    </div>
+
+    <div class="campo-form">
+      <label>Subtítulo</label>
+      <input type="text" [(ngModel)]="proyecto.subtitulo" placeholder="Ej. Identidad visual completa">
+    </div>
+
+    <div class="campo-form">
+      <label>Año <span class="req">*</span></label>
+      <input type="number" [(ngModel)]="proyecto.anio" min="1900" max="2099">
+    </div>
+
+    <div class="campo-form">
+      <label>Descripción</label>
+      <textarea [(ngModel)]="proyecto.descripcion" rows="3" placeholder="Describe brevemente el proyecto..."></textarea>
+    </div>
+
+    <div class="campo-form">
+      <label>Categorías</label>
+      <div *ngIf="cargandoCategorias" class="cargando-cats">Cargando...</div>
+      <div class="pills-selector" *ngIf="!cargandoCategorias">
+        <button type="button"
+                *ngFor="let cat of categoriasDisponibles"
+                class="pill-toggle"
+                [class.selected]="categoriasSeleccionadas.has(cat.idCategoria!)"
+                (click)="toggleCategoria(cat.idCategoria)">
+          {{ cat.nombre }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-footer">
+    <button class="btn-secundario" (click)="cancelar()">Cancelar</button>
+    <button class="btn-primario" (click)="guardarProyecto()"
+            [disabled]="!proyecto.titulo || !proyecto.anio || guardando">
+      {{ guardando ? 'Guardando...' : '💾 Crear Proyecto' }}
+    </button>
+  </div>
+</div>

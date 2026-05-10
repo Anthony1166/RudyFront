@@ -1,0 +1,128 @@
+<div class="header-principal">
+  <div class="titulo-seccion">
+    <h1>Portafolio de Proyectos</h1>
+    <p>Tienes <strong>{{ proyectos.length }}</strong> proyectos registrados en total.</p>
+  </div>
+  <div class="acciones-globales">
+    <button class="btn-config" routerLink="/administracion/categoria-proyecto/listar">
+      <span class="icon">🏷️</span> Categorías
+    </button>
+    <button class="btn-nuevo" (click)="abrirModal()">
+      <span class="icon">✨</span> Nuevo Proyecto
+    </button>
+  </div>
+
+  <div class="modal-backdrop" *ngIf="mostrarModalRegistro">
+    <div class="modal-contenido">
+      <app-registrar-proyecto (onCerrar)="cerrarModal($event)"></app-registrar-proyecto>
+    </div>
+  </div>
+</div>
+
+<div class="toolbar">
+  <div class="search-box">
+    <span class="search-icon">🔍</span>
+    <input type="text" placeholder="Buscar por título o descripción..." (input)="onSearch($event)">
+  </div>
+
+  <div class="controles-derecha">
+
+    <div class="filtro-categoria custom-dropdown">
+      <div class="dropdown-trigger" [class.abierto]="dropdownCategoriaAbierto"
+           (click)="dropdownCategoriaAbierto = !dropdownCategoriaAbierto; dropdownAnioAbierto = false">
+        <span>📁 {{ nombreCategoriaSeleccionada }}</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="dropdown-menu" *ngIf="dropdownCategoriaAbierto">
+        <div class="dropdown-item" [class.activo]="idCategoriaSeleccionada === 'todas'"
+             (click)="seleccionarCategoria('todas', $event)">📁 Todas las categorías</div>
+        <div class="dropdown-item" *ngFor="let cat of categorias"
+             [class.activo]="idCategoriaSeleccionada === cat.idCategoria"
+             (click)="seleccionarCategoria(cat.idCategoria!, $event)">📁 {{ cat.nombre }}</div>
+      </div>
+    </div>
+
+    <div class="filtro-anio custom-dropdown">
+      <div class="dropdown-trigger" [class.abierto]="dropdownAnioAbierto"
+           (click)="dropdownAnioAbierto = !dropdownAnioAbierto; dropdownCategoriaAbierto = false">
+        <span>📅 {{ labelAnio }}</span>
+        <span class="flecha">▼</span>
+      </div>
+      <div class="dropdown-menu" *ngIf="dropdownAnioAbierto">
+        <div class="dropdown-item" [class.activo]="anioSeleccionado === 'todos'"
+             (click)="seleccionarAnio('todos', $event)">📅 Todos los años</div>
+        <div class="dropdown-item" *ngFor="let anio of aniosDisponibles"
+             [class.activo]="anioSeleccionado === anio"
+             (click)="seleccionarAnio(anio, $event)">📅 {{ anio }}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="dropdown-backdrop"
+       *ngIf="dropdownCategoriaAbierto || dropdownAnioAbierto"
+       (click)="dropdownCategoriaAbierto = false; dropdownAnioAbierto = false"></div>
+</div>
+
+<div *ngIf="cargando" class="loading-overlay">
+  <div class="loader"></div>
+  <p>Sincronizando portafolio...</p>
+</div>
+
+<div *ngIf="guardandoOrden" class="saving-toast">Guardando nuevo orden...</div>
+
+<div class="grid-moderno"
+     cdkDropList
+     cdkDropListOrientation="mixed"
+     (cdkDropListDropped)="onDrop($event)"
+     *ngIf="!cargando && proyectos.length > 0">
+
+  <div class="tarjeta-pro"
+       *ngFor="let proy of proyectos; trackBy: trackByFn; let i = index"
+       cdkDrag
+       [class.is-hidden]="!proy.activo">
+
+    <div class="tarjeta-visual">
+      <div class="orden-badge">#{{i + 1}}</div>
+      <div class="drag-anchor" cdkDragHandle>⋮⋮</div>
+
+      <div class="img-wrapper">
+        <img *ngIf="obtenerPortada(proy) as url; else noImg" [src]="url" [alt]="proy.titulo">
+        <ng-template #noImg><div class="placeholder-icon">🖼️</div></ng-template>
+
+        <div class="status-overlay">
+          <span class="tag-visible" [class.oculto]="!proy.activo">
+            {{ proy.activo ? 'VISIBLE' : 'OCULTO' }}
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tarjeta-info">
+      <div class="info-principal">
+        <h3>{{ proy.titulo }}</h3>
+        <p class="sub-txt">{{ proy.subtitulo || 'Sin subtítulo' }}</p>
+      </div>
+      <div class="info-anio">
+        <span class="anio-badge">{{ proy.anio }}</span>
+      </div>
+      <div class="categorias-pills" *ngIf="proy.categorias && proy.categorias.length > 0">
+        <span class="pill-cat" *ngFor="let cat of proy.categorias">{{ cat.nombre }}</span>
+      </div>
+    </div>
+
+    <div class="tarjeta-footer">
+      <button class="action-btn edit" [routerLink]="['/administracion/proyecto-portafolio/actualizar', proy.idProyecto]" title="Editar">✏️</button>
+      <button class="action-btn toggle" (click)="toggleVisibilidad(proy)" title="Visibilidad">
+        {{ proy.activo ? '👁️' : '👁️‍🗨️' }}
+      </button>
+      <button class="action-btn delete" (click)="eliminarDefinitivo(proy)" title="Eliminar">🗑️</button>
+    </div>
+
+    <div *cdkDragPlaceholder class="drag-placeholder"></div>
+  </div>
+</div>
+
+<div *ngIf="!cargando && proyectos.length === 0" class="empty-state">
+  No hay proyectos que coincidan con los filtros seleccionados.
+</div>
