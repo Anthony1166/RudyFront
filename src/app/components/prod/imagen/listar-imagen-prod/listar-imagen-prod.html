@@ -26,7 +26,7 @@
   <div cdkDropList cdkDropListOrientation="mixed" (cdkDropListDropped)="onDrop($event)" class="drop-zone-galeria">
 
     <div class="tarjeta-foto" *ngFor="let img of imagenes; let i = index" cdkDrag (click)="abrirModal(img)">
-      <img [src]="img.urlImagen" alt="Foto producto" class="img-preview">
+      <img [src]="img.urlImagen" alt="Foto producto" class="img-preview" loading="lazy">
 
       <div *ngIf="img.esPortada" class="badge-portada">⭐ PORTADA</div>
       <div class="badge-orden">#{{ i + 1 }}</div>

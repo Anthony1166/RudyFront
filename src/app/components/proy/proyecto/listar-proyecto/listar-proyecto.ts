@@ -1,4 +1,5 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, DestroyRef, inject, OnInit } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
@@ -39,6 +40,7 @@ export class ListarProyecto implements OnInit {
 
   private proyectoService = inject(ProyectoAdminService);
   private categoriaService = inject(CategoriaProyectoService);
+  private destroyRef = inject(DestroyRef);
 
   get nombreCategoriaSeleccionada(): string {
     if (this.idCategoriaSeleccionada === 'todas') return 'Todas las categorías';
@@ -51,12 +53,12 @@ export class ListarProyecto implements OnInit {
 
   ngOnInit(): void {
     this.cargarProyectos();
-    this.categoriaService.listarTodas().subscribe(data => this.categorias = data);
+    this.categoriaService.listarTodas().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => this.categorias = data);
   }
 
   cargarProyectos(): void {
     this.cargando = true;
-    this.proyectoService.listarTodosAdmin().subscribe({
+    this.proyectoService.listarTodosAdmin().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         this.proyectos = data;
         this.todosLosProyectos = data;
@@ -98,18 +100,17 @@ export class ListarProyecto implements OnInit {
     this.cargando = true;
 
     if (tieneCategoria && !tieneAnio) {
-      this.proyectoService.listarPorCategoriaAdmin(Number(this.idCategoriaSeleccionada)).subscribe({
+      this.proyectoService.listarPorCategoriaAdmin(Number(this.idCategoriaSeleccionada)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data) => { this.proyectos = data; this.cargando = false; },
         error: () => this.cargando = false
       });
     } else if (!tieneCategoria && tieneAnio) {
-      this.proyectoService.listarPorAnio(Number(this.anioSeleccionado)).subscribe({
+      this.proyectoService.listarPorAnio(Number(this.anioSeleccionado)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data) => { this.proyectos = data; this.cargando = false; },
         error: () => this.cargando = false
       });
     } else {
-      // Ambos filtros: filtramos localmente desde el cache total
-      this.proyectoService.listarPorCategoriaAdmin(Number(this.idCategoriaSeleccionada)).subscribe({
+      this.proyectoService.listarPorCategoriaAdmin(Number(this.idCategoriaSeleccionada)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data) => {
           this.proyectos = data.filter(p => p.anio === Number(this.anioSeleccionado));
           this.cargando = false;
@@ -137,7 +138,7 @@ export class ListarProyecto implements OnInit {
   onDrop(event: CdkDragDrop<ProyectoAdmin[]>): void {
     moveItemInArray(this.proyectos, event.previousIndex, event.currentIndex);
     this.guardandoOrden = true;
-    this.proyectoService.reordenarLote(this.proyectos.map(p => p.idProyecto!)).subscribe({
+    this.proyectoService.reordenarLote(this.proyectos.map(p => p.idProyecto!)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => this.guardandoOrden = false,
       error: () => { this.guardandoOrden = false; this.cargarProyectos(); }
     });
@@ -153,7 +154,7 @@ export class ListarProyecto implements OnInit {
   toggleVisibilidad(proyecto: ProyectoAdmin): void {
     if (!proyecto.idProyecto) return;
     if (confirm(`¿Estás segura de ${!proyecto.activo ? 'MOSTRAR' : 'OCULTAR'} el proyecto "${proyecto.titulo}"?`)) {
-      this.proyectoService.apagarProyecto(proyecto.idProyecto).subscribe({
+      this.proyectoService.apagarProyecto(proyecto.idProyecto).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => proyecto.activo = !proyecto.activo,
         error: (err) => console.error('Error', err)
       });
@@ -163,7 +164,7 @@ export class ListarProyecto implements OnInit {
   eliminarDefinitivo(proyecto: ProyectoAdmin): void {
     if (!proyecto.idProyecto) return;
     if (confirm(`⚠️ ALERTA CRÍTICA: ¿Estás segura de ELIMINAR POR SIEMPRE el proyecto "${proyecto.titulo}"?\nEsto también borrará sus fotos y procesos.`)) {
-      this.proyectoService.eliminarFisico(proyecto.idProyecto).subscribe({
+      this.proyectoService.eliminarFisico(proyecto.idProyecto).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => this.proyectos = this.proyectos.filter(p => p.idProyecto !== proyecto.idProyecto),
         error: (err) => console.error('Error', err)
       });

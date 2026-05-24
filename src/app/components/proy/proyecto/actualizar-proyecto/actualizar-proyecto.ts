@@ -8,6 +8,7 @@ import { ProyectoAdminService } from '../../../../services/proy/proyecto-admin.s
 import { CategoriaProyectoService } from '../../../../services/proy/categoria-proyecto.service';
 import { ListarImagenProy } from '../imagen-proy/listar-imagen-proy/listar-imagen-proy';
 import { ListarProcesoProy } from '../proceso-proy/listar-proceso-proy/listar-proceso-proy';
+import { ToastService } from '../../../../services/toast.service';
 
 @Component({
   selector: 'app-actualizar-proyecto',
@@ -30,6 +31,7 @@ export class ActualizarProyecto implements OnInit {
   private router = inject(Router);
   private proyectoService = inject(ProyectoAdminService);
   private categoriaService = inject(CategoriaProyectoService);
+  private toast = inject(ToastService);
 
   ngOnInit(): void {
     this.idProyecto = Number(this.route.snapshot.paramMap.get('id'));
@@ -55,7 +57,7 @@ export class ActualizarProyecto implements OnInit {
         this.cargandoDatos = false;
       },
       error: () => {
-        alert('No se pudo cargar el proyecto.');
+        this.toast.error('No se pudo cargar el proyecto.');
         this.router.navigate(['/administracion/proyecto-portafolio/listar']);
       }
     });
@@ -74,8 +76,8 @@ export class ActualizarProyecto implements OnInit {
     this.proyecto.categorias = Array.from(this.categoriasSeleccionadas).map(id => ({ idCategoria: id } as CategoriaProyecto));
 
     this.proyectoService.actualizarProyecto(this.idProyecto, this.proyecto).subscribe({
-      next: () => { this.guardando = false; this.router.navigate(['/administracion/proyecto-portafolio/listar']); },
-      error: (err) => { console.error('Error', err); alert('Error al guardar los cambios.'); this.guardando = false; }
+      next: () => { this.guardando = false; this.toast.exito('Proyecto actualizado correctamente.'); this.router.navigate(['/administracion/proyecto-portafolio/listar']); },
+      error: (err) => { this.toast.error(err?.error?.mensaje ?? 'Error al guardar los cambios.'); this.guardando = false; }
     });
   }
 }

@@ -5,17 +5,31 @@
     <div class="spinner-blanco"></div>
   </div>
 
+  <div class="empty-state" *ngIf="!cargando && categorias.length === 0">
+    <svg class="empty-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="20" width="60" height="48" rx="6" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M10 32h60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 20V14a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 50h20M30 58h12" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <p class="empty-title">Sin categorías por ahora</p>
+    <p class="empty-subtitle">Pronto habrá contenido aquí.</p>
+  </div>
+
   <div class="carousel-master-wrapper" *ngIf="!cargando && categorias.length > 0">
 
     <div class="cards-container"
          [class.cards-1]="categorias.length === 1"
          [class.cards-2]="categorias.length === 2">
 
-      <div class="cat-card" *ngFor="let cat of categorias" [routerLink]="['/categoria', cat.slug]">
+      <div class="cat-card"
+           *ngFor="let cat of categorias; let i = index"
+           [routerLink]="['/categoria', cat.slug]"
+           [style.animation-delay]="(i * 0.08) + 's'">
         <h2 class="cat-title">{{ cat.nombre | uppercase }}</h2>
 
         <div class="cat-img-wrapper">
-          <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre">
+          <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre" loading="lazy">
           <div *ngIf="!cat.urlImagen" class="placeholder-img">📦</div>
         </div>
       </div>

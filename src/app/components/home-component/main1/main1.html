@@ -2,10 +2,10 @@
   <div class="text-div">
     <div class="hero-content">
       <div class="hero-heading-group">
-        <h1 class="title-main">SAMANTHA<br/>AVALOS</h1>
-        <p class="parraf-main">DISEÑADORA INDUSTRIAL </p>
+        <h1 class="title-main" appReveal [revealDelay]="0.1">SAMANTHA<br/>AVALOS</h1>
+        <p class="parraf-main" appReveal [revealDelay]="0.2">DISEÑADORA INDUSTRIAL </p>
       </div>
-      <div class="buttons">
+      <div class="buttons" appReveal [revealDelay]="0.3">
         <button class="btn-hero btn-hero--primary" [routerLink]="'/Categorias'">PRODUCTOS</button>
         <button class="btn-hero btn-hero--secondary" [routerLink]="'/Proyectos'">PORTAFOLIO</button>
       </div>
@@ -13,7 +13,7 @@
   </div>
 
   <div class="img-div">
-    <img id="samiCort" class="img-vaquita" src="/assets/samivaquita.png" alt="Samivaquita" />
-    <img id="samiComp" class="img-vaquita" src="/assets/Samicompleta.png" alt="Samivaquita" />
+    <img id="samiCort" class="img-vaquita reveal-right" appReveal [revealDelay]="0.2" src="/assets/samivaquita.png" alt="Samivaquita" />
+    <img id="samiComp" class="img-vaquita reveal-right" appReveal [revealDelay]="0.2" src="/assets/Samicompleta.png" alt="Samivaquita" />
   </div>
 </div>

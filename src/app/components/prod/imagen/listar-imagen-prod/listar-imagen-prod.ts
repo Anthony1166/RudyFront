@@ -5,6 +5,7 @@ import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-dr
 import {ImagenProducto} from '../../../../model/prod/imagen-producto';
 import {ImagenProductoService} from '../../../../services/prod/imagen-producto.service';
 import {UploadService} from '../../../../services/upload-service';
+import {ToastService} from '../../../../services/toast.service';
 import {FormsModule} from '@angular/forms';
 
 @Component({
@@ -28,6 +29,7 @@ export class ListarImagenProd {
   private route = inject(ActivatedRoute);
   private imagenService = inject(ImagenProductoService);
   private uploadService = inject(UploadService);
+  private toast = inject(ToastService);
 
   ngOnInit(): void {
     this.productoId = Number(this.route.snapshot.paramMap.get('id'));
@@ -67,14 +69,14 @@ export class ListarImagenProd {
             this.subiendo = false;
             if(imgGuardada.esPortada) this.cargarGaleria();
           },
-          error: (err) => {
-            console.error('Error guardando', err);
+          error: () => {
+            this.toast.error('Error al guardar la imagen.');
             this.uploadService.borrarImagen(respuestaS3.url).subscribe();
             this.subiendo = false;
           }
         });
       },
-      error: (err) => { alert('Hubo un error al subir la foto.'); this.subiendo = false; }
+      error: () => { this.toast.error('Hubo un error al subir la foto.'); this.subiendo = false; }
     });
   }
 
@@ -112,8 +114,8 @@ export class ListarImagenProd {
         this.cerrarModal();
         this.guardandoCambiosModal = false;
       },
-      error: (err) => {
-        console.error('Error actualizando imagen', err);
+      error: () => {
+        this.toast.error('Error al actualizar la imagen.');
         this.guardandoCambiosModal = false;
       }
     });

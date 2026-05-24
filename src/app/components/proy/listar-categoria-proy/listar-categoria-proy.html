@@ -44,7 +44,7 @@
       <div class="visual-wrapper">
         <div class="orden-badge">#{{i + 1}}</div>
         <div class="drag-handle" cdkDragHandle>⋮⋮</div>
-        <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre" class="img-cat">
+        <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre" class="img-cat" loading="lazy">
         <div *ngIf="!cat.urlImagen" class="placeholder-cat">{{ cat.nombre.charAt(0).toUpperCase() }}</div>
         <div class="status-pill" [class.oculto]="!cat.activo">
           {{ cat.activo ? 'VISIBLE' : 'OCULTA' }}

@@ -83,7 +83,7 @@
   border-radius: 0.5rem;
   box-shadow: 0.3125rem 0.3125rem 0.3125rem 0 rgba(0, 0, 0, 0.44);
   cursor: pointer;
-  transition: transform 0.2s ease, background 0.2s ease;
+  transition: transform var(--anim-fast) ease, background var(--anim-fast) ease;
   color: #FFFFFF;
   font-family: Heavitas, sans-serif;
   font-size: clamp(0.875rem, 1vw + 0.3rem, 1.5rem);

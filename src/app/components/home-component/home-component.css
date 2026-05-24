@@ -1,3 +1,8 @@
+:host {
+  display: block;
+  animation: routeFadeIn var(--anim-fast) ease-out both;
+}
+
 .home-cont{
 
   min-height: 100dvh;

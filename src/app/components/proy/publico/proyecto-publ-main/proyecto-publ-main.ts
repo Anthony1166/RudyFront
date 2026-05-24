@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProyectoAdmin } from '../../../../model/proy/proyecto';
 
@@ -8,13 +8,7 @@ import { ProyectoAdmin } from '../../../../model/proy/proyecto';
   templateUrl: './proyecto-publ-main.html',
   styleUrl: './proyecto-publ-main.css'
 })
-export class ProyectoPublMain implements OnChanges {
+export class ProyectoPublMain {
   @Input() proyectoRecibido?: ProyectoAdmin;
-  isLoading = true;
-
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['proyectoRecibido']?.currentValue) {
-      this.isLoading = false;
-    }
-  }
+  @Input() isLoading = true;
 }

@@ -43,7 +43,7 @@
   justify-content: center;
   color: #EBDDC1;
   text-decoration: none;
-  transition: opacity 0.3s ease;
+  transition: opacity var(--anim-fast) ease;
 }
 
 .nav-btn:hover {

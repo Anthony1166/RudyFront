@@ -83,7 +83,7 @@
             <p>{{ p.descripcion }}</p>
           </div>
 
-          <img *ngIf="p.urlImagen" [src]="p.urlImagen" class="proceso-thumb">
+          <img *ngIf="p.urlImagen" [src]="p.urlImagen" class="proceso-thumb" loading="lazy">
         </div>
 
         <div class="proceso-acciones">

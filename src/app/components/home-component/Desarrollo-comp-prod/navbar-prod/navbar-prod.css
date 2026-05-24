@@ -61,12 +61,12 @@
   justify-content: center;
   color: white;
   text-decoration: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition: transform var(--anim-fast) ease, opacity var(--anim-fast) ease;
 }
 
 .nav-btn:hover {
   opacity: 0.8;
-  transform: translateY(-2px); /* Pequeño salto al pasar el mouse */
+  transform: var(--hover-lift-sm); /* Pequeño salto al pasar el mouse */
 }
 
 .nav-icon {

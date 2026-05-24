@@ -35,20 +35,24 @@
 
       <!-- Estado Vacío (Sin procesos) -->
       <div class="empty-state" *ngIf="!cargando && (!procesos || procesos.length === 0)">
-        <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="#ccc" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="12" cy="12" r="10"></circle>
-          <line x1="12" y1="8" x2="12" y2="12"></line>
-          <line x1="12" y1="16" x2="12.01" y2="16"></line>
+        <svg class="empty-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="10" y="20" width="60" height="48" rx="6" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+          <path d="M10 32h60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M24 20V14a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+          <path d="M30 50h20M30 58h12" stroke="white" stroke-width="3" stroke-linecap="round"/>
         </svg>
-        <p>Aún no se han definido procesos para este producto.</p>
+        <p class="empty-title">Sin procesos por ahora</p>
+        <p class="empty-subtitle">Pronto habrá contenido aquí.</p>
       </div>
 
       <!-- Estado con Datos -->
       <ng-container *ngIf="!cargando && procesos && procesos.length > 0">
-        <div class="proceso-card" *ngFor="let p of procesos">
+        <div class="proceso-card"
+             *ngFor="let p of procesos; let i = index"
+             [style.animation-delay]="(i * 0.08) + 's'">
 
           <div class="card-img-container">
-            <img [src]="p.urlImagen || 'assets/logo/logo.png'" alt="Imagen del proceso {{p.titulo}}" class="card-img" />
+            <img [src]="p.urlImagen || 'assets/logo/logo.png'" alt="Imagen del proceso {{p.titulo}}" class="card-img" loading="lazy" />
           </div>
 
           <div class="card-content">

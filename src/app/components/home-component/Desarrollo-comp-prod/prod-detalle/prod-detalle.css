@@ -17,6 +17,7 @@ app-producto-cabecera {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  animation: routeFadeIn var(--anim-fast) ease-out both;
 }
 
 .main-detalle-producto {

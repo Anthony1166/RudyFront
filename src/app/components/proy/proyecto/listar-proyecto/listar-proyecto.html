@@ -87,7 +87,7 @@
       <div class="drag-anchor" cdkDragHandle>⋮⋮</div>
 
       <div class="img-wrapper">
-        <img *ngIf="obtenerPortada(proy) as url; else noImg" [src]="url" [alt]="proy.titulo">
+        <img *ngIf="obtenerPortada(proy) as url; else noImg" [src]="url" [alt]="proy.titulo" loading="lazy">
         <ng-template #noImg><div class="placeholder-icon">🖼️</div></ng-template>
 
         <div class="status-overlay">

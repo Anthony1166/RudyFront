@@ -6,6 +6,7 @@ import {CdkDragDrop, DragDropModule, moveItemInArray} from '@angular/cdk/drag-dr
 import {ProcesoProducto} from '../../../../model/prod/proceso-producto';
 import {ProcesoProductoService} from '../../../../services/prod/proceso-producto.service';
 import {UploadService} from '../../../../services/upload-service';
+import {ToastService} from '../../../../services/toast.service';
 
 @Component({
   selector: 'app-listar-proceso-prod',
@@ -31,6 +32,7 @@ export class ListarProcesoProd {
   private route = inject(ActivatedRoute);
   private procesoService = inject(ProcesoProductoService);
   private uploadService = inject(UploadService);
+  private toast = inject(ToastService);
 
   ngOnInit(): void {
     this.productoId = Number(this.route.snapshot.paramMap.get('id'));
@@ -67,9 +69,8 @@ export class ListarProcesoProd {
         this.procesoForm.urlImagen = res.url;
         this.subiendoImagen = false;
       },
-      error: (err) => {
-        console.error('Error subiendo imagen', err);
-        alert('Error al subir la imagen.');
+      error: () => {
+        this.toast.error('Error al subir la imagen.');
         this.subiendoImagen = false;
       }
     });
@@ -96,8 +97,7 @@ export class ListarProcesoProd {
           this.guardando = false;
         },
         error: (err) => {
-          console.error('Error al actualizar', err);
-          alert('Hubo un error al actualizar el paso.');
+          this.toast.error(err?.error?.mensaje ?? 'Hubo un error al actualizar el paso.');
           this.guardando = false;
         }
       });
@@ -109,8 +109,7 @@ export class ListarProcesoProd {
           this.guardando = false;
         },
         error: (err) => {
-          console.error('Error al agregar', err);
-          alert('Hubo un error al guardar el paso.');
+          this.toast.error(err?.error?.mensaje ?? 'Hubo un error al guardar el paso.');
           this.guardando = false;
         }
       });

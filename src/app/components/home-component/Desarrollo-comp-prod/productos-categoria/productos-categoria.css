@@ -10,6 +10,7 @@ app-navbar-prod {
   display: flex;
   flex-direction: column;
   min-height: 100dvh;
+  animation: routeFadeIn var(--anim-fast) ease-out both;
 }
 
 .main-productos {
@@ -41,6 +42,8 @@ app-navbar-prod {
   font-weight: 400;
   line-height: normal;
 
+  opacity: 0;
+  animation: fadeSlideUp 0.6s var(--ease-out-soft) 0.05s both;
 }
 .filtro-custom {
   position: relative;
@@ -60,13 +63,13 @@ app-navbar-prod {
   font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all var(--anim-base) ease;
 }
 
-.filtro-btn:hover { background: rgba(255, 255, 255, 0.2); transform: translateY(-2px); }
+.filtro-btn:hover { background: rgba(255, 255, 255, 0.2); transform: var(--hover-lift-sm); }
 
 /* Animación de la flechita cuando se abre el menú */
-.arrow { font-size: 0.6rem; transition: transform 0.3s ease; }
+.arrow { font-size: 0.6rem; transition: transform var(--anim-base) ease; }
 .arrow.up { transform: rotate(180deg); }
 
 /* --- LA LISTA FLOTANTE PREMIUM --- */
@@ -83,7 +86,7 @@ app-navbar-prod {
   padding: 0.5rem;
   margin: 0;
   z-index: 100;
-  animation: popIn 0.2s ease-out forwards;
+  animation: popIn var(--anim-fast) ease-out forwards;
 }
 
 .filtro-lista li {
@@ -92,17 +95,12 @@ app-navbar-prod {
   font-size: 0.9rem;
   border-radius: 0.5rem;
   cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease;
+  transition: background var(--anim-fast) ease, color var(--anim-fast) ease;
 }
 
 .filtro-lista li:hover {
   background: #2495FF; /* Tu azul corporativo */
   color: white;
-}
-
-@keyframes popIn {
-  0% { opacity: 0; transform: translateY(-10px); }
-  100% { opacity: 1; transform: translateY(0); }
 }
 
 
@@ -116,6 +114,54 @@ app-navbar-prod {
   width: 100%;
   max-width: 1600px;
   margin: 0 auto;
+}
+
+/* ── Spinner de carga ── */
+.loader-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 0;
+}
+
+.spinner-blanco {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin var(--anim-spin) linear infinite;
+}
+
+/* ── Estado vacío ── */
+.empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  padding: 6rem 0;
+  text-align: center;
+}
+
+.empty-icon {
+  width: 5rem;
+  height: 5rem;
+  opacity: 0.75;
+}
+
+.empty-title {
+  color: #ffffff;
+  font-family: Heavitas, sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.empty-subtitle {
+  color: #ffffff;
+  font-family: Inter, sans-serif;
+  font-size: 1rem;
+  opacity: 0.7;
 }
 
 /* --- TARJETA DE PRODUCTO --- */
@@ -135,30 +181,19 @@ app-navbar-prod {
   position: relative;
 
   transition:
-    translate 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    scale 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    box-shadow 0.4s cubic-bezier(0.25, 0.8, 0.25, 1),
-    border-color 0.4s ease;
+    translate var(--anim-base) var(--ease-out-soft),
+    scale var(--anim-base) var(--ease-out-soft),
+    box-shadow var(--anim-base) var(--ease-out-soft),
+    border-color var(--anim-base) ease;
 
   opacity: 0;
-  animation: fadeSlideUp 0.6s cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
-}
-/* --- LA ANIMACIÓN DE ENTRADA (Faltaba esto) --- */
-@keyframes fadeSlideUp {
-  0% {
-    opacity: 0;
-    transform: translateY(40px); /* Empiezan 40px más abajo */
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0); /* Llegan a su posición original completamente visibles */
-  }
+  animation: fadeSlideUp var(--anim-grid) var(--ease-out-soft) forwards;
 }
 
 .prod-card:hover {
   /* Usamos propiedades independientes para no pisar el 'transform' de la animación */
-  translate: 0 -8px;
-  scale: 1.03;
+  translate: 0 -6px;
+  scale: 1.02;
 
   /* Hacemos la sombra un poco más amplia y difuminada para que coincida con el nuevo tamaño y altura */
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
@@ -249,8 +284,8 @@ app-navbar-prod {
   border-radius: 2rem;
   cursor: pointer;
   transition:
-    background-color 0.3s ease,
-    scale 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    background-color var(--anim-base) ease,
+    scale var(--anim-base) var(--ease-out-soft);
 }
 .btn-accion:hover {
   background: #116ee3;

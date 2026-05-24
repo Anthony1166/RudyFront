@@ -1,4 +1,5 @@
-import {Component, inject, OnInit} from '@angular/core';
+import {Component, DestroyRef, inject, OnInit} from '@angular/core';
+import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {Producto} from '../../../../model/prod/producto';
 import {ProductoService} from '../../../../services/prod/producto.service';
 import {
@@ -40,7 +41,8 @@ export class ListarProducto implements OnInit{
   guardandoOrden = false;
 
   private productoService = inject(ProductoService);
-  private categoriaService = inject(CategoriaProductoService); // 🔥 EL SERVICIO INYECTADO
+  private categoriaService = inject(CategoriaProductoService);
+  private destroyRef = inject(DestroyRef);
 
   filtroActual: 'todos' | 'destacados' | 'ocultos' = 'todos';
   mostrarModalRegistro = false;
@@ -69,7 +71,7 @@ export class ListarProducto implements OnInit{
   }
 
   cargarCategoriasParaFiltro(): void {
-    this.categoriaService.listarTodas().subscribe(data => this.categorias = data);
+    this.categoriaService.listarTodas().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(data => this.categorias = data);
   }
 
   alCambiarFiltro(): void {
@@ -77,7 +79,7 @@ export class ListarProducto implements OnInit{
     if (this.idCategoriaSeleccionada === 'todas') {
       this.cargarProductos();
     } else {
-      this.productoService.listarPorCategoriaAdmin(Number(this.idCategoriaSeleccionada)).subscribe({
+      this.productoService.listarPorCategoriaAdmin(Number(this.idCategoriaSeleccionada)).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: (data) => {
           this.productos = data;
           this.cargando = false;
@@ -111,7 +113,7 @@ export class ListarProducto implements OnInit{
 
   cargarProductos(): void {
     this.cargando = true;
-    this.productoService.listarTodosAdmin().subscribe({
+    this.productoService.listarTodosAdmin().pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (data) => {
         this.productos = data;
         this.todosLosProductos = data; // Guardamos copia en caché
@@ -139,7 +141,7 @@ export class ListarProducto implements OnInit{
     const idsOrdenados = this.productos.map(p => p.id!);
 
     this.guardandoOrden = true;
-    this.productoService.reordenarLote(idsOrdenados).subscribe({
+    this.productoService.reordenarLote(idsOrdenados).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: () => this.guardandoOrden = false,
       error: (err) => {
         console.error('Error guardando el orden', err);
@@ -155,7 +157,7 @@ export class ListarProducto implements OnInit{
     const nuevoEstado = !producto.activo;
 
     if (confirm(`¿Estás segura de ${nuevoEstado ? 'MOSTRAR' : 'OCULTAR'} el producto "${producto.nombre}" en la tienda?`)) {
-      this.productoService.apagarProducto(producto.id).subscribe({
+      this.productoService.apagarProducto(producto.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => producto.activo = nuevoEstado,
         error: (err) => console.error('Error al cambiar visibilidad', err)
       });
@@ -166,7 +168,7 @@ export class ListarProducto implements OnInit{
     if (!producto.id) return;
 
     if (confirm(`⚠️ ALERTA CRÍTICA: ¿Estás segura de ELIMINAR POR SIEMPRE el producto "${producto.nombre}"?\nEsto también borrará sus fotos y procesos de la base de datos.`)) {
-      this.productoService.eliminarFisico(producto.id).subscribe({
+      this.productoService.eliminarFisico(producto.id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
         next: () => this.productos = this.productos.filter(p => p.id !== producto.id),
         error: (err) => console.error('Error al eliminar físicamente', err)
       });

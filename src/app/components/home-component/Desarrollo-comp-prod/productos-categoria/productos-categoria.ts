@@ -66,12 +66,6 @@ export class ProductosCategoria implements OnInit, OnDestroy {
     this.menuFiltroAbierto = false;       // Cerramos el menú
 
     switch (criterio) {
-      case 'az':
-        this.productos.sort((a, b) => a.nombre.localeCompare(b.nombre));
-        break;
-      case 'za':
-        this.productos.sort((a, b) => b.nombre.localeCompare(a.nombre));
-        break;
       case 'recientes':
         this.productos.sort((a, b) => (b.id || 0) - (a.id || 0));
         break;

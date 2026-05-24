@@ -22,6 +22,87 @@
   font-style: normal;
 }
 
+/* ============================================================
+   Sistema de animaciones unificado (lado público)
+   ============================================================ */
+:root {
+  --anim-fast: 0.2s;
+  --anim-base: 0.3s;
+  --anim-slow: 0.7s;
+  --anim-grid: 0.9s;
+  --anim-spin: 1s;
+  --anim-shimmer: 1.5s;
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-out-snap: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+  --hover-lift-sm: translateY(-2px);
+  --hover-lift-md: translateY(-6px);
+  --hover-img-scale: scale(1.05);
+  --hover-card-scale: scale(1.02);
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+/* Las entradas usan translate/scale (propiedades independientes)
+   para no pisar el transform de los :hover. */
+@keyframes fadeSlideUp {
+  from { opacity: 0; translate: 0 40px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes slideFadeIn {
+  from { opacity: 0; translate: 40px 0; scale: 0.98; }
+  to   { opacity: 1; translate: 0 0; scale: 1; }
+}
+@keyframes popIn {
+  from { opacity: 0; translate: 0 -10px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes shimmer {
+  from { background-position: -400px 0; }
+  to   { background-position: 400px 0; }
+}
+@keyframes routeFadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; translate: -40px 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes slideInRight {
+  from { opacity: 0; translate: 40px 0; }
+  to   { opacity: 1; translate: 0 0; }
+}
+@keyframes slideInDown {
+  from { opacity: 0; translate: 0 -20px; }
+  to   { opacity: 1; translate: 0 0; }
+}
+
+.u-spinner  { animation: spin var(--anim-spin) linear infinite; }
+.u-fade-up  { animation: fadeSlideUp var(--anim-grid) var(--ease-out-soft) both; }
+.u-slide-in { animation: slideFadeIn var(--anim-slow) var(--ease-out-snap) both; }
+.u-pop-in   { animation: popIn var(--anim-fast) ease-out both; }
+.u-shimmer  { animation: shimmer var(--anim-shimmer) linear infinite; }
+
+/* Scroll-reveal: el atributo [appReveal] añade .reveal al elemento
+   y luego .is-visible cuando entra al viewport. */
+.reveal { opacity: 0; }
+.reveal.is-visible {
+  animation: fadeSlideUp var(--anim-grid) var(--ease-out-soft) both;
+}
+.reveal.reveal-left.is-visible {
+  animation: slideInLeft var(--anim-grid) var(--ease-out-soft) both;
+}
+.reveal.reveal-right.is-visible {
+  animation: slideInRight var(--anim-grid) var(--ease-out-soft) both;
+}
+.reveal.reveal-down.is-visible {
+  animation: slideInDown var(--anim-grid) var(--ease-out-soft) both;
+}
+
 /*
  @media (max-height: 980px) {
   html {

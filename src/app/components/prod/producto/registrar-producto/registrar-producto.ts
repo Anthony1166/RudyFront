@@ -6,6 +6,7 @@ import {CategoriaProductoService} from '../../../../services/prod/categoria-prod
 import {Router, RouterLink} from '@angular/router';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
+import {ToastService} from '../../../../services/toast.service';
 
 @Component({
   selector: 'app-registrar-producto',
@@ -35,6 +36,7 @@ export class RegistrarProducto implements OnInit{
   private productoService = inject(ProductoService);
   private categoriaService = inject(CategoriaProductoService);
   private router = inject(Router);
+  private toast = inject(ToastService);
 
   @Output() onCerrar = new EventEmitter<boolean>();
 
@@ -69,20 +71,21 @@ export class RegistrarProducto implements OnInit{
 
   guardarProducto(): void {
     if (!this.producto.nombre || !this.producto.descripcion || this.producto.precio <= 0) {
-      alert('Por favor, completa los campos obligatorios.'); return;
+      this.toast.error('Por favor, completa los campos obligatorios.'); return;
     }
 
     this.guardando = true;
     this.producto.categorias = Array.from(this.categoriasSeleccionadas).map(id => ({ id } as CategoriaProducto));
 
     this.productoService.crearProducto(this.producto).subscribe({
-      next: (productoGuardado) => {
+      next: () => {
         this.guardando = false;
-        // 4. EN LUGAR DE NAVEGAR, EMITIMOS TRUE (Éxito -> Recargar lista)
+        this.toast.exito('Producto guardado correctamente.');
         this.onCerrar.emit(true);
       },
       error: (err) => {
-        console.error('Error', err); this.guardando = false;
+        this.toast.error(err?.error?.mensaje ?? 'Error al guardar el producto.');
+        this.guardando = false;
       }
     });
   }

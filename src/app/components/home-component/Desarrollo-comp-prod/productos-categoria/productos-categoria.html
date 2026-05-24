@@ -15,8 +15,6 @@
       <ul class="filtro-lista" *ngIf="menuFiltroAbierto">
         <li (click)="cambiarOrden('relevancia', 'Relevancia')">Relevancia</li>
         <li (click)="cambiarOrden('recientes', 'Más Recientes')">Más Recientes</li>
-        <li (click)="cambiarOrden('az', 'Alfabéticamente (A-Z)')">Alfabéticamente (A-Z)</li>
-        <li (click)="cambiarOrden('za', 'Alfabéticamente (Z-A)')">Alfabéticamente (Z-A)</li>
         <li (click)="cambiarOrden('precio-menor', 'Precio: Menor a Mayor')">Precio: Menor a Mayor</li>
         <li (click)="cambiarOrden('precio-mayor', 'Precio: Mayor a Menor')">Precio: Mayor a Menor</li>
       </ul>
@@ -27,12 +25,23 @@
     <div class="spinner-blanco"></div>
   </div>
 
-  <div class="grid-productos" *ngIf="!cargando">
+  <div class="empty-state" *ngIf="!cargando && productos.length === 0">
+    <svg class="empty-icon" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="20" width="60" height="48" rx="6" stroke="white" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M10 32h60" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M24 20V14a4 4 0 0 1 4-4h24a4 4 0 0 1 4 4v6" stroke="white" stroke-width="3" stroke-linecap="round"/>
+      <path d="M30 50h20M30 58h12" stroke="white" stroke-width="3" stroke-linecap="round"/>
+    </svg>
+    <p class="empty-title">Sin productos por ahora</p>
+    <p class="empty-subtitle">Esta categoría no tiene productos activos aún.</p>
+  </div>
+
+  <div class="grid-productos" *ngIf="!cargando && productos.length > 0">
     <div class="prod-card"
          *ngFor="let prod of productos; let i = index"
          [routerLink]="['/producto', prod.id]"
          [style.animation-delay]="(i * 0.08) + 's'">
-      <img *ngIf="obtenerImagenPortada(prod)" [src]="obtenerImagenPortada(prod)" [alt]="prod.nombre" class="prod-img">
+      <img *ngIf="obtenerImagenPortada(prod)" [src]="obtenerImagenPortada(prod)" [alt]="prod.nombre" class="prod-img" loading="lazy">
 
       <div *ngIf="!obtenerImagenPortada(prod)" class="prod-img placeholder-img">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="2">

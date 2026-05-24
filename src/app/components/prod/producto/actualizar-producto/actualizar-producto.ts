@@ -1,4 +1,5 @@
 import {Component, inject, OnInit} from '@angular/core';
+import {ToastService} from '../../../../services/toast.service';
 import {CategoriaProducto} from '../../../../model/prod/categoria-producto';
 import {Producto} from '../../../../model/prod/producto';
 import {ActivatedRoute, Router, RouterLink} from '@angular/router';
@@ -33,6 +34,7 @@ export class ActualizarProducto implements OnInit{
   private router = inject(Router);
   private productoService = inject(ProductoService);
   private categoriaService = inject(CategoriaProductoService);
+  private toast = inject(ToastService);
 
   ngOnInit(): void {
     this.idProducto = Number(this.route.snapshot.paramMap.get('id'));
@@ -68,9 +70,8 @@ export class ActualizarProducto implements OnInit{
 
         this.cargandoDatos = false;
       },
-      error: (err) => {
-        console.error('Error cargando producto', err);
-        alert('No se pudo cargar la información del producto.');
+      error: () => {
+        this.toast.error('No se pudo cargar la información del producto.');
         this.router.navigate(['/administracion/producto/listar']);
       }
     });
@@ -96,11 +97,11 @@ export class ActualizarProducto implements OnInit{
     this.productoService.actualizarProducto(this.idProducto, this.producto).subscribe({
       next: () => {
         this.guardando = false;
+        this.toast.exito('Producto actualizado correctamente.');
         this.router.navigate(['/administracion/producto/listar']);
       },
       error: (err) => {
-        console.error('Error actualizando', err);
-        alert('Hubo un error al guardar los cambios.');
+        this.toast.error(err?.error?.mensaje ?? 'Hubo un error al guardar los cambios.');
         this.guardando = false;
       }
     });

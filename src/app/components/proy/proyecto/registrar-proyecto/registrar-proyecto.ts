@@ -1,6 +1,7 @@
 import { Component, EventEmitter, inject, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { ToastService } from '../../../../services/toast.service';
 import { ProyectoAdmin } from '../../../../model/proy/proyecto';
 import { CategoriaProyecto } from '../../../../model/proy/categoria-proyecto';
 import { ProyectoAdminService } from '../../../../services/proy/proyecto-admin.service';
@@ -29,6 +30,7 @@ export class RegistrarProyecto implements OnInit {
 
   private proyectoService = inject(ProyectoAdminService);
   private categoriaService = inject(CategoriaProyectoService);
+  private toast = inject(ToastService);
 
   ngOnInit(): void {
     this.categoriaService.listarTodas().subscribe({
@@ -46,14 +48,14 @@ export class RegistrarProyecto implements OnInit {
 
   guardarProyecto(): void {
     if (!this.proyecto.titulo?.trim() || !this.proyecto.anio) {
-      alert('El título y el año son obligatorios.'); return;
+      this.toast.error('El título y el año son obligatorios.'); return;
     }
     this.guardando = true;
     this.proyecto.categorias = Array.from(this.categoriasSeleccionadas).map(id => ({ idCategoria: id } as CategoriaProyecto));
 
     this.proyectoService.crearProyecto(this.proyecto).subscribe({
-      next: () => { this.guardando = false; this.onCerrar.emit(true); },
-      error: (err) => { console.error('Error', err); this.guardando = false; }
+      next: () => { this.guardando = false; this.toast.exito('Proyecto creado correctamente.'); this.onCerrar.emit(true); },
+      error: (err) => { this.toast.error(err?.error?.mensaje ?? 'Error al crear el proyecto.'); this.guardando = false; }
     });
   }
 

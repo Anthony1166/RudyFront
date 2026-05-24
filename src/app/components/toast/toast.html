@@ -1,0 +1,15 @@
+<div class="toast-container">
+  <div
+    *ngFor="let t of toasts"
+    class="toast"
+    [class.toast-exito]="t.tipo === 'exito'"
+    [class.toast-error]="t.tipo === 'error'"
+    [class.toast-info]="t.tipo === 'info'"
+  >
+    <span class="toast-icono">
+      {{ t.tipo === 'exito' ? '✓' : t.tipo === 'error' ? '✕' : 'i' }}
+    </span>
+    <span class="toast-mensaje">{{ t.mensaje }}</span>
+    <button class="toast-cerrar" (click)="quitar(t.id)">×</button>
+  </div>
+</div>

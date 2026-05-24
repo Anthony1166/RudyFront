@@ -72,7 +72,7 @@
             <h4 *ngIf="!p.titulo" class="sin-titulo">Paso {{ i + 1 }}</h4>
             <p>{{ p.descripcion }}</p>
           </div>
-          <img *ngIf="p.urlImagen" [src]="p.urlImagen" class="proceso-thumb">
+          <img *ngIf="p.urlImagen" [src]="p.urlImagen" class="proceso-thumb" loading="lazy">
         </div>
         <div class="proceso-acciones">
           <button class="btn-icon" (click)="editarProceso(p)" title="Editar">✏️</button>
