@@ -32,7 +32,13 @@ export class AuthInterceptor implements HttpInterceptor {
       this.authService.logout();
     }
 
-    // Peticiones sin token (públicas, login, register)
+    // Peticiones de login/register: dejar que el componente maneje el error
+    const esAuth = req.url.includes('/auth/login') || req.url.includes('/auth/register');
+    if (esAuth) {
+      return next.handle(req);
+    }
+
+    // Peticiones públicas sin token
     return next.handle(req).pipe(
       catchError((error: HttpErrorResponse) => this.manejarError(error))
     );
