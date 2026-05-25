@@ -6,16 +6,11 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Deploy to VPS
-        uses: appleboy/ssh-action@v1.0.0
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: |
-            cd /opt/apps/RudyFront
-            git pull
-            ng build
-            sudo systemctl reload nginx
+        run: |
+          cd /opt/apps/RudyFront
+          git pull
+          ng build
+          sudo systemctl reload nginx
