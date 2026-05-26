@@ -9,10 +9,11 @@ import {
 import { CategoriaProyecto } from '../../../model/proy/categoria-proyecto';
 import { CategoriaProyectoService } from '../../../services/proy/categoria-proyecto.service';
 import { UploadService } from '../../../services/upload-service';
+import { AjusteImagen, ImagenEditor } from '../../shared/imagen-editor/imagen-editor';
 
 @Component({
   selector: 'app-listar-categoria-proy',
-  imports: [CommonModule, DragDropModule, CdkDragPlaceholder, CdkDragHandle, CdkDrag, CdkDropList, FormsModule, RouterLink],
+  imports: [CommonModule, DragDropModule, CdkDragPlaceholder, CdkDragHandle, CdkDrag, CdkDropList, FormsModule, RouterLink, ImagenEditor],
   templateUrl: './listar-categoria-proy.html',
   styleUrl: './listar-categoria-proy.css'
 })
@@ -28,6 +29,7 @@ export class ListarCategoriaProy implements OnInit {
   subiendoImagen = false;
   guardandoCategoria = false;
   mensajeError = '';
+  mostrarEditor = false;
 
   private categoriaService = inject(CategoriaProyectoService);
   private uploadService = inject(UploadService);
@@ -132,5 +134,35 @@ export class ListarCategoriaProy implements OnInit {
         setTimeout(() => { this.mensajeError = ''; this.cdr.detectChanges(); }, 5000);
       }
     });
+  }
+
+  abrirEditor(): void {
+    if (!this.categoriaForm.urlImagen) return;
+    this.mostrarEditor = true;
+  }
+
+  cerrarEditor(): void {
+    this.mostrarEditor = false;
+  }
+
+  onGuardarAjuste(ajuste: AjusteImagen): void {
+    this.categoriaForm.posX = ajuste.posX;
+    this.categoriaForm.posY = ajuste.posY;
+    this.categoriaForm.escala = ajuste.escala;
+    this.categoriaForm.rotacion = ajuste.rotacion;
+    this.categoriaForm.volteoH = ajuste.volteoH;
+    this.categoriaForm.volteoV = ajuste.volteoV;
+    this.mostrarEditor = false;
+  }
+
+  ajusteActual(): AjusteImagen {
+    return {
+      posX: this.categoriaForm.posX ?? 50,
+      posY: this.categoriaForm.posY ?? 50,
+      escala: this.categoriaForm.escala ?? 1,
+      rotacion: this.categoriaForm.rotacion ?? 0,
+      volteoH: this.categoriaForm.volteoH ?? false,
+      volteoV: this.categoriaForm.volteoV ?? false,
+    };
   }
 }

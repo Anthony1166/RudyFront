@@ -75,6 +75,9 @@ textarea { resize: vertical; min-height: 80px; }
   cursor: pointer; font-size: 0.8rem;
 }
 
+.btn-ajustar-mini { margin-top: 8px; width: 100%; background: white; color: #2495FF; border: 2px solid #bfdbfe; padding: 8px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: 0.2s; font-family: inherit; font-size: 0.85rem; }
+.btn-ajustar-mini:hover { background: #eff6ff; border-color: #2495FF; }
+
 .botones-form { display: flex; gap: 10px; margin-top: 20px; }
 .btn-primario { flex: 1; background: var(--color-primario); color: white; border: none; padding: 10px; border-radius: 8px; font-weight: bold; cursor: pointer; }
 .btn-primario:disabled { background: #a0aec0; cursor: not-allowed; }

@@ -52,7 +52,7 @@
              [style.animation-delay]="(i * 0.08) + 's'">
 
           <div class="card-img-container">
-            <img [src]="p.urlImagen || 'assets/logo/logo.png'" alt="Imagen del proceso {{p.titulo}}" class="card-img" loading="lazy" />
+            <img [src]="p.urlImagen || 'assets/logo/logo.png'" [appAjusteImagen]="p" alt="Imagen del proceso {{p.titulo}}" class="card-img" loading="lazy" />
           </div>
 
           <div class="card-content">

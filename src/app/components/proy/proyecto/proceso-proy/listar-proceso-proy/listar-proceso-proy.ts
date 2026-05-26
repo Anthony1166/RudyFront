@@ -6,10 +6,11 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { ProcesoProyecto } from '../../../../../model/proy/proceso-proyecto';
 import { ProcesoProyectoService } from '../../../../../services/proy/proceso-proyecto.service';
 import { UploadService } from '../../../../../services/upload-service';
+import { AjusteImagen, ImagenEditor } from '../../../../shared/imagen-editor/imagen-editor';
 
 @Component({
   selector: 'app-listar-proceso-proy',
-  imports: [CommonModule, FormsModule, DragDropModule],
+  imports: [CommonModule, FormsModule, DragDropModule, ImagenEditor],
   templateUrl: './listar-proceso-proy.html',
   styleUrl: './listar-proceso-proy.css'
 })
@@ -25,6 +26,7 @@ export class ListarProcesoProy implements OnInit {
   subiendoImagen = false;
   guardando = false;
   guardandoOrden = false;
+  mostrarEditor = false;
 
   private route = inject(ActivatedRoute);
   private procesoService = inject(ProcesoProyectoService);
@@ -122,5 +124,35 @@ export class ListarProcesoProy implements OnInit {
       next: () => this.guardandoOrden = false,
       error: () => { this.guardandoOrden = false; this.cargarProcesos(); }
     });
+  }
+
+  abrirEditor(): void {
+    if (!this.procesoForm.urlImagen) return;
+    this.mostrarEditor = true;
+  }
+
+  cerrarEditor(): void {
+    this.mostrarEditor = false;
+  }
+
+  onGuardarAjuste(ajuste: AjusteImagen): void {
+    this.procesoForm.posX = ajuste.posX;
+    this.procesoForm.posY = ajuste.posY;
+    this.procesoForm.escala = ajuste.escala;
+    this.procesoForm.rotacion = ajuste.rotacion;
+    this.procesoForm.volteoH = ajuste.volteoH;
+    this.procesoForm.volteoV = ajuste.volteoV;
+    this.mostrarEditor = false;
+  }
+
+  ajusteActual(): AjusteImagen {
+    return {
+      posX: this.procesoForm.posX ?? 50,
+      posY: this.procesoForm.posY ?? 50,
+      escala: this.procesoForm.escala ?? 1,
+      rotacion: this.procesoForm.rotacion ?? 0,
+      volteoH: this.procesoForm.volteoH ?? false,
+      volteoV: this.procesoForm.volteoV ?? false,
+    };
   }
 }

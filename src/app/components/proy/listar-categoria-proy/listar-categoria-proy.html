@@ -90,6 +90,12 @@
               <div class="spinner"></div><p>Subiendo...</p>
             </div>
           </div>
+          <button *ngIf="categoriaForm.urlImagen && !subiendoImagen"
+                  type="button"
+                  class="btn-ajustar-imagen"
+                  (click)="abrirEditor()">
+            🎯 Ajustar imagen
+          </button>
         </div>
 
         <div class="form-section">
@@ -121,5 +127,12 @@
       </div>
     </div>
   </div>
+
+  <app-imagen-editor *ngIf="mostrarEditor && categoriaForm.urlImagen"
+                     [urlImagen]="categoriaForm.urlImagen"
+                     [ajuste]="ajusteActual()"
+                     (guardar)="onGuardarAjuste($event)"
+                     (cancelar)="cerrarEditor()">
+  </app-imagen-editor>
 
 </div>

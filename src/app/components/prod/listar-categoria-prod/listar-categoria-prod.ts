@@ -9,10 +9,11 @@ import {
 } from '@angular/cdk/drag-drop';
 import {UploadService} from '../../../services/upload-service';
 import {FormsModule} from '@angular/forms';
+import {AjusteImagen, ImagenEditor} from '../../shared/imagen-editor/imagen-editor';
 
 @Component({
   selector: 'app-listar-categoria-prod',
-  imports: [CommonModule, DragDropModule, CdkDragPlaceholder, CdkDragHandle, CdkDrag, CdkDropList, FormsModule, RouterLink],
+  imports: [CommonModule, DragDropModule, CdkDragPlaceholder, CdkDragHandle, CdkDrag, CdkDropList, FormsModule, RouterLink, ImagenEditor],
   templateUrl: './listar-categoria-prod.html',
   styleUrl: './listar-categoria-prod.css'
 })
@@ -29,6 +30,7 @@ export class ListarCategoriaProd implements OnInit {
   subiendoImagen = false;
   guardandoCategoria = false;
   mensajeError: string = '';
+  mostrarEditor = false;
 
   // --- INYECCIONES ---
   private categoriaService = inject(CategoriaProductoService);
@@ -169,5 +171,38 @@ export class ListarCategoriaProd implements OnInit {
       this.mensajeError = '';
       this.cdr.detectChanges();
     }, 5000);
+  }
+
+  // ==========================================
+  // EDITOR DE IMAGEN (punto focal + zoom + rotar/voltear)
+  // ==========================================
+  abrirEditor(): void {
+    if (!this.categoriaForm.urlImagen) return;
+    this.mostrarEditor = true;
+  }
+
+  cerrarEditor(): void {
+    this.mostrarEditor = false;
+  }
+
+  onGuardarAjuste(ajuste: AjusteImagen): void {
+    this.categoriaForm.posX = ajuste.posX;
+    this.categoriaForm.posY = ajuste.posY;
+    this.categoriaForm.escala = ajuste.escala;
+    this.categoriaForm.rotacion = ajuste.rotacion;
+    this.categoriaForm.volteoH = ajuste.volteoH;
+    this.categoriaForm.volteoV = ajuste.volteoV;
+    this.mostrarEditor = false;
+  }
+
+  ajusteActual(): AjusteImagen {
+    return {
+      posX: this.categoriaForm.posX ?? 50,
+      posY: this.categoriaForm.posY ?? 50,
+      escala: this.categoriaForm.escala ?? 1,
+      rotacion: this.categoriaForm.rotacion ?? 0,
+      volteoH: this.categoriaForm.volteoH ?? false,
+      volteoV: this.categoriaForm.volteoV ?? false,
+    };
   }
 }

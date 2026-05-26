@@ -79,6 +79,8 @@
 .full-preview { width: 100%; height: 100%; object-fit: cover; }
 .overlay-change { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.6); color: white; font-size: 0.8rem; font-weight: bold; text-align: center; padding: 8px 0; opacity: 0; transition: 0.3s; }
 .dropzone-cat:hover .overlay-change { opacity: 1; }
+.btn-ajustar-imagen { margin-top: 0.75rem; width: 100%; background: white; color: #2495FF; border: 2px solid #bfdbfe; padding: 10px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; font-family: inherit; font-size: 0.875rem; }
+.btn-ajustar-imagen:hover { background: #eff6ff; border-color: #2495FF; }
 .loader-container { display: flex; flex-direction: column; align-items: center; color: #3b82f6; font-size: 0.85rem; font-weight: bold;}
 
 /* Formulario */

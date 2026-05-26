@@ -5,10 +5,11 @@ import { CategoriaProductoService } from '../../../../services/prod/categoria-pr
 import { NgForOf, NgIf, UpperCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { NavbarProd } from '../navbar-prod/navbar-prod';
+import { AjusteImagenDirective } from '../../../../directives/ajuste-imagen.directive';
 
 @Component({
   selector: 'app-cat-comp',
-  imports: [FooterP1, NgIf, NgForOf, RouterLink, UpperCasePipe, NavbarProd],
+  imports: [FooterP1, NgIf, NgForOf, RouterLink, UpperCasePipe, NavbarProd, AjusteImagenDirective],
   templateUrl: './cat-comp.html',
   styleUrl: './cat-comp.css'
 })

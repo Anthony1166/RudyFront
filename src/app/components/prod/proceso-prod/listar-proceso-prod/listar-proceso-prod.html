@@ -44,6 +44,12 @@
             <button class="btn-quitar-foto" (click)="quitarImagenForm()">✖</button>
           </div>
         </div>
+        <button *ngIf="procesoForm.urlImagen && !subiendoImagen"
+                type="button"
+                class="btn-ajustar-mini"
+                (click)="abrirEditor()">
+          🎯 Ajustar imagen
+        </button>
       </div>
 
       <div class="botones-form">
@@ -98,3 +104,10 @@
 
   </div>
 </div>
+
+<app-imagen-editor *ngIf="mostrarEditor && procesoForm.urlImagen"
+                   [urlImagen]="procesoForm.urlImagen"
+                   [ajuste]="ajusteActual()"
+                   (guardar)="onGuardarAjuste($event)"
+                   (cancelar)="cerrarEditor()">
+</app-imagen-editor>

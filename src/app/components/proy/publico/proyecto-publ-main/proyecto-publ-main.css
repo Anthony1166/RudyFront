@@ -25,7 +25,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding-inline: max(8rem, calc((100% - 120rem) / 2 + 8rem));
+  padding-inline: max(4rem, calc((100% - 103.5rem) / 2 + 4rem));
   padding-block: 4rem;
   gap: 6.875rem;
   box-sizing: border-box;
@@ -89,6 +89,7 @@
   transition: transform var(--anim-base) ease;
   border-radius: 1rem;
   box-shadow: 0.25rem 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
+  transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 /* =========================================

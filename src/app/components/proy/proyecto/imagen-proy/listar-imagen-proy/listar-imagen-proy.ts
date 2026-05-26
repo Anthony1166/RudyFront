@@ -6,10 +6,11 @@ import { CdkDragDrop, DragDropModule, moveItemInArray } from '@angular/cdk/drag-
 import { ImagenProyecto } from '../../../../../model/proy/imagen-proyecto';
 import { ImagenProyectoService } from '../../../../../services/proy/imagen-proyecto.service';
 import { UploadService } from '../../../../../services/upload-service';
+import { AjusteImagen, ImagenEditor } from '../../../../shared/imagen-editor/imagen-editor';
 
 @Component({
   selector: 'app-listar-imagen-proy',
-  imports: [CommonModule, DragDropModule, FormsModule],
+  imports: [CommonModule, DragDropModule, FormsModule, ImagenEditor],
   templateUrl: './listar-imagen-proy.html',
   styleUrl: './listar-imagen-proy.css'
 })
@@ -22,6 +23,8 @@ export class ListarImagenProy implements OnInit {
 
   imagenSeleccionada: ImagenProyecto | null = null;
   guardandoCambiosModal = false;
+
+  mostrarEditor = false;
 
   private route = inject(ActivatedRoute);
   private imagenService = inject(ImagenProyectoService);
@@ -107,5 +110,38 @@ export class ListarImagenProy implements OnInit {
         error: (err) => console.error('Error al eliminar', err)
       });
     }
+  }
+
+  abrirEditor(): void {
+    if (!this.imagenSeleccionada) return;
+    this.mostrarEditor = true;
+  }
+
+  cerrarEditor(): void {
+    this.mostrarEditor = false;
+  }
+
+  onGuardarAjuste(ajuste: AjusteImagen): void {
+    if (!this.imagenSeleccionada) return;
+    this.imagenSeleccionada.posX = ajuste.posX;
+    this.imagenSeleccionada.posY = ajuste.posY;
+    this.imagenSeleccionada.escala = ajuste.escala;
+    this.imagenSeleccionada.rotacion = ajuste.rotacion;
+    this.imagenSeleccionada.volteoH = ajuste.volteoH;
+    this.imagenSeleccionada.volteoV = ajuste.volteoV;
+    this.mostrarEditor = false;
+    this.guardarDetallesImagen();
+  }
+
+  ajusteActual(): AjusteImagen {
+    const img = this.imagenSeleccionada;
+    return {
+      posX: img?.posX ?? 50,
+      posY: img?.posY ?? 50,
+      escala: img?.escala ?? 1,
+      rotacion: img?.rotacion ?? 0,
+      volteoH: img?.volteoH ?? false,
+      volteoV: img?.volteoV ?? false,
+    };
   }
 }

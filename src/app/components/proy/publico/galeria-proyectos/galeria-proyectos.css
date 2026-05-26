@@ -1,182 +1,79 @@
-* {
-  margin: 0;
-  padding: 0;
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+app-navbar-prod {
+  --nav-padding: 0 4rem;
+  --nav-max-width: 1600px;
 }
 
-.grid-page-container {
+:host {
+  display: flex;
+  flex-direction: column;
   min-height: 100dvh;
-  width: 100%;
-  background: linear-gradient(180deg, #2495FF -9.81%, #B7CF49 100%);
-  padding: 3rem clamp(2rem, 6.5vw, 7.6875rem);
-  box-sizing: border-box;
+  animation: routeFadeIn var(--anim-fast) ease-out both;
 }
 
-.grid-header-container {
-  margin-bottom: 3rem;
+.main-productos {
+  font-family: 'Inter', sans-serif;
+  background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
 }
 
-.back-button {
-  display: inline-block;
-  margin-bottom: 1.5rem;
-  cursor: pointer;
-  transition: transform var(--anim-fast) ease;
-  width: 2.75rem;
-  height: 2.75rem;
-}
-.back-button:hover {
-  transform: translateX(-5px);
-}
-
-.grid-header {
+.header-categoria {
+  padding: 3.5rem 4rem 0 4rem;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   color: white;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto 2.87rem auto;
 }
 
-.page-title {
-  color: #FFFFFF;
+.cat-title {
+  align-self: stretch;
+  color: #FFF;
   font-family: Heavitas, sans-serif;
   font-size: 2.5rem;
+  font-style: normal;
   font-weight: 400;
+  line-height: normal;
 
   opacity: 0;
   animation: fadeSlideUp 0.6s var(--ease-out-soft) 0.05s both;
 }
 
-.page-subtitle {
-  color: #FFFFFF;
-  font-family: Inter, sans-serif;
-  font-size: 1.25rem;
-}
-
-/* =========================================
-   GRID
-   Columnas fijas; las tarjetas se escalan
-   proporcionalmente (container queries).
-   ========================================= */
-.projects-grid {
+.grid-productos {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  justify-items: start;
-  gap: clamp(2rem, 3.8vw, 4.5rem);
+  justify-content: center;
+  gap: 3rem 4.5rem;
+  padding: 0 4rem 11.5rem 4rem;
   width: 100%;
-  max-width: 103.5rem;
-  margin: 0 auto 7rem auto;
+  max-width: 1600px;
+  margin: 0 auto;
 }
 
-/* Celda contenedora: define el contexto de
-   container query para cada tarjeta. */
-.grid-cell {
-  container-type: inline-size;
-  width: 100%;
-  max-width: 22.5rem;
-
-  opacity: 0;
-  animation: fadeSlideUp var(--anim-grid) var(--ease-out-soft) forwards;
-}
-
-/* Todas las medidas internas en cqi
-   (1cqi = 1% del ancho de la tarjeta) para
-   que el contenido escale como una imagen. */
-.grid-card {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6.667cqi;
-  width: 100%;
-  padding: 4.444cqi;
-  border-radius: 6.667cqi;
-  background: #FFF;
-  border: 1px solid rgba(0, 0, 0, 0.04);
-  box-shadow: 1.667cqi 2.222cqi 2.778cqi 0 rgba(0, 0, 0, 0.3);
-  box-sizing: border-box;
-  cursor: pointer;
-
-  transition:
-    translate var(--anim-base) var(--ease-out-soft),
-    scale var(--anim-base) var(--ease-out-soft),
-    box-shadow var(--anim-base) var(--ease-out-soft),
-    border-color var(--anim-base) ease;
-}
-
-.grid-card:hover {
-  translate: 0 -6px;
-  scale: 1.02;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-  border-color: rgba(36, 149, 255, 0.3);
-}
-
-.card-img {
-  width: 100%;
-  aspect-ratio: 328 / 264;
-  border-radius: 5.556cqi;
-  object-fit: cover;
-  -webkit-user-drag: none;
-}
-
-.card-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  align-items: flex-start;
-  width: 100%;
-  box-sizing: border-box;
-  padding: 2.222cqi 4.444cqi;
-  gap: 4.444cqi;
-}
-
-.card-tit-txt {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 6.667cqi;
-  width: 100%;
-}
-
-.card-title {
-  line-height: normal;
-  color: #000000;
-  font-family: 'Heavitas', sans-serif;
-  font-size: 6.667cqi;
-  font-weight: 400;
-}
-
-.card-desc {
-  line-height: normal;
-  color: #000;
-  text-align: justify;
-  font-size: 4.444cqi;
-  font-family: 'Inter', sans-serif;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: clip;
-}
-
-.btn-ver-mas {
+/* ── Spinner de carga ── */
+.loader-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  align-self: flex-end;
-  width: 11.111cqi;
-  height: 11.111cqi;
-  color: #FFFFFF;
-  text-decoration: none;
-  background: #2495FF;
-  border-radius: 8.889cqi;
-  cursor: pointer;
-  transition: background-color var(--anim-base) ease;
-}
-.btn-ver-mas:hover {
-  background-color: #1a6bcf;
-}
-.btn-ver-mas svg {
-  width: 2.222cqi;
-  height: auto;
+  padding: 6rem 0;
 }
 
+.spinner-blanco {
+  width: 3rem;
+  height: 3rem;
+  border: 4px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin var(--anim-spin) linear infinite;
+}
+
+/* ── Estado vacío ── */
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -207,96 +104,240 @@
   opacity: 0.7;
 }
 
-.loading-state {
+/* --- TARJETA --- */
+.prod-card {
+  box-sizing: border-box;
+  display: flex;
+  width: 100%;
+  padding: 1rem;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  border-radius: 1.5rem;
+  background: #FFF;
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+
+  position: relative;
+  cursor: pointer;
+
+  transition:
+    translate var(--anim-base) var(--ease-out-soft),
+    scale var(--anim-base) var(--ease-out-soft),
+    box-shadow var(--anim-base) var(--ease-out-soft),
+    border-color var(--anim-base) ease;
+
+  opacity: 0;
+  animation: fadeSlideUp var(--anim-grid) var(--ease-out-soft) forwards;
+}
+
+.prod-card:hover {
+  translate: 0 -6px;
+  scale: 1.02;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  border-color: rgba(36, 149, 255, 0.3);
+}
+
+.prod-img {
+  width: 100%;
+  aspect-ratio: 20.5 / 16.5;
+  border-radius: 1.5rem;
+  object-fit: cover;
+  -webkit-user-drag: none;
+  transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
+}
+
+.placeholder-img {
+  background-color: #f1f3f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.info-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.5rem;
-  padding: 6rem 0;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-grow: 1;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0.5rem 1rem;
+  gap: 1rem;
 }
 
-.spinner {
-  width: 3rem;
-  height: 3rem;
-  border: 4px solid rgba(255, 255, 255, 0.3);
-  border-top-color: #ffffff;
-  border-radius: 50%;
-  animation: spin var(--anim-spin) linear infinite;
+.card-tit-txt {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1rem;
+  width: 100%;
 }
 
-.loading-text {
-  color: #ffffff;
-  font-family: Inter, sans-serif;
+.info-title {
+  line-height: normal;
+  color: #000000;
+  font-family: 'Heavitas', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.info-sub {
+  line-height: normal;
+  color: #000;
+  text-align: justify;
   font-size: 1rem;
-  opacity: 0.85;
+  font-family: 'Inter', sans-serif;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: clip;
 }
 
+.card-footer {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: auto;
+}
+
+/* --- BOTÓN AZUL REDONDO --- */
+.btn-accion {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  color: #FFFFFF;
+  text-decoration: none;
+  background: #2495FF;
+  border: none;
+  border-radius: 2rem;
+  cursor: pointer;
+  transition:
+    background-color var(--anim-base) ease,
+    scale var(--anim-base) var(--ease-out-soft);
+}
+
+.btn-accion:hover {
+  background: #116ee3;
+  scale: 1.15;
+}
+
+
 /* =========================================
-   TABLET HORIZONTAL (≤1366px) → 3 columnas
-   max-width = 3·22.5rem + 2·gap → las tarjetas
-   llenan las columnas sin huecos.
+   TABLET HORIZONTAL (1025px – 1366px)
+   2 columnas fluidas
    ========================================= */
-@media only screen and (max-width: 1366px) {
-  .grid-page-container {
-    padding: 3rem 2.5rem;
+@media only screen and (min-width: 1025px) and (max-width: 1366px) {
+  app-navbar-prod {
+    --nav-padding: 0 2rem;
   }
-  .projects-grid {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 3rem;
-    max-width: 73.5rem;
+
+  .grid-productos {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+    padding: 0 2rem 6rem 2rem;
+  }
+
+  .prod-card {
+    width: 100%;
+    max-width: 22.5rem;
+    margin: 0 auto;
+  }
+
+  .header-categoria {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .btn-accion {
+    display: none;
   }
 }
 
+
 /* =========================================
-   TABLET VERTICAL (≤1024px) → 2 columnas
+   TABLET VERTICAL (≤1024px)
+   2 columnas más compactas
    ========================================= */
 @media only screen and (max-width: 1024px) {
-  .grid-page-container {
-    padding: 3rem 2rem;
+  app-navbar-prod {
+    --nav-padding: 0 2rem;
   }
-  .page-title {
-    font-size: 2rem;
-  }
-  .projects-grid {
+
+  .grid-productos {
     grid-template-columns: repeat(2, 1fr);
-    gap: 2.5rem;
-    max-width: 47.5rem;
+    gap: 2rem;
+    padding: 0 2rem 6rem 2rem;
   }
-  .grid-cell {
-    cursor: pointer;
+
+  .prod-card {
+    width: 100%;
+    max-width: 22.5rem;
+    margin: 0 auto;
   }
-  .btn-ver-mas {
+
+  .header-categoria {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  .btn-accion {
     display: none;
   }
 }
 
+
 /* =========================================
-   MÓVIL (≤768px) → 1 columna
-   La tarjeta llena el ancho (hasta 30rem) y
-   se centra, como en el diseño de celular.
+   MÓVIL (≤768px)
+   1 columna
    ========================================= */
 @media only screen and (max-width: 768px) {
-  .grid-page-container {
-    padding: 2rem 1.5rem;
+  app-navbar-prod {
+    --nav-padding: 0 2rem;
   }
-  .page-title {
-    font-size: 1.75rem;
+
+  .main-productos {
+    min-height: 100dvh;
+    width: 100%;
+    overflow-x: hidden;
   }
-  .page-subtitle {
-    font-size: 1rem;
+
+  .header-categoria {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 1.5rem 2rem 0 2rem;
+    margin-bottom: 1.5rem;
   }
-  .projects-grid {
+
+  .cat-title {
+    font-size: 1.5rem;
+  }
+
+  .grid-productos {
     grid-template-columns: 1fr;
     gap: 1.5rem;
-    max-width: 30rem;
-    margin-bottom: 4rem;
+    padding: 0 2rem 4rem 2rem;
   }
-  .grid-cell {
-    max-width: 30rem;
-    cursor: pointer;
+
+  .prod-card {
+    width: 100%;
+    max-width: 100%;
   }
-  .btn-ver-mas {
+
+  .prod-card:hover {
+    translate: none;
+    scale: none;
+  }
+
+  .btn-accion {
     display: none;
+  }
+
+  .btn-accion:hover {
+    scale: none;
   }
 }

@@ -68,6 +68,9 @@
 .btn-portada-modal { background: white; color: #b45309; border: 2px solid #fde68a; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; }
 .btn-portada-modal:hover { background: #fffbeb; border-color: #f59e0b; }
 
+.btn-ajustar-modal { background: white; color: #2495FF; border: 2px solid #bfdbfe; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; }
+.btn-ajustar-modal:hover { background: #eff6ff; border-color: #2495FF; }
+
 .divisor { height: 1px; background: #e2e8f0; margin: 1.5rem 0; }
 .btn-eliminar-modal { width: 100%; background: #fef2f2; color: #ef4444; border: 1px solid #fecaca; padding: 12px; border-radius: 10px; font-weight: bold; cursor: pointer; transition: 0.2s; }
 .btn-eliminar-modal:hover { background: #fee2e2; border-color: #ef4444; }

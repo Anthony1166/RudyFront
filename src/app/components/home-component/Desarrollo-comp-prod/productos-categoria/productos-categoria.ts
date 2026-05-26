@@ -7,10 +7,11 @@ import {ProductoService} from '../../../../services/prod/producto.service';
 import {NavbarProd} from '../navbar-prod/navbar-prod';
 import {Subject} from 'rxjs';
 import {takeUntil} from 'rxjs/operators';
+import {AjusteImagenDirective} from '../../../../directives/ajuste-imagen.directive';
 
 @Component({
   selector: 'app-productos-categoria',
-  imports: [CommonModule, RouterLink, FooterP1, NavbarProd],
+  imports: [CommonModule, RouterLink, FooterP1, NavbarProd, AjusteImagenDirective],
   templateUrl: './productos-categoria.html',
   styleUrl: './productos-categoria.css'
 })
@@ -82,11 +83,18 @@ export class ProductosCategoria implements OnInit, OnDestroy {
   }
 
   obtenerImagenPortada(producto: any): string | null {
-    if (producto.urlImagen) return producto.urlImagen;
+    const obj = this.obtenerPortadaObj(producto);
+    if (obj && typeof obj === 'object') {
+      return obj.url || obj.urlImagen || obj.ruta || null;
+    }
+    return obj as string | null;
+  }
+
+  obtenerPortadaObj(producto: any): any {
+    if (producto.urlImagen) return producto;
     if (producto.imagenes && producto.imagenes.length > 0) {
       const portada = producto.imagenes.find((img: any) => img.esPortada === true || img.portada === true);
-      const imagenFinal = portada ? portada : producto.imagenes[0];
-      return imagenFinal.url || imagenFinal.urlImagen || imagenFinal.ruta || null;
+      return portada ? portada : producto.imagenes[0];
     }
     return null;
   }

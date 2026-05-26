@@ -22,6 +22,7 @@
 
       <img *ngFor="let img of [imagenActual]; trackBy: trackById"
            [src]="img.urlImagen"
+           [appAjusteImagen]="img"
            [alt]="img.textoAlternativo || producto.nombre"
            class="img-principal animar-traslacion"
            loading="lazy">
@@ -31,6 +32,7 @@
     <div class="miniaturas-fila" *ngIf="miniaturas.length > 0">
       <img *ngFor="let mini of miniaturas"
            [src]="mini.urlImagen"
+           [appAjusteImagen]="mini"
            [alt]="mini.textoAlternativo || producto.nombre"
            class="img-mini"
            loading="lazy"

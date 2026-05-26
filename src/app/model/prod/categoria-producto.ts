@@ -5,4 +5,10 @@ export class CategoriaProducto {
   slug?: string;
   activo?: boolean;
   orden?: number;
+  posX?: number;
+  posY?: number;
+  escala?: number;
+  rotacion?: number;
+  volteoH?: boolean;
+  volteoV?: boolean;
 }

@@ -58,6 +58,9 @@
           <button *ngIf="!imagenSeleccionada.esPortada" class="btn-portada-modal" (click)="marcarComoPortadaDesdeModal()">
             ⭐ Hacer Portada
           </button>
+          <button class="btn-ajustar-modal" (click)="abrirEditor()">
+            🎯 Ajustar imagen
+          </button>
         </div>
         <div class="divisor"></div>
         <button class="btn-eliminar-modal" (click)="eliminarImagenDesdeModal()">
@@ -67,3 +70,10 @@
     </div>
   </div>
 </div>
+
+<app-imagen-editor *ngIf="mostrarEditor && imagenSeleccionada"
+                   [urlImagen]="imagenSeleccionada.urlImagen"
+                   [ajuste]="ajusteActual()"
+                   (guardar)="onGuardarAjuste($event)"
+                   (cancelar)="cerrarEditor()">
+</app-imagen-editor>

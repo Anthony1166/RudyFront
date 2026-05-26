@@ -125,10 +125,11 @@
   height: 100%;
   object-fit: cover;
   transition: transform var(--anim-slow) ease;
+  transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 .cat-card:hover .cat-img-wrapper img {
-  transform: var(--hover-img-scale);
+  transform: rotate(var(--ai-rot, 0deg)) scale(calc(var(--ai-scl, 1) * 1.05)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 .placeholder-img {

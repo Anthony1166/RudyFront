@@ -7,10 +7,11 @@ import {ImagenProductoService} from '../../../../services/prod/imagen-producto.s
 import {UploadService} from '../../../../services/upload-service';
 import {ToastService} from '../../../../services/toast.service';
 import {FormsModule} from '@angular/forms';
+import {AjusteImagen, ImagenEditor} from '../../../shared/imagen-editor/imagen-editor';
 
 @Component({
   selector: 'app-listar-imagen-prod',
-  imports: [CommonModule, DragDropModule, FormsModule],
+  imports: [CommonModule, DragDropModule, FormsModule, ImagenEditor],
   templateUrl: './listar-imagen-prod.html',
   styleUrl: './listar-imagen-prod.css'
 })
@@ -25,6 +26,9 @@ export class ListarImagenProd {
   // 🔥 VARIABLES PARA EL MODAL
   imagenSeleccionada: ImagenProducto | null = null;
   guardandoCambiosModal = false;
+
+  // Editor de ajustes de imagen
+  mostrarEditor = false;
 
   private route = inject(ActivatedRoute);
   private imagenService = inject(ImagenProductoService);
@@ -145,4 +149,36 @@ export class ListarImagenProd {
     }
   }
 
+  abrirEditor(): void {
+    if (!this.imagenSeleccionada) return;
+    this.mostrarEditor = true;
+  }
+
+  cerrarEditor(): void {
+    this.mostrarEditor = false;
+  }
+
+  onGuardarAjuste(ajuste: AjusteImagen): void {
+    if (!this.imagenSeleccionada) return;
+    this.imagenSeleccionada.posX = ajuste.posX;
+    this.imagenSeleccionada.posY = ajuste.posY;
+    this.imagenSeleccionada.escala = ajuste.escala;
+    this.imagenSeleccionada.rotacion = ajuste.rotacion;
+    this.imagenSeleccionada.volteoH = ajuste.volteoH;
+    this.imagenSeleccionada.volteoV = ajuste.volteoV;
+    this.mostrarEditor = false;
+    this.guardarDetallesImagen();
+  }
+
+  ajusteActual(): AjusteImagen {
+    const img = this.imagenSeleccionada;
+    return {
+      posX: img?.posX ?? 50,
+      posY: img?.posY ?? 50,
+      escala: img?.escala ?? 1,
+      rotacion: img?.rotacion ?? 0,
+      volteoH: img?.volteoH ?? false,
+      volteoV: img?.volteoV ?? false,
+    };
+  }
 }

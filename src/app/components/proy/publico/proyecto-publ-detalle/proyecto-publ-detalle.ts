@@ -5,14 +5,14 @@ import { Subject, of } from 'rxjs';
 import { switchMap, takeUntil, catchError } from 'rxjs/operators';
 import { ProyectoAdmin } from '../../../../model/proy/proyecto';
 import { ProyectoAdminService } from '../../../../services/proy/proyecto-admin.service';
-import { Navbar } from '../../../home-component/navbar/navbar';
+import { NavbarProd } from '../../../home-component/Desarrollo-comp-prod/navbar-prod/navbar-prod';
 import { FooterP1 } from '../../../home-component/footer-p1/footer-p1';
 import { ProyectoPublMain } from '../proyecto-publ-main/proyecto-publ-main';
 import { ProyectoPublProcesos } from '../proyecto-publ-procesos/proyecto-publ-procesos';
 
 @Component({
   selector: 'app-proyecto-publ-detalle',
-  imports: [CommonModule, Navbar, FooterP1, ProyectoPublMain, ProyectoPublProcesos],
+  imports: [CommonModule, NavbarProd, FooterP1, ProyectoPublMain, ProyectoPublProcesos],
   templateUrl: './proyecto-publ-detalle.html',
   styleUrl: './proyecto-publ-detalle.css'
 })

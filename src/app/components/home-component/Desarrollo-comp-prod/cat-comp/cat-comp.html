@@ -29,7 +29,7 @@
         <h2 class="cat-title">{{ cat.nombre | uppercase }}</h2>
 
         <div class="cat-img-wrapper">
-          <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [alt]="cat.nombre" loading="lazy">
+          <img *ngIf="cat.urlImagen" [src]="cat.urlImagen" [appAjusteImagen]="cat" [alt]="cat.nombre" loading="lazy">
           <div *ngIf="!cat.urlImagen" class="placeholder-img">📦</div>
         </div>
       </div>

@@ -1,11 +1,12 @@
 import { Component, Input, ViewChild, ElementRef, AfterViewInit, OnChanges, ChangeDetectorRef } from '@angular/core';
 import { ProcesoProducto } from '../../../../model/prod/proceso-producto';
 import { CommonModule } from '@angular/common';
+import { AjusteImagenDirective } from '../../../../directives/ajuste-imagen.directive';
 
 @Component({
   selector: 'app-procesos-lista',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, AjusteImagenDirective],
   templateUrl: './procesos-lista.html',
   styleUrl: './procesos-lista.css'
 })

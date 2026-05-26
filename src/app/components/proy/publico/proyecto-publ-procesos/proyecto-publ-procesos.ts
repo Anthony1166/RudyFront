@@ -2,10 +2,11 @@ import { Component, ElementRef, inject, Input, OnInit, ViewChild } from '@angula
 import { CommonModule } from '@angular/common';
 import { ProcesoProyecto } from '../../../../model/proy/proceso-proyecto';
 import { ProcesoProyectoService } from '../../../../services/proy/proceso-proyecto.service';
+import { AjusteImagenDirective } from '../../../../directives/ajuste-imagen.directive';
 
 @Component({
   selector: 'app-proyecto-publ-procesos',
-  imports: [CommonModule],
+  imports: [CommonModule, AjusteImagenDirective],
   templateUrl: './proyecto-publ-procesos.html',
   styleUrl: './proyecto-publ-procesos.css'
 })

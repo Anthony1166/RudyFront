@@ -41,7 +41,12 @@
          *ngFor="let prod of productos; let i = index"
          [routerLink]="['/producto', prod.id]"
          [style.animation-delay]="(i * 0.08) + 's'">
-      <img *ngIf="obtenerImagenPortada(prod)" [src]="obtenerImagenPortada(prod)" [alt]="prod.nombre" class="prod-img" loading="lazy">
+      <img *ngIf="obtenerImagenPortada(prod)"
+           [src]="obtenerImagenPortada(prod)"
+           [appAjusteImagen]="obtenerPortadaObj(prod)"
+           [alt]="prod.nombre"
+           class="prod-img"
+           loading="lazy">
 
       <div *ngIf="!obtenerImagenPortada(prod)" class="prod-img placeholder-img">
         <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#adb5bd" stroke-width="2">

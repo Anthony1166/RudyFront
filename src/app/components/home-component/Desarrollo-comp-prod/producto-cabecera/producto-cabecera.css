@@ -124,11 +124,12 @@
   object-fit: cover;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
   transition: transform var(--anim-base) var(--ease-out-soft), box-shadow var(--anim-base) ease;
+  transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 /* El zoom "chiqui" al pasar el mouse por la imagen grande */
 .img-principal:hover {
-  transform: var(--hover-card-scale);
+  transform: rotate(var(--ai-rot, 0deg)) scale(calc(var(--ai-scl, 1) * 1.02)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
   box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 
@@ -155,10 +156,11 @@
   box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
   cursor: pointer;
   transition: transform var(--anim-fast) ease;
+  transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 .img-mini:hover {
-  transform: var(--hover-img-scale);
+  transform: rotate(var(--ai-rot, 0deg)) scale(calc(var(--ai-scl, 1) * 1.05)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 

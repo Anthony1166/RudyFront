@@ -7,10 +7,11 @@ import {ProcesoProducto} from '../../../../model/prod/proceso-producto';
 import {ProcesoProductoService} from '../../../../services/prod/proceso-producto.service';
 import {UploadService} from '../../../../services/upload-service';
 import {ToastService} from '../../../../services/toast.service';
+import {AjusteImagen, ImagenEditor} from '../../../shared/imagen-editor/imagen-editor';
 
 @Component({
   selector: 'app-listar-proceso-prod',
-  imports: [CommonModule, FormsModule, RouterLink, DragDropModule],
+  imports: [CommonModule, FormsModule, RouterLink, DragDropModule, ImagenEditor],
   templateUrl: './listar-proceso-prod.html',
   styleUrl: './listar-proceso-prod.css'
 })
@@ -28,6 +29,7 @@ export class ListarProcesoProd {
   subiendoImagen = false;
   guardando = false;
   guardandoOrden = false;
+  mostrarEditor = false;
 
   private route = inject(ActivatedRoute);
   private procesoService = inject(ProcesoProductoService);
@@ -170,5 +172,35 @@ export class ListarProcesoProd {
         this.cargarProcesos(); // Revertir en caso de error
       }
     });
+  }
+
+  abrirEditor(): void {
+    if (!this.procesoForm.urlImagen) return;
+    this.mostrarEditor = true;
+  }
+
+  cerrarEditor(): void {
+    this.mostrarEditor = false;
+  }
+
+  onGuardarAjuste(ajuste: AjusteImagen): void {
+    this.procesoForm.posX = ajuste.posX;
+    this.procesoForm.posY = ajuste.posY;
+    this.procesoForm.escala = ajuste.escala;
+    this.procesoForm.rotacion = ajuste.rotacion;
+    this.procesoForm.volteoH = ajuste.volteoH;
+    this.procesoForm.volteoV = ajuste.volteoV;
+    this.mostrarEditor = false;
+  }
+
+  ajusteActual(): AjusteImagen {
+    return {
+      posX: this.procesoForm.posX ?? 50,
+      posY: this.procesoForm.posY ?? 50,
+      escala: this.procesoForm.escala ?? 1,
+      rotacion: this.procesoForm.rotacion ?? 0,
+      volteoH: this.procesoForm.volteoH ?? false,
+      volteoV: this.procesoForm.volteoV ?? false,
+    };
   }
 }

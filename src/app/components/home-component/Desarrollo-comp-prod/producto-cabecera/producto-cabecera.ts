@@ -2,6 +2,7 @@ import {Component, Input, SimpleChanges} from '@angular/core';
 import {Producto} from '../../../../model/prod/producto';
 import {ImagenProducto} from '../../../../model/prod/imagen-producto';
 import {DecimalPipe, NgForOf, NgIf, UpperCasePipe} from '@angular/common';
+import {AjusteImagenDirective} from '../../../../directives/ajuste-imagen.directive';
 
 @Component({
   selector: 'app-producto-cabecera',
@@ -9,7 +10,8 @@ import {DecimalPipe, NgForOf, NgIf, UpperCasePipe} from '@angular/common';
     UpperCasePipe,
     DecimalPipe,
     NgIf,
-    NgForOf
+    NgForOf,
+    AjusteImagenDirective
   ],
   templateUrl: './producto-cabecera.html',
   styleUrl: './producto-cabecera.css'

@@ -1,0 +1,92 @@
+<div class="editor-overlay" (click)="onCancelar()">
+  <div class="editor-modal" (click)="$event.stopPropagation()">
+
+    <header class="editor-header">
+      <h2>Ajustar imagen</h2>
+      <button class="btn-cerrar" (click)="onCancelar()" aria-label="Cerrar">×</button>
+    </header>
+
+    <div class="editor-cuerpo">
+
+      <div class="lienzo-col">
+        <div class="lienzo"
+             #lienzo
+             (mousedown)="onLienzoMouseDown($event)"
+             (touchstart)="onLienzoTouchStart($event)">
+          <img [src]="urlImagen"
+               class="img-lienzo"
+               [ngStyle]="estiloImagenLienzo"
+               alt="Imagen a ajustar"
+               draggable="false">
+          <div class="punto-focal"
+               [style.left.%]="trabajo.posX"
+               [style.top.%]="trabajo.posY"
+               [class.activo]="arrastrando">
+            <div class="punto-cruz">+</div>
+          </div>
+        </div>
+        <p class="ayuda">Arrastra el punto sobre la zona que quieres que se vea en las cards.</p>
+      </div>
+
+      <aside class="preview-col">
+        <p class="preview-titulo">Vista previa</p>
+        <div class="preview-lista">
+          <div class="preview-item" *ngFor="let asp of aspectos">
+            <span class="preview-etiqueta">{{ asp.etiqueta }}</span>
+            <div class="preview-marco" [style.aspect-ratio]="asp.ratio">
+              <img [src]="urlImagen"
+                   class="img-preview"
+                   [ngStyle]="estiloPreview(asp)"
+                   alt=""
+                   draggable="false">
+            </div>
+          </div>
+        </div>
+      </aside>
+
+    </div>
+
+    <div class="editor-controles">
+      <div class="control">
+        <label>Zoom <span class="valor">{{ trabajo.escala | number:'1.1-1' }}x</span></label>
+        <input type="range" min="1" max="3" step="0.1" [(ngModel)]="trabajo.escala">
+      </div>
+
+      <div class="control">
+        <label>Rotación</label>
+        <div class="botones-grupo">
+          <button type="button"
+                  *ngFor="let g of [0, 90, 180, 270]"
+                  class="btn-rot"
+                  [class.activo]="trabajo.rotacion === g"
+                  (click)="setRotacion(g)">
+            {{ g }}°
+          </button>
+        </div>
+      </div>
+
+      <div class="control">
+        <label>Voltear</label>
+        <div class="botones-grupo">
+          <button type="button"
+                  class="btn-rot"
+                  [class.activo]="trabajo.volteoH"
+                  (click)="toggleVolteoH()">⇄ Horiz</button>
+          <button type="button"
+                  class="btn-rot"
+                  [class.activo]="trabajo.volteoV"
+                  (click)="toggleVolteoV()">⇅ Vert</button>
+        </div>
+      </div>
+    </div>
+
+    <footer class="editor-pie">
+      <button class="btn-secundario" type="button" (click)="restaurar()">Restaurar</button>
+      <div class="acciones-derecha">
+        <button class="btn-secundario" type="button" (click)="onCancelar()">Cancelar</button>
+        <button class="btn-primario" type="button" (click)="onGuardar()">Guardar</button>
+      </div>
+    </footer>
+
+  </div>
+</div>

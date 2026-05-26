@@ -4,4 +4,10 @@ export class ImagenProducto {
   orden?: number;
   esPortada?: boolean;
   textoAlternativo?: string;
+  posX?: number;
+  posY?: number;
+  escala?: number;
+  rotacion?: number;
+  volteoH?: boolean;
+  volteoV?: boolean;
 }
