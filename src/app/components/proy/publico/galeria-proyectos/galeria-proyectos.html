@@ -34,6 +34,7 @@
   <div class="projects-grid" *ngIf="!isLoading && proyectos.length > 0">
     <div *ngFor="let proyecto of proyectos; let i = index"
          class="grid-cell"
+         [routerLink]="['/proyecto', proyecto.slug]"
          [style.animation-delay]="(i * 0.08) + 's'">
       <div class="grid-card">
         <img [src]="getPortada(proyecto)" [alt]="proyecto.titulo" class="card-img" loading="lazy">

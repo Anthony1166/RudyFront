@@ -318,6 +318,10 @@ app-navbar-prod {
     padding-left: 2rem;
     padding-right: 2rem;
   }
+
+  .btn-accion {
+    display: none;
+  }
 }
 
 
@@ -345,6 +349,10 @@ app-navbar-prod {
   .header-categoria {
     padding-left: 2rem;
     padding-right: 2rem;
+  }
+
+  .btn-accion {
+    display: none;
   }
 }
 
@@ -408,6 +416,10 @@ app-navbar-prod {
   .prod-card:hover {
     translate: none;
     scale: none;
+  }
+
+  .btn-accion {
+    display: none;
   }
 
   .btn-accion:hover {

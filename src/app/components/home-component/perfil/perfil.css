@@ -149,7 +149,7 @@
   .about-section {
     flex-direction: column;
     min-height: auto;
-    padding: 3rem 1.5rem 0;
+    padding: 3rem 1.5rem 2.5rem;
     gap: 0;
     overflow: hidden;
   }

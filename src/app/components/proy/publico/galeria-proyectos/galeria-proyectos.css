@@ -263,6 +263,12 @@
     gap: 2.5rem;
     max-width: 47.5rem;
   }
+  .grid-cell {
+    cursor: pointer;
+  }
+  .btn-ver-mas {
+    display: none;
+  }
 }
 
 /* =========================================
@@ -288,5 +294,9 @@
   }
   .grid-cell {
     max-width: 30rem;
+    cursor: pointer;
+  }
+  .btn-ver-mas {
+    display: none;
   }
 }
