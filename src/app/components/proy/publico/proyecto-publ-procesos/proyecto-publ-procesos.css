@@ -74,11 +74,18 @@
   flex-shrink: 0;
 }
 
-.proceso-img {
+.proceso-img-wrap {
   width: 100%;
   aspect-ratio: 472 / 360;
-  object-fit: cover;
   border-radius: 1.25rem;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.proceso-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   -webkit-user-drag: none;
   transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }

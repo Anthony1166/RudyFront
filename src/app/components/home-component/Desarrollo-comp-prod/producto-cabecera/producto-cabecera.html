@@ -30,13 +30,15 @@
     </div>
 
     <div class="miniaturas-fila" *ngIf="miniaturas.length > 0">
-      <img *ngFor="let mini of miniaturas"
-           [src]="mini.urlImagen"
-           [appAjusteImagen]="mini"
-           [alt]="mini.textoAlternativo || producto.nombre"
-           class="img-mini"
-           loading="lazy"
+      <div class="img-mini-wrap"
+           *ngFor="let mini of miniaturas"
            (click)="cambiarImagen(mini)">
+        <img [src]="mini.urlImagen"
+             [appAjusteImagen]="mini"
+             [alt]="mini.textoAlternativo || producto.nombre"
+             class="img-mini"
+             loading="lazy">
+      </div>
     </div>
 
   </div>

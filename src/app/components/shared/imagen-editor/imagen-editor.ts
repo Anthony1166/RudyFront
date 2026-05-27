@@ -1,14 +1,12 @@
 import { CommonModule } from '@angular/common';
 import {
-  AfterViewInit,
   Component,
   ElementRef,
   EventEmitter,
   HostListener,
   Input,
-  OnChanges,
+  OnInit,
   Output,
-  SimpleChanges,
   ViewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -43,7 +41,7 @@ interface PreviewAspecto {
   templateUrl: './imagen-editor.html',
   styleUrl: './imagen-editor.css',
 })
-export class ImagenEditor implements OnChanges, AfterViewInit {
+export class ImagenEditor implements OnInit {
   @Input() urlImagen!: string;
   @Input() ajuste: AjusteImagen = { ...AJUSTE_DEFAULT };
   @Input() aspectos: PreviewAspecto[] = [
@@ -60,16 +58,11 @@ export class ImagenEditor implements OnChanges, AfterViewInit {
   trabajo: AjusteImagen = { ...AJUSTE_DEFAULT };
   arrastrando = false;
 
-  ngOnChanges(changes: SimpleChanges): void {
-    if (changes['ajuste']) {
-      this.trabajo = { ...AJUSTE_DEFAULT, ...(this.ajuste || {}) };
-    }
-  }
-
-  ngAfterViewInit(): void {
-    if (!this.trabajo) {
-      this.trabajo = { ...AJUSTE_DEFAULT };
-    }
+  ngOnInit(): void {
+    // Inicializamos UNA SOLA VEZ con los valores recibidos. El padre puede
+    // pasar un objeto nuevo en cada change detection (vía función) y eso no
+    // debe pisar los cambios locales del usuario.
+    this.trabajo = { ...AJUSTE_DEFAULT, ...(this.ajuste || {}) };
   }
 
   onLienzoMouseDown(event: MouseEvent): void {

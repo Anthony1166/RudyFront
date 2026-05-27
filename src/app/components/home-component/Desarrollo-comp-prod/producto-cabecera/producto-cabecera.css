@@ -115,22 +115,31 @@
   gap: 1rem;
 }
 
-.img-principal {
+.img-principal-wrapper {
   width: 100%;
   max-width: 48rem;
-  height: auto;
   aspect-ratio: 48 / 28.1875;
   border-radius: 1.25rem;
-  object-fit: cover;
+  overflow: hidden;
   box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-  transition: transform var(--anim-base) var(--ease-out-soft), box-shadow var(--anim-base) ease;
+  transition: box-shadow var(--anim-base) ease;
+}
+.img-principal-wrapper:hover {
+  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+}
+
+.img-principal {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform var(--anim-base) var(--ease-out-soft);
   transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
 /* El zoom "chiqui" al pasar el mouse por la imagen grande */
-.img-principal:hover {
+.img-principal-wrapper:hover .img-principal {
   transform: rotate(var(--ai-rot, 0deg)) scale(calc(var(--ai-scl, 1) * 1.02)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
-  box-shadow: 0 15px 40px rgba(0,0,0,0.2);
 }
 
 /* Entrada con desplazamiento desde la derecha (slideFadeIn vive en styles.css) */
@@ -144,22 +153,27 @@
   gap: 1.5rem;
 }
 
-.img-mini {
+.img-mini-wrap {
   flex: 1;
   min-width: 0;
   max-width: 15rem;
-  height: auto;
   aspect-ratio: 4/3;
-
-  object-fit: cover;
   border-radius: 1rem;
+  overflow: hidden;
   box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.25);
   cursor: pointer;
+}
+
+.img-mini {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   transition: transform var(--anim-fast) ease;
   transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
-.img-mini:hover {
+.img-mini-wrap:hover .img-mini {
   transform: rotate(var(--ai-rot, 0deg)) scale(calc(var(--ai-scl, 1) * 1.05)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
@@ -257,9 +271,8 @@
   }
 
   /* Galería: ancho completo */
-  .img-principal {
+  .img-principal-wrapper {
     width: 100%;
-    height: auto;
     aspect-ratio: 22.69 / 13.19;
   }
 
@@ -268,16 +281,15 @@
     gap: 0.625rem;
   }
 
-  .img-mini {
+  .img-mini-wrap {
     flex: 1;
     min-width: 0;
-    width: auto;
-    height: auto;
-    aspect-ratio: 7 / 5.25;   /* Landscape: ancho > alto */
+    max-width: none;
+    aspect-ratio: 7 / 5.25;
     border-radius: 1rem;
   }
 
-  .img-mini:hover {
-    transform: none;
+  .img-mini-wrap:hover .img-mini {
+    transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
   }
 }

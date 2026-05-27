@@ -78,17 +78,18 @@
   flex: 1 1 0;
   min-width: 0;
   max-width: 25rem;
+  aspect-ratio: 4 / 3;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: 0.25rem 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
 }
 
 .project-img {
   display: block;
   width: 100%;
-  height: auto;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   transition: transform var(--anim-base) ease;
-  border-radius: 1rem;
-  box-shadow: 0.25rem 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   transform: rotate(var(--ai-rot, 0deg)) scale(var(--ai-scl, 1)) scaleX(var(--ai-vh, 1)) scaleY(var(--ai-vv, 1));
 }
 
@@ -187,9 +188,6 @@
     width: 22rem;
     max-width: none;
     scroll-snap-align: start;
-  }
-  /* En el carrusel las imágenes son más altas (cuadradas). */
-  .project-img {
     aspect-ratio: 1 / 1;
   }
 }

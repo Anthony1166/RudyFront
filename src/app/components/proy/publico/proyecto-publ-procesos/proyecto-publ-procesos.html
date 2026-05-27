@@ -19,7 +19,9 @@
        (mouseup)="onMouseUp()"
        (mousemove)="onMouseMove($event)">
     <div *ngFor="let proceso of procesos" class="proceso-card">
-      <img [src]="getImagen(proceso)" [appAjusteImagen]="proceso" [alt]="proceso.titulo" class="proceso-img" loading="lazy">
+      <div class="proceso-img-wrap">
+        <img [src]="getImagen(proceso)" [appAjusteImagen]="proceso" [alt]="proceso.titulo" class="proceso-img" loading="lazy">
+      </div>
       <div class="proceso-info">
         <h3 class="proceso-title">{{ proceso.titulo }}</h3>
         <p class="proceso-desc">{{ proceso.descripcion }}</p>
