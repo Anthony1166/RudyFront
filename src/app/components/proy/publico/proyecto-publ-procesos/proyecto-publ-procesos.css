@@ -1,4 +1,4 @@
-* {
+﻿* {
   margin: 0;
   padding: 0;
 }
@@ -7,14 +7,14 @@
    Medidas en rem/px: el zoom del navegador
    escala toda la página de forma uniforme y
    las posiciones relativas se mantienen.
-   La altura usa min(rem, dvh): en pantallas
+   La altura usa min(rem, svh): en pantallas
    normales llena el alto del viewport, y al
    hacer zoom escala junto con el contenido.
    ========================================= */
 
 .procesos-section {
   background: #FFF;
-  min-height: min(74.25rem, 110dvh);
+  min-height: min(74.25rem, 110svh);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -23,7 +23,7 @@
 /* Cuando solo se muestra un estado (cargando / vacío)
    la sección no necesita ocupar la pantalla completa. */
 .procesos-section:has(.state-box) {
-  min-height: min(40.5rem, 60dvh);
+  min-height: min(40.5rem, 60svh);
 }
 
 .procesos-header {

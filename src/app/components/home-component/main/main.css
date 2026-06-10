@@ -1,4 +1,4 @@
-.main-component {
+﻿.main-component {
   display: flex;
   flex-direction: row;
 }
@@ -71,7 +71,7 @@
   }
   .text-div{
     width: 100%;
-    height: 35dvh;
+    height: 35svh;
   }
   .hhh {
     flex-direction: column;
@@ -84,7 +84,7 @@
   .img-div{
     display: flex;
     justify-content: center;
-    height: 49dvh;
+    height: 49svh;
     width: 100%;
     padding-left: 0;
     box-sizing: border-box;

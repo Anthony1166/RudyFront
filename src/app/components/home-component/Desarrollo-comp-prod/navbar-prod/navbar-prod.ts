@@ -17,9 +17,17 @@ export class NavbarProd {
   /** true = solo muestra la flecha en desktop (cat-comp mode) */
   @Input() soloFlecha: boolean = false;
 
+  /** 'claro' = iconos/texto en blanco (tienda/portafolio) | 'crema' = #EBDDC1 (inicio, fondo oscuro) */
+  @Input() tema: 'claro' | 'crema' = 'claro';
+
   /** Agrega clase CSS al host para que el CSS pueda reaccionar */
   @HostBinding('class.solo-flecha') get esSoloFlecha() {
     return this.soloFlecha;
+  }
+
+  /** Activa la paleta crema para el navbar del inicio */
+  @HostBinding('class.tema-crema') get esTemaCrema() {
+    return this.tema === 'crema';
   }
 
   volverAtras(): void {

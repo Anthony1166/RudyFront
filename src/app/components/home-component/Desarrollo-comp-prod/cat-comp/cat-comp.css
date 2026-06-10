@@ -1,4 +1,4 @@
-* {
+﻿* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -8,7 +8,7 @@
 :host {
   display: flex;
   flex-direction: column;
-  min-height: 100dvh;
+  min-height: 100svh;
   animation: routeFadeIn var(--anim-fast) ease-out both;
 }
 
@@ -227,7 +227,7 @@
 
 @media only screen and (max-width: 768px) {
   .main-cat {
-    min-height: 100dvh;
+    min-height: 100svh;
     width: 100%;          /* 100% en vez de 100vw para evitar overflow del scrollbar */
     overflow-x: hidden;
   }

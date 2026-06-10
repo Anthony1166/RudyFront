@@ -1,4 +1,4 @@
-* {
+﻿* {
   margin: 0;
   padding: 0;
 }
@@ -7,7 +7,7 @@
    Medidas en rem/px: el zoom del navegador
    escala toda la página de forma uniforme y
    las posiciones relativas se mantienen.
-   La altura usa min(rem, dvh): en pantallas
+   La altura usa min(rem, svh): en pantallas
    normales llena el alto del viewport, y al
    hacer zoom escala junto con el contenido.
    ========================================= */
@@ -20,7 +20,7 @@
 }
 
 .main-project-section {
-  min-height: min(58rem, 86dvh);
+  min-height: min(58rem, 86svh);
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -34,7 +34,7 @@
 /* Sin imágenes (texto solo, carga o "no encontrado")
    el hero no necesita ocupar tanto alto. */
 .main-project-section:not(:has(.images-container)) {
-  min-height: min(32rem, 70dvh);
+  min-height: min(32rem, 70svh);
 }
 
 .txt-main {

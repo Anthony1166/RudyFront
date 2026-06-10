@@ -1,4 +1,4 @@
-.editor-overlay {
+﻿.editor-overlay {
   position: fixed;
   inset: 0;
   background: rgba(0, 0, 0, 0.55);
@@ -263,7 +263,7 @@
 
 @media (max-width: 768px) {
   .editor-modal {
-    max-height: 100dvh;
+    max-height: 100svh;
     border-radius: 0;
   }
   .editor-overlay {

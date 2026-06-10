@@ -37,12 +37,6 @@
   --hover-card-scale: scale(1.02);
 }
 
-/* Navbar blanco — usado en páginas con fondo claro/gradiente (ej: proyecto) */
-.navbar-white .nav-brand,
-.navbar-white .nav-btn {
-  color: #FFFFFF !important;
-}
-
 @keyframes spin {
   to { transform: rotate(360deg); }
 }
