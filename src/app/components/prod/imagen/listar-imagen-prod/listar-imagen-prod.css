@@ -18,8 +18,8 @@
 .caja-subida:hover .icono-nube { color: #3b82f6; }
 
 /* TARJETAS DE FOTOS */
-.tarjeta-foto { width: 180px; height: 180px; position: relative; border-radius: 16px; overflow: hidden; box-shadow: 0 4px 6px rgba(0,0,0,0.05); background: white; transition: all 0.2s; cursor: pointer; border: 2px solid transparent; }
-.tarjeta-foto:hover { transform: translateY(-4px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); border-color: #cbd5e1; }
+.tarjeta-foto { width: 180px; height: 180px; position: relative; border-radius: 1.25rem; overflow: hidden; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); background: white; transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; cursor: pointer; border: 1px solid rgba(0, 0, 0, 0.06); }
+.tarjeta-foto:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); border-color: #cbd5e1; }
 .img-preview { width: 100%; height: 100%; object-fit: cover; }
 
 .badge-portada { position: absolute; top: 8px; left: 8px; background: #f59e0b; color: white; padding: 4px 8px; border-radius: 6px; font-size: 0.65rem; font-weight: 800; z-index: 5; }

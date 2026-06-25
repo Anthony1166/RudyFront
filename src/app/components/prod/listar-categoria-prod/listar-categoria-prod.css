@@ -29,20 +29,21 @@
 
 /* --- GRILLA Y TARJETAS --- */
 .grid-moderno { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 25px; }
-.tarjeta-categoria-pro { background: white; border-radius: 20px; border: 1px solid #f1f5f9; overflow: hidden; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); display: flex; flex-direction: column;}
-.tarjeta-categoria-pro:hover { transform: translateY(-8px); box-shadow: 0 20px 25px -10px rgba(0,0,0,0.1); }
+.tarjeta-categoria-pro { background: white; border-radius: 1.25rem; border: 1px solid rgba(0, 0, 0, 0.06); overflow: hidden; transition: transform 0.3s ease, box-shadow 0.3s ease; box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06); display: flex; flex-direction: column;}
+.tarjeta-categoria-pro:hover { transform: translateY(-3px); box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1); }
 .tarjeta-categoria-pro.is-hidden { opacity: 0.6; filter: grayscale(0.5); }
 
-.visual-wrapper { position: relative; height: 180px; background: #f8fafc; border-bottom: 1px solid #f1f5f9;}
-.img-cat { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; }
+.visual-wrapper { position: relative; padding: 0.75rem; background: white; }
+.img-wrap-cat { width: 100%; height: 165px; overflow: hidden; border-radius: 0.875rem; }
+.img-cat { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; display: block; }
 .tarjeta-categoria-pro:hover .img-cat { transform: scale(1.05); }
 .placeholder-cat { width: 100%; height: 100%; display: flex; justify-content: center; align-items: center; font-size: 4rem; font-weight: 900; color: #cbd5e1; background: linear-gradient(135deg, #f8fafc, #edf2f7); }
 
-.orden-badge { position: absolute; top: 12px; left: 12px; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); color: white; padding: 5px 12px; border-radius: 10px; font-weight: 800; font-size: 0.75rem; z-index: 10; }
-.drag-handle { position: absolute; top: 12px; right: 12px; background: white; color: #475569; padding: 4px 8px; border-radius: 8px; cursor: grab; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+.orden-badge { position: absolute; top: 1.5rem; left: 1.5rem; background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(8px); color: white; padding: 5px 12px; border-radius: 10px; font-weight: 800; font-size: 0.75rem; z-index: 10; }
+.drag-handle { position: absolute; top: 1.5rem; right: 1.5rem; background: white; color: #475569; padding: 4px 8px; border-radius: 8px; cursor: grab; z-index: 10; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
 .drag-handle:active { cursor: grabbing; }
 
-.status-pill { position: absolute; bottom: 12px; left: 12px; background: #10b981; color: white; padding: 4px 10px; border-radius: 8px; font-size: 0.65rem; font-weight: 800; }
+.status-pill { position: absolute; bottom: 1.5rem; left: 1.5rem; background: #10b981; color: white; padding: 4px 10px; border-radius: 8px; font-size: 0.65rem; font-weight: 800; }
 .status-pill.oculto { background: #64748b; }
 
 .info-cat { padding: 1.5rem; text-align: center; }

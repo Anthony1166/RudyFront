@@ -25,7 +25,7 @@ app-producto-cabecera {
   display: flex;
   flex-direction: column;
   flex: 1;
-  background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+  background: linear-gradient(180deg, var(--bg-producto-detalle-top, #2495FF) 0%, var(--bg-producto-detalle-bottom, #B7CF49) 100%);
 }
 
 .hero-section {

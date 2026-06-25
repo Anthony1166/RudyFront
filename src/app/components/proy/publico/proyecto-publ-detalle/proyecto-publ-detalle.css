@@ -23,7 +23,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
-  background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+  background: linear-gradient(180deg, var(--bg-portafolio-detalle-top, #2495FF) 0%, var(--bg-portafolio-detalle-bottom, #B7CF49) 100%);
   box-shadow: 0 -38px 100px 30px rgba(0, 0, 0, 0.25);
 }
 
@@ -33,7 +33,7 @@
    solo color continuo. En escritorio queda como está. */
 @media only screen and (max-width: 1366px) {
   .page-wrapper {
-    background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+    background: linear-gradient(180deg, var(--bg-portafolio-detalle-top, #2495FF) 0%, var(--bg-portafolio-detalle-bottom, #B7CF49) 100%);
   }
   /* Sin fondo ni sombra: el degradado es continuo y la
      sombra cortaría el flujo de color. */

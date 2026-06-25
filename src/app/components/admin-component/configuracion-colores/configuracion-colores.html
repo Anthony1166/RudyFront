@@ -1,0 +1,63 @@
+<section class="cc-container">
+
+  <header class="cc-header">
+    <h1 class="cc-title">Colores de fondo</h1>
+    <p class="cc-subtitle">Cambia los dos colores del degradado de cada sección. El degradado vertical se mantiene.</p>
+  </header>
+
+  <!-- Cargando -->
+  <div class="cc-loader" *ngIf="cargando">
+    <div class="cc-spinner"></div>
+  </div>
+
+  <!-- Lista de componentes configurables -->
+  <div class="cc-grid" *ngIf="!cargando">
+    <article class="cc-card" *ngFor="let config of configuraciones">
+
+      <!-- Vista previa del degradado -->
+      <div class="cc-preview" [style.background]="gradiente(config)">
+        <span class="cc-preview-label">{{ config.nombre }}</span>
+      </div>
+
+      <div class="cc-body">
+        <!-- Color superior -->
+        <div class="cc-field">
+          <label>Color superior</label>
+          <div class="cc-picker">
+            <input type="color"
+                   [(ngModel)]="config.colorTop"
+                   (ngModelChange)="previsualizar(config)">
+            <span class="cc-hex">{{ config.colorTop | uppercase }}</span>
+          </div>
+        </div>
+
+        <!-- Color inferior -->
+        <div class="cc-field">
+          <label>Color inferior</label>
+          <div class="cc-picker">
+            <input type="color"
+                   [(ngModel)]="config.colorBottom"
+                   (ngModelChange)="previsualizar(config)">
+            <span class="cc-hex">{{ config.colorBottom | uppercase }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="cc-actions">
+        <button class="cc-btn cc-btn-restore"
+                (click)="restaurar(config)"
+                [disabled]="!esModificado(config) || guardandoClave === config.clave"
+                title="Volver a los colores originales">
+          ↺ Restaurar
+        </button>
+        <button class="cc-btn cc-btn-save"
+                (click)="guardar(config)"
+                [disabled]="guardandoClave === config.clave">
+          {{ guardandoClave === config.clave ? 'Guardando…' : 'Guardar' }}
+        </button>
+      </div>
+
+    </article>
+  </div>
+
+</section>

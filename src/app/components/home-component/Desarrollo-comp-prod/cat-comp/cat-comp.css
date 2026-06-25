@@ -14,7 +14,7 @@
 
 .main-cat {
   font-family: 'Montserrat', 'Poppins', sans-serif;
-  background: linear-gradient(180deg, #2495FF 0%, #B7CF49 100%);
+  background: linear-gradient(180deg, var(--bg-tienda-categorias-top, #2495FF) 0%, var(--bg-tienda-categorias-bottom, #B7CF49) 100%);
   flex: 1;           /* Crece para llenar el espacio entre navbar y footer */
   min-height: 0;     /* Permite que shrink si el contenido es corto */
   width: 100%;

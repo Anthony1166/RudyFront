@@ -9,7 +9,7 @@
 }
 
 .divcont{
-  background: linear-gradient(180deg, #155999 0%, #2495FF 100%);
+  background: linear-gradient(180deg, var(--bg-perfil-pagina-top, #155999) 0%, var(--bg-perfil-pagina-bottom, #2495FF) 100%);
   box-shadow: 0px -38px 100px 30px rgba(0, 0, 0, 0.25);
 
 }

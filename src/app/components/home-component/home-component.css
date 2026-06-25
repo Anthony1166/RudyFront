@@ -10,7 +10,7 @@
 }
 
 .main-cont{
-  background: linear-gradient(180deg, #000 -9.81%, #B7CF49 100%);
+  background: linear-gradient(180deg, var(--bg-home-top, #000) -9.81%, var(--bg-home-bottom, #B7CF49) 100%);
 }
 
 /* El navbar unificado en el inicio respeta el ancho/padding del hero */

@@ -42,7 +42,10 @@ export const routes: Routes = [
 
       { path: 'proceso-producto/listar', loadComponent: () => import('./components/prod/proceso-prod/listar-proceso-prod/listar-proceso-prod').then(m => m.ListarProcesoProd) },
       { path: 'proceso-producto/actualizar/:id', loadComponent: () => import('./components/prod/proceso-prod/actualizar-proceso-prod/actualizar-proceso-prod').then(m => m.ActualizarProcesoProd) },
-      { path: 'producto/:id/procesos', loadComponent: () => import('./components/prod/proceso-prod/listar-proceso-prod/listar-proceso-prod').then(m => m.ListarProcesoProd) }
+      { path: 'producto/:id/procesos', loadComponent: () => import('./components/prod/proceso-prod/listar-proceso-prod/listar-proceso-prod').then(m => m.ListarProcesoProd) },
+
+      // Apariencia
+      { path: 'configuracion-colores', loadComponent: () => import('./components/admin-component/configuracion-colores/configuracion-colores').then(m => m.ConfiguracionColores) }
     ]
   },
   { path: '**', redirectTo: '' }
