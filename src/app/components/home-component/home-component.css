@@ -11,6 +11,12 @@
 
 .main-cont{
   background: linear-gradient(180deg, var(--bg-home-top, #000) -9.81%, var(--bg-home-bottom, #B7CF49) 100%);
+
+  /* La portada (navbar + hero) ocupa toda la pantalla; el hero crece para
+     llenar el espacio bajo el navbar, sin importar el alto del navbar. */
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
 }
 
 /* El navbar unificado en el inicio respeta el ancho/padding del hero */

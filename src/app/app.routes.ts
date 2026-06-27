@@ -45,7 +45,8 @@ export const routes: Routes = [
       { path: 'producto/:id/procesos', loadComponent: () => import('./components/prod/proceso-prod/listar-proceso-prod/listar-proceso-prod').then(m => m.ListarProcesoProd) },
 
       // Apariencia
-      { path: 'configuracion-colores', loadComponent: () => import('./components/admin-component/configuracion-colores/configuracion-colores').then(m => m.ConfiguracionColores) }
+      { path: 'configuracion-colores', loadComponent: () => import('./components/admin-component/configuracion-colores/configuracion-colores').then(m => m.ConfiguracionColores) },
+      { path: 'perfil-sobre-mi', loadComponent: () => import('./components/admin-component/editar-perfil/editar-perfil').then(m => m.EditarPerfil) }
     ]
   },
   { path: '**', redirectTo: '' }

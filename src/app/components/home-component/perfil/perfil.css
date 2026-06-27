@@ -20,10 +20,20 @@
   padding-right: 4rem;
 }
 
-.star-svg {
+.star-clip {
   width: 100%;
   max-width: 34.625rem;
   aspect-ratio: 1 / 1;
+  clip-path: url(#molde-estrella);
+  overflow: hidden;
+}
+
+.star-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  /* El transform (zoom/rotar/voltear) y object-position lo aplica [ngStyle] desde el componente */
 }
 
 /* ---- Contenedor de texto ---- */
@@ -116,7 +126,7 @@
     height: auto;
   }
 
-  .star-svg {
+  .star-clip {
     max-width: 20rem;
   }
 
@@ -166,7 +176,7 @@
     margin-right: -3rem;
   }
 
-  .star-svg {
+  .star-clip {
     max-width: none;
     width: 100%;
   }

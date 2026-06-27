@@ -1,50 +1,65 @@
 <div class="editor-overlay" (click)="onCancelar()">
-  <div class="editor-modal" (click)="$event.stopPropagation()">
+  <div class="editor-modal" [class.editor-modal--forma]="formaClipId" (click)="$event.stopPropagation()">
 
     <header class="editor-header">
       <h2>Ajustar imagen</h2>
       <button class="btn-cerrar" (click)="onCancelar()" aria-label="Cerrar">×</button>
     </header>
 
-    <div class="editor-cuerpo">
-
-      <div class="lienzo-col">
-        <div class="lienzo"
-             #lienzo
-             (mousedown)="onLienzoMouseDown($event)"
-             (touchstart)="onLienzoTouchStart($event)">
-          <img [src]="urlImagen"
-               class="img-lienzo"
-               [ngStyle]="estiloImagenLienzo"
-               alt="Imagen a ajustar"
-               draggable="false">
-          <div class="punto-focal"
-               [style.left.%]="trabajo.posX"
-               [style.top.%]="trabajo.posY"
-               [class.activo]="arrastrando">
-            <div class="punto-cruz">+</div>
+    <!-- Modo FORMA (ej. perfil): una sola vista grande, arrastrable, con el recorte real -->
+    @if (formaClipId) {
+      <div class="editor-cuerpo editor-cuerpo--forma">
+        <div class="forma-col">
+          <div class="preview-marco preview-forma preview-forma--grande"
+               [class.arrastrando]="arrastrando"
+               [style.clip-path]="'url(#' + formaClipId + ')'"
+               (mousedown)="onLienzoMouseDown($event)"
+               (touchstart)="onLienzoTouchStart($event)">
+            <img [src]="urlImagen"
+                 class="img-preview"
+                 [ngStyle]="estiloImagenLienzo"
+                 alt="Imagen a ajustar"
+                 draggable="false">
           </div>
+          <p class="ayuda">Arrastra la imagen para moverla y usa el zoom para acercarla.</p>
         </div>
-        <p class="ayuda">Arrastra el punto sobre la zona que quieres que se vea en las cards.</p>
       </div>
+    } @else {
+      <div class="editor-cuerpo">
 
-      <aside class="preview-col">
-        <p class="preview-titulo">Vista previa</p>
-        <div class="preview-lista">
-          <div class="preview-item" *ngFor="let asp of aspectos">
-            <span class="preview-etiqueta">{{ asp.etiqueta }}</span>
-            <div class="preview-marco" [style.aspect-ratio]="asp.ratio">
-              <img [src]="urlImagen"
-                   class="img-preview"
-                   [ngStyle]="estiloPreview(asp)"
-                   alt=""
-                   draggable="false">
+        <div class="lienzo-col">
+          <div class="lienzo"
+               #lienzo
+               [class.arrastrando]="arrastrando"
+               (mousedown)="onLienzoMouseDown($event)"
+               (touchstart)="onLienzoTouchStart($event)">
+            <img [src]="urlImagen"
+                 class="img-lienzo"
+                 [ngStyle]="estiloImagenLienzo"
+                 alt="Imagen a ajustar"
+                 draggable="false">
+          </div>
+          <p class="ayuda">Arrastra la imagen para moverla y usa el zoom para acercarla.</p>
+        </div>
+
+        <aside class="preview-col">
+          <p class="preview-titulo">Vista previa</p>
+          <div class="preview-lista">
+            <div class="preview-item" *ngFor="let asp of aspectos">
+              <span class="preview-etiqueta">{{ asp.etiqueta }}</span>
+              <div class="preview-marco" [style.aspect-ratio]="asp.ratio">
+                <img [src]="urlImagen"
+                     class="img-preview"
+                     [ngStyle]="estiloPreview(asp)"
+                     alt=""
+                     draggable="false">
+              </div>
             </div>
           </div>
-        </div>
-      </aside>
+        </aside>
 
-    </div>
+      </div>
+    }
 
     <div class="editor-controles">
       <div class="control">

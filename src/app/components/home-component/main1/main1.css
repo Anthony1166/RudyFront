@@ -1,8 +1,19 @@
-﻿.main-component {
+﻿/* El componente del hero crece para llenar el alto restante de la portada
+   (100svh menos el navbar), de modo que la imagen quede pegada abajo. */
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+
+.main-component {
   display: flex;
   flex-direction: row;
+  flex: 1;
   min-height: 86svh;
   max-width: 1800px;
+  width: 100%;
   margin: 0 auto;
   padding: 0 clamp(1rem, 3vw, 4rem);
   box-sizing: border-box;

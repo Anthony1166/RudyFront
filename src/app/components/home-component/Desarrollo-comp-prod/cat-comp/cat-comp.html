@@ -24,7 +24,8 @@
 
       <div class="cat-card"
            *ngFor="let cat of categorias; let i = index"
-           [routerLink]="['/categoria', cat.slug]"
+           (click)="irACategoria(cat)"
+           [class.navegando]="navegandoSlug === cat.slug"
            [style.animation-delay]="(i * 0.08) + 's'">
         <h2 class="cat-title">{{ cat.nombre | uppercase }}</h2>
 

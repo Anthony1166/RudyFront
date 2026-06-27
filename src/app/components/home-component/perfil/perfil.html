@@ -1,54 +1,58 @@
+<!-- Molde de estrella para recortar la foto. clipPathUnits="objectBoundingBox"
+     + scale(1/554) reutiliza el path original (coords 0–554) pero lo normaliza
+     a 0–1 para que escale junto al contenedor en responsive. -->
+<svg width="0" height="0" aria-hidden="true" style="position:absolute">
+  <defs>
+    <clipPath id="molde-estrella" clipPathUnits="objectBoundingBox">
+      <path transform="scale(0.00180505415)" d="M250.438 19.0871C258.973 -6.36242 294.969 -6.36242 303.504 19.0871V19.0871C310.383 39.5989 336.941 44.8814 351.146 28.5635V28.5635C368.77 8.31746 402.026 22.0927 400.173 48.8711V48.8711C398.679 70.4541 421.193 85.4976 440.561 75.8578V75.8578C464.592 63.8975 490.045 89.3507 478.085 113.381V113.381C468.445 132.75 483.488 155.264 505.071 153.77V153.77C531.85 151.916 545.625 185.172 525.379 202.797V202.797C509.061 217.002 514.344 243.559 534.855 250.438V250.438C560.305 258.973 560.305 294.969 534.855 303.504V303.504C514.344 310.383 509.061 336.941 525.379 351.146V351.146C545.625 368.77 531.85 402.026 505.071 400.173V400.173C483.488 398.679 468.445 421.193 478.085 440.561V440.561C490.045 464.592 464.592 490.045 440.561 478.085V478.085C421.193 468.445 398.679 483.488 400.173 505.071V505.071C402.026 531.85 368.77 545.625 351.146 525.379V525.379C336.941 509.061 310.383 514.344 303.504 534.855V534.855C294.969 560.305 258.973 560.305 250.438 534.855V534.855C243.559 514.344 217.002 509.061 202.797 525.379V525.379C185.172 545.625 151.916 531.85 153.77 505.071V505.071C155.264 483.488 132.75 468.445 113.381 478.085V478.085C89.3507 490.045 63.8975 464.592 75.8578 440.561V440.561C85.4976 421.193 70.4541 398.679 48.8711 400.173V400.173C22.0927 402.026 8.31747 368.77 28.5635 351.146V351.146C44.8814 336.941 39.5989 310.383 19.0871 303.504V303.504C-6.36243 294.969 -6.36242 258.973 19.0871 250.438V250.438C39.5989 243.559 44.8814 217.002 28.5635 202.797V202.797C8.31747 185.172 22.0927 151.916 48.8711 153.77V153.77C70.4541 155.264 85.4976 132.75 75.8578 113.381V113.381C63.8975 89.3507 89.3507 63.8975 113.381 75.8578V75.8578C132.75 85.4976 155.264 70.4541 153.77 48.8711V48.8711C151.916 22.0927 185.172 8.31747 202.797 28.5635V28.5635C217.002 44.8814 243.559 39.5989 250.438 19.0871V19.0871Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
 <section class="about-section">
   <div class="star-profile-container reveal-left" appReveal [revealDelay]="0">
-    <svg
-      viewBox="0 0 554 554"
-      xmlns="http://www.w3.org/2000/svg"
-      class="star-svg"
-      role="img"
-      aria-labelledby="titulo-estrella"
-    >
-      <title id="titulo-estrella">Foto de perfil de Sami</title>
-
-      <defs>
-        <clipPath id="molde-estrella">
-          <path d="M250.438 19.0871C258.973 -6.36242 294.969 -6.36242 303.504 19.0871V19.0871C310.383 39.5989 336.941 44.8814 351.146 28.5635V28.5635C368.77 8.31746 402.026 22.0927 400.173 48.8711V48.8711C398.679 70.4541 421.193 85.4976 440.561 75.8578V75.8578C464.592 63.8975 490.045 89.3507 478.085 113.381V113.381C468.445 132.75 483.488 155.264 505.071 153.77V153.77C531.85 151.916 545.625 185.172 525.379 202.797V202.797C509.061 217.002 514.344 243.559 534.855 250.438V250.438C560.305 258.973 560.305 294.969 534.855 303.504V303.504C514.344 310.383 509.061 336.941 525.379 351.146V351.146C545.625 368.77 531.85 402.026 505.071 400.173V400.173C483.488 398.679 468.445 421.193 478.085 440.561V440.561C490.045 464.592 464.592 490.045 440.561 478.085V478.085C421.193 468.445 398.679 483.488 400.173 505.071V505.071C402.026 531.85 368.77 545.625 351.146 525.379V525.379C336.941 509.061 310.383 514.344 303.504 534.855V534.855C294.969 560.305 258.973 560.305 250.438 534.855V534.855C243.559 514.344 217.002 509.061 202.797 525.379V525.379C185.172 545.625 151.916 531.85 153.77 505.071V505.071C155.264 483.488 132.75 468.445 113.381 478.085V478.085C89.3507 490.045 63.8975 464.592 75.8578 440.561V440.561C85.4976 421.193 70.4541 398.679 48.8711 400.173V400.173C22.0927 402.026 8.31747 368.77 28.5635 351.146V351.146C44.8814 336.941 39.5989 310.383 19.0871 303.504V303.504C-6.36243 294.969 -6.36242 258.973 19.0871 250.438V250.438C39.5989 243.559 44.8814 217.002 28.5635 202.797V202.797C8.31747 185.172 22.0927 151.916 48.8711 153.77V153.77C70.4541 155.264 85.4976 132.75 75.8578 113.381V113.381C63.8975 89.3507 89.3507 63.8975 113.381 75.8578V75.8578C132.75 85.4976 155.264 70.4541 153.77 48.8711V48.8711C151.916 22.0927 185.172 8.31747 202.797 28.5635V28.5635C217.002 44.8814 243.559 39.5989 250.438 19.0871V19.0871Z"/>
-        </clipPath>
-      </defs>
-
-      <rect width="100%" height="100%" fill="#2c3e50" clip-path="url(#molde-estrella)" />
-
-      <image
-        href="/assets/estrellitaSami.png"
-        width="100%"
-        height="100%"
-        preserveAspectRatio="xMidYMid slice"
-        clip-path="url(#molde-estrella)"
+    <div class="star-clip">
+      <img
+        class="star-img"
+        [src]="perfil.urlImagen"
+        [ngStyle]="estiloImg()"
+        [alt]="'Foto de perfil de ' + perfil.titulo"
+        loading="lazy"
       />
-    </svg>
+    </div>
   </div>
 
   <div class="about-text-container">
     <div class="text-container">
       <div class="about-block about-block--intro reveal-right" appReveal [revealDelay]="0.1">
-        <h2 class="about-title">¡HOLA! SOY SAMI</h2>
-        <p class="about-desc">
-          Estudiante de Diseño Industrial (9.º ciclo en la PUCP) enfocada en el desarrollo de productos funcionales y accesibles. Trabajo desde el prototipado y la manufactura, entendiendo el diseño como un proceso de prueba, error y ajuste continuo con una mirada centrada en el usuario.
-        </p>
+        <h2 class="about-title">{{ perfil.titulo }}</h2>
+        <p class="about-desc">{{ perfil.descripcion }}</p>
       </div>
 
       <div class="about-block about-block--areas reveal-right" appReveal [revealDelay]="0.2">
-        <h3 class="about-subtitle">ÁREAS DE INTERÉS</h3>
-        <p class="about-body">
-          Diseño de productos | Manufactura en madera | Manufactura en plásticos | Educación infantil
-        </p>
+        <h3 class="about-subtitle">{{ perfil.subtituloAreas }}</h3>
+        @if (perfil.areasModo === 'lista') {
+          <ul class="about-lang-list">
+            @for (area of perfil.areas; track area) {
+              <li>{{ area }}</li>
+            }
+          </ul>
+        } @else {
+          <p class="about-body">{{ perfil.areas.join(' | ') }}</p>
+        }
       </div>
 
       <div class="about-block about-block--idiomas reveal-right" appReveal [revealDelay]="0.3">
-        <h3 class="about-subtitle">IDIOMAS</h3>
-        <ul class="about-lang-list">
-          <li>Inglés B2</li>
-          <li>Francés A2</li>
-        </ul>
+        <h3 class="about-subtitle">{{ perfil.subtituloIdiomas }}</h3>
+        @if (perfil.idiomasModo === 'lista') {
+          <ul class="about-lang-list">
+            @for (idioma of perfil.idiomas; track idioma) {
+              <li>{{ idioma }}</li>
+            }
+          </ul>
+        } @else {
+          <p class="about-body">{{ perfil.idiomas.join(' | ') }}</p>
+        }
       </div>
     </div>
   </div>
